@@ -1,0 +1,3466 @@
+{
+  "app": "ESL English",
+  "schema": "esl-word-bank-v3",
+  "updatedAt": "2026-05-10T08:49:24.870494+00:00",
+  "levels": [
+    "Inglés I",
+    "Inglés II",
+    "Inglés III",
+    "Inglés IV"
+  ],
+  "activities": {
+    "anagrama": {
+      "title": "Anagrama",
+      "file": "Anagrama.html",
+      "bankType": "words",
+      "usesTranslation": false,
+      "entryFormat": "word",
+      "levels": {
+        "Inglés I": {
+          "Different things": [
+            "apple",
+            "book",
+            "coffee",
+            "guitar",
+            "pen",
+            "taxi",
+            "zebra"
+          ]
+        },
+        "Inglés II": {
+          "Nationalities": [
+            "American",
+            "Chinese",
+            "English",
+            "Indian",
+            "Italian",
+            "Mexican",
+            "Thai",
+            "Turkish"
+          ]
+        },
+        "Inglés III": {
+          "NUMBERS AND TIME": [
+            "zero",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "ten"
+          ]
+        },
+        "Inglés IV": {
+          "OPINION ADJECTIVES": [
+            "all right",
+            "amazing",
+            "awful",
+            "boring",
+            "excellent",
+            "fantastic",
+            "fine",
+            "great",
+            "horrible",
+            "terrible",
+            "wonderful"
+          ],
+          "NAMES": [
+            "brand name",
+            "full name",
+            "initials",
+            "nickname",
+            "pen name",
+            "real name",
+            "stage name",
+            "first name",
+            "middle name",
+            "last name"
+          ]
+        }
+      }
+    },
+    "flashcards": {
+      "title": "Flashcards",
+      "file": "Flashcards.html",
+      "bankType": "pairs",
+      "usesTranslation": true,
+      "entryFormat": "word_translation",
+      "levels": {
+        "Inglés I": {
+          "Different things": [
+            {
+              "word": "apple",
+              "translation": "manzana"
+            },
+            {
+              "word": "book",
+              "translation": "Libro"
+            },
+            {
+              "word": "coffee",
+              "translation": "Café"
+            },
+            {
+              "word": "guitar",
+              "translation": "Guitarra"
+            },
+            {
+              "word": "pen",
+              "translation": "Bolígrafo"
+            },
+            {
+              "word": "taxi",
+              "translation": "Taxi"
+            },
+            {
+              "word": "zebra",
+              "translation": "Cebra"
+            }
+          ],
+          "Colors": [
+            {
+              "word": "black",
+              "translation": "Negro"
+            },
+            {
+              "word": "blue",
+              "translation": "Azul"
+            },
+            {
+              "word": "brown",
+              "translation": "Café"
+            },
+            {
+              "word": "green",
+              "translation": "Verde"
+            },
+            {
+              "word": "orange",
+              "translation": "Naranja"
+            },
+            {
+              "word": "red",
+              "translation": "Rojo"
+            },
+            {
+              "word": "white",
+              "translation": "Blanco"
+            },
+            {
+              "word": "yellow",
+              "translation": "Amarillo"
+            }
+          ],
+          "Days of the week": [
+            {
+              "word": "Monday",
+              "translation": "Lunes"
+            },
+            {
+              "word": "Tuesday",
+              "translation": "Martes"
+            },
+            {
+              "word": "Wednesday",
+              "translation": "Miércoles"
+            },
+            {
+              "word": "Thursday",
+              "translation": "Jueves"
+            },
+            {
+              "word": "Friday",
+              "translation": "Viernes"
+            },
+            {
+              "word": "Saturday",
+              "translation": "Sábado"
+            },
+            {
+              "word": "Sunday",
+              "translation": "Domingo"
+            }
+          ],
+          "Numbers 0-10": [
+            {
+              "word": "zero",
+              "translation": "Cero"
+            },
+            {
+              "word": "one",
+              "translation": "Uno"
+            },
+            {
+              "word": "two",
+              "translation": "Dos"
+            },
+            {
+              "word": "three",
+              "translation": "Tres"
+            },
+            {
+              "word": "four",
+              "translation": "Cuatro"
+            },
+            {
+              "word": "five",
+              "translation": "Cinco"
+            },
+            {
+              "word": "six",
+              "translation": "Seis"
+            },
+            {
+              "word": "seven",
+              "translation": "Siete"
+            },
+            {
+              "word": "eight",
+              "translation": "Ocho"
+            },
+            {
+              "word": "nine",
+              "translation": "Nueve"
+            },
+            {
+              "word": "ten",
+              "translation": "Diez"
+            }
+          ],
+          "Personal information 1": [
+            {
+              "word": "email address",
+              "translation": "Correo electrónico"
+            },
+            {
+              "word": "last name",
+              "translation": "Apellido"
+            },
+            {
+              "word": "phone number",
+              "translation": "Número de teléfono"
+            },
+            {
+              "word": "first name",
+              "translation": "Primer Nombre"
+            }
+          ],
+          "Countries": [
+            {
+              "word": "Brazil",
+              "translation": "Brasil"
+            },
+            {
+              "word": "Chile",
+              "translation": "Chile"
+            },
+            {
+              "word": "Egypt",
+              "translation": "Egipto"
+            },
+            {
+              "word": "England",
+              "translation": "Inglaterra"
+            },
+            {
+              "word": "Italy",
+              "translation": "Italia"
+            },
+            {
+              "word": "Russia",
+              "translation": "Rusia"
+            },
+            {
+              "word": "Turkey",
+              "translation": "Turquía"
+            },
+            {
+              "word": "the United States",
+              "translation": "Estados Unidos"
+            }
+          ],
+          "Numbers 11-100": [
+            {
+              "word": "eleven",
+              "translation": "Once"
+            },
+            {
+              "word": "twelve",
+              "translation": "Doce"
+            },
+            {
+              "word": "thirteen",
+              "translation": "Trece"
+            },
+            {
+              "word": "fourteen",
+              "translation": "Catorce"
+            },
+            {
+              "word": "fifteen",
+              "translation": "Quince"
+            },
+            {
+              "word": "sixteen",
+              "translation": "Dieciséis"
+            },
+            {
+              "word": "seventeen",
+              "translation": "Diecisiete"
+            },
+            {
+              "word": "eighteen",
+              "translation": "Dieciocho"
+            },
+            {
+              "word": "nineteen",
+              "translation": "Diecinueve"
+            },
+            {
+              "word": "twenty",
+              "translation": "Veinte"
+            },
+            {
+              "word": "twenty-one",
+              "translation": "Veintiuno"
+            },
+            {
+              "word": "twenty-two",
+              "translation": "Veintidós"
+            },
+            {
+              "word": "twenty-three",
+              "translation": "Veintitrés"
+            },
+            {
+              "word": "twenty-four",
+              "translation": "Veinticuatro"
+            },
+            {
+              "word": "twenty-five",
+              "translation": "Veinticinco"
+            },
+            {
+              "word": "twenty-six",
+              "translation": "Veintiséis"
+            },
+            {
+              "word": "twenty-seven",
+              "translation": "Veintisiete"
+            },
+            {
+              "word": "twenty-eight",
+              "translation": "Veintiocho"
+            },
+            {
+              "word": "twenty-nine",
+              "translation": "Veintinueve"
+            },
+            {
+              "word": "thirty",
+              "translation": "Treinta"
+            },
+            {
+              "word": "forty",
+              "translation": "Cuarenta"
+            },
+            {
+              "word": "fifty",
+              "translation": "Cincuenta"
+            },
+            {
+              "word": "sixty",
+              "translation": "Sesenta"
+            },
+            {
+              "word": "seventy",
+              "translation": "Setenta"
+            },
+            {
+              "word": "eighty",
+              "translation": "Ochenta"
+            },
+            {
+              "word": "ninety",
+              "translation": "Noventa"
+            },
+            {
+              "word": "one hundred",
+              "translation": "Cien"
+            }
+          ],
+          "Personal information 2": [
+            {
+              "word": "address",
+              "translation": "Dirección"
+            },
+            {
+              "word": "city",
+              "translation": "Ciudad"
+            },
+            {
+              "word": "country",
+              "translation": "País"
+            },
+            {
+              "word": "name",
+              "translation": "Nombre"
+            },
+            {
+              "word": "title",
+              "translation": "Título"
+            },
+            {
+              "word": "town",
+              "translation": "Pueblo"
+            },
+            {
+              "word": "zip code",
+              "translation": "Código postal"
+            }
+          ],
+          "Technology": [
+            {
+              "word": "alarm clock",
+              "translation": "Reloj despertador"
+            },
+            {
+              "word": "camera",
+              "translation": "Cámara"
+            },
+            {
+              "word": "computer",
+              "translation": "Computadora"
+            },
+            {
+              "word": "games console",
+              "translation": "Consola de videojuegos"
+            },
+            {
+              "word": "phone",
+              "translation": "Teléfono"
+            },
+            {
+              "word": "radio",
+              "translation": "Radio"
+            },
+            {
+              "word": "tablet",
+              "translation": "Tableta"
+            },
+            {
+              "word": "TV",
+              "translation": "Televisor"
+            },
+            {
+              "word": "video games",
+              "translation": "Videojuegos"
+            },
+            {
+              "word": "watch",
+              "translation": "Reloj"
+            }
+          ],
+          "Months": [
+            {
+              "word": "January",
+              "translation": "Enero"
+            },
+            {
+              "word": "February",
+              "translation": "Febrero"
+            },
+            {
+              "word": "March",
+              "translation": "Marzo"
+            },
+            {
+              "word": "April",
+              "translation": "Abril"
+            },
+            {
+              "word": "May",
+              "translation": "Mayo"
+            },
+            {
+              "word": "June",
+              "translation": "Junio"
+            },
+            {
+              "word": "July",
+              "translation": "Julio"
+            },
+            {
+              "word": "August",
+              "translation": "Agosto"
+            },
+            {
+              "word": "September",
+              "translation": "Septiembre"
+            },
+            {
+              "word": "October",
+              "translation": "Octubre"
+            },
+            {
+              "word": "November",
+              "translation": "Noviembre"
+            },
+            {
+              "word": "December",
+              "translation": "Diciembre"
+            }
+          ],
+          "Ordinal numbers": [
+            {
+              "word": "first",
+              "translation": "Primero"
+            },
+            {
+              "word": "second",
+              "translation": "Segundo"
+            },
+            {
+              "word": "third",
+              "translation": "Tercero"
+            },
+            {
+              "word": "fourth",
+              "translation": "Cuarto"
+            },
+            {
+              "word": "fifth",
+              "translation": "Quinto"
+            },
+            {
+              "word": "sixth",
+              "translation": "Sexto"
+            },
+            {
+              "word": "seventh",
+              "translation": "Séptimo"
+            },
+            {
+              "word": "eighth",
+              "translation": "Octavo"
+            },
+            {
+              "word": "ninth",
+              "translation": "Noveno"
+            },
+            {
+              "word": "tenth",
+              "translation": "Décimo"
+            },
+            {
+              "word": "eleventh",
+              "translation": "Undécimo"
+            },
+            {
+              "word": "twelfth",
+              "translation": "Duodécimo"
+            },
+            {
+              "word": "thirteenth",
+              "translation": "Decimotercero"
+            },
+            {
+              "word": "fourteenth",
+              "translation": "Decimocuarto"
+            },
+            {
+              "word": "fifteenth",
+              "translation": "Decimoquinto"
+            },
+            {
+              "word": "sixteenth",
+              "translation": "Decimosexto"
+            },
+            {
+              "word": "seventeenth",
+              "translation": "Decimoséptimo"
+            },
+            {
+              "word": "eighteenth",
+              "translation": "Decimoctavo"
+            },
+            {
+              "word": "nineteenth",
+              "translation": "Decimonoveno"
+            },
+            {
+              "word": "twentieth",
+              "translation": "Vigésimo"
+            },
+            {
+              "word": "twenty-first",
+              "translation": "Vigésimo primero"
+            },
+            {
+              "word": "twenty-second",
+              "translation": "Vigésimo segundo"
+            },
+            {
+              "word": "twenty-third",
+              "translation": "Vigésimo tercero"
+            },
+            {
+              "word": "twenty-fourth",
+              "translation": "Vigésimo cuarto"
+            },
+            {
+              "word": "twenty-fifth",
+              "translation": "Vigésimo quinto"
+            },
+            {
+              "word": "twenty-sixth",
+              "translation": "Vigésimo sexto"
+            },
+            {
+              "word": "twenty-seventh",
+              "translation": "Vigésimo séptimo"
+            },
+            {
+              "word": "twenty-eighth",
+              "translation": "Vigésimo octavo"
+            },
+            {
+              "word": "twenty-ninth",
+              "translation": "Vigésimo noveno"
+            },
+            {
+              "word": "thirtieth",
+              "translation": "Trigésimo"
+            },
+            {
+              "word": "thirty-first",
+              "translation": "Trigésimo primero"
+            }
+          ],
+          "Snacks and drinks": [
+            {
+              "word": "black coffee",
+              "translation": "Café negro"
+            },
+            {
+              "word": "chips",
+              "translation": "Papas fritas"
+            },
+            {
+              "word": "chocolate bars",
+              "translation": "Barras de chocolate"
+            },
+            {
+              "word": "coffee with milk",
+              "translation": "Café con leche"
+            },
+            {
+              "word": "cookies",
+              "translation": "Galletas"
+            },
+            {
+              "word": "hot chocolate",
+              "translation": "Chocolate caliente"
+            },
+            {
+              "word": "milk",
+              "translation": "Leche"
+            },
+            {
+              "word": "orange juice",
+              "translation": "Jugo de naranja"
+            },
+            {
+              "word": "sandwiches",
+              "translation": "Sándwiches"
+            },
+            {
+              "word": "soda",
+              "translation": "Gaseosa"
+            },
+            {
+              "word": "tea",
+              "translation": "Té"
+            },
+            {
+              "word": "water",
+              "translation": "Agua"
+            }
+          ],
+          "Rooms": [
+            {
+              "word": "bathroom",
+              "translation": "Baño"
+            },
+            {
+              "word": "bedroom",
+              "translation": "Dormitorio"
+            },
+            {
+              "word": "kitchen",
+              "translation": "Cocina"
+            },
+            {
+              "word": "living room",
+              "translation": "Sala"
+            }
+          ],
+          "Furniture": [
+            {
+              "word": "bed",
+              "translation": "Cama"
+            },
+            {
+              "word": "chair",
+              "translation": "Silla"
+            },
+            {
+              "word": "couch",
+              "translation": "Sofá"
+            },
+            {
+              "word": "shower",
+              "translation": "Ducha"
+            },
+            {
+              "word": "table",
+              "translation": "Mesa"
+            },
+            {
+              "word": "window",
+              "translation": "Ventana"
+            }
+          ],
+          "Family": [
+            {
+              "word": "brother",
+              "translation": "Hermano"
+            },
+            {
+              "word": "dad",
+              "translation": "Papá"
+            },
+            {
+              "word": "daughter",
+              "translation": "Hija"
+            },
+            {
+              "word": "father",
+              "translation": "Padre"
+            },
+            {
+              "word": "friend",
+              "translation": "Amigo"
+            },
+            {
+              "word": "mom",
+              "translation": "Mamá"
+            },
+            {
+              "word": "mother",
+              "translation": "Madre"
+            },
+            {
+              "word": "parents",
+              "translation": "Padres"
+            },
+            {
+              "word": "pet",
+              "translation": "Mascota"
+            },
+            {
+              "word": "sister",
+              "translation": "Hermana"
+            },
+            {
+              "word": "son",
+              "translation": "Hijo"
+            }
+          ],
+          "Daily routines": [
+            {
+              "word": "finish class",
+              "translation": "Terminar clase"
+            },
+            {
+              "word": "finish work",
+              "translation": "Terminar el trabajo"
+            },
+            {
+              "word": "get home",
+              "translation": "Llegar a casa"
+            },
+            {
+              "word": "get up",
+              "translation": "Levantarse"
+            },
+            {
+              "word": "go to bed",
+              "translation": "Ir a dormir"
+            },
+            {
+              "word": "go to class",
+              "translation": "Ir a clase"
+            },
+            {
+              "word": "go to work",
+              "translation": "Ir al trabajo"
+            },
+            {
+              "word": "have a shower",
+              "translation": "Ducharse"
+            },
+            {
+              "word": "have breakfast",
+              "translation": "Desayunar"
+            },
+            {
+              "word": "have dinner",
+              "translation": "Cenar"
+            },
+            {
+              "word": "have lunch",
+              "translation": "Almorzar"
+            },
+            {
+              "word": "leave home",
+              "translation": "Salir de casa"
+            },
+            {
+              "word": "start class",
+              "translation": "Empezar clase"
+            },
+            {
+              "word": "start work",
+              "translation": "Empezar el trabajo"
+            },
+            {
+              "word": "wake up",
+              "translation": "Despertarse"
+            }
+          ],
+          "Sports and exercise": [
+            {
+              "word": "exercise",
+              "translation": "Ejercicio"
+            },
+            {
+              "word": "play basketball",
+              "translation": "Jugar baloncesto"
+            },
+            {
+              "word": "play soccer",
+              "translation": "Jugar fútbol"
+            },
+            {
+              "word": "play tennis",
+              "translation": "Jugar tenis"
+            },
+            {
+              "word": "ride a bike",
+              "translation": "Montar bicicleta"
+            },
+            {
+              "word": "run",
+              "translation": "Correr"
+            },
+            {
+              "word": "swim",
+              "translation": "Nadar"
+            },
+            {
+              "word": "walk",
+              "translation": "Caminar"
+            },
+            {
+              "word": "walk your dog",
+              "translation": "Pasear a tu perro"
+            }
+          ],
+          "Verbs and prepositions": [
+            {
+              "word": "come from",
+              "translation": "Venir de"
+            },
+            {
+              "word": "listen to",
+              "translation": "Escuchar"
+            },
+            {
+              "word": "live in",
+              "translation": "Vivir en"
+            },
+            {
+              "word": "love",
+              "translation": "Amar"
+            },
+            {
+              "word": "talk about",
+              "translation": "Hablar sobre"
+            },
+            {
+              "word": "work for",
+              "translation": "Trabajar para"
+            },
+            {
+              "word": "work in",
+              "translation": "Trabajar en"
+            }
+          ],
+          "Adjectives": [
+            {
+              "word": "boring",
+              "translation": "Aburrido"
+            },
+            {
+              "word": "difficult",
+              "translation": "Difícil"
+            },
+            {
+              "word": "easy",
+              "translation": "Fácil"
+            },
+            {
+              "word": "happy",
+              "translation": "Feliz"
+            },
+            {
+              "word": "horrible",
+              "translation": "Horrible"
+            },
+            {
+              "word": "interesting",
+              "translation": "Interesante"
+            },
+            {
+              "word": "nice",
+              "translation": "Agradable"
+            },
+            {
+              "word": "right",
+              "translation": "Correcto"
+            },
+            {
+              "word": "sad",
+              "translation": "Triste"
+            },
+            {
+              "word": "wrong",
+              "translation": "Incorrecto"
+            }
+          ],
+          "Family Members 2": [
+            {
+              "word": "mother-in-law",
+              "translation": "suegra"
+            },
+            {
+              "word": "father-in-law",
+              "translation": "suegro"
+            },
+            {
+              "word": "brother-in-law",
+              "translation": "cuñado"
+            },
+            {
+              "word": "sister-in-law",
+              "translation": "cuñada"
+            },
+            {
+              "word": "son-in-law",
+              "translation": "yerno"
+            },
+            {
+              "word": "daughter-in-law",
+              "translation": "nuera"
+            },
+            {
+              "word": "stepmother",
+              "translation": "madrastra"
+            },
+            {
+              "word": "stepfather",
+              "translation": "padrastro"
+            },
+            {
+              "word": "stepson",
+              "translation": "hijastro"
+            },
+            {
+              "word": "stepdaughter",
+              "translation": "hijastra"
+            },
+            {
+              "word": "stepbrother",
+              "translation": "hermanastro"
+            },
+            {
+              "word": "stepsister",
+              "translation": "hermanastra"
+            }
+          ],
+          "Posessive Adjectives": [
+            {
+              "word": "My",
+              "translation": "Mi"
+            },
+            {
+              "word": "Your",
+              "translation": "Su (ustedes)"
+            },
+            {
+              "word": "His",
+              "translation": "Su (hombre)"
+            },
+            {
+              "word": "Her",
+              "translation": "Su (mujer)"
+            },
+            {
+              "word": "Its",
+              "translation": "Su (algo)"
+            },
+            {
+              "word": "Our",
+              "translation": "Nuestro"
+            },
+            {
+              "word": "Their",
+              "translation": "Su (ellos)"
+            }
+          ],
+          "Personal Pronouns": [
+            {
+              "word": "I",
+              "translation": "Yo"
+            },
+            {
+              "word": "You",
+              "translation": "Tú"
+            },
+            {
+              "word": "He",
+              "translation": "Él"
+            },
+            {
+              "word": "She",
+              "translation": "Ella"
+            },
+            {
+              "word": "It",
+              "translation": "Esto"
+            },
+            {
+              "word": "We",
+              "translation": "Nosotros"
+            },
+            {
+              "word": "You (plural)",
+              "translation": "Ustedes"
+            },
+            {
+              "word": "They",
+              "translation": "Ellos"
+            }
+          ]
+        },
+        "Inglés II": {},
+        "Inglés III": {},
+        "Inglés IV": {}
+      }
+    },
+    "hangman": {
+      "title": "Hangman",
+      "file": "Hangman Game.html",
+      "bankType": "words",
+      "usesTranslation": false,
+      "entryFormat": "word",
+      "levels": {
+        "Inglés I": {
+          "Different things": [
+            "apple",
+            "book",
+            "coffee",
+            "guitar",
+            "pen",
+            "taxi",
+            "zebra"
+          ],
+          "Colors": [
+            "black",
+            "blue",
+            "brown",
+            "green",
+            "orange",
+            "red",
+            "white",
+            "yellow"
+          ],
+          "Days of the week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "Numbers 0-10": [
+            "zero",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "ten"
+          ],
+          "Personal information 1": [
+            "email address",
+            "first name",
+            "last name",
+            "phone number"
+          ]
+        },
+        "Inglés II": {
+          "Countries": [
+            "Brazil",
+            "Chile",
+            "Egypt",
+            "England",
+            "Italy",
+            "Russia",
+            "Turkey",
+            "the United States"
+          ],
+          "Numbers 11-100": [
+            "eleven",
+            "twelve",
+            "thirteen",
+            "fourteen",
+            "fifteen",
+            "sixteen",
+            "seventeen",
+            "eighteen",
+            "nineteen",
+            "twenty",
+            "twenty-one",
+            "twenty-two",
+            "twenty-three",
+            "twenty-four",
+            "twenty-five",
+            "twenty-six",
+            "twenty-seven",
+            "twenty-eight",
+            "twenty-nine",
+            "thirty",
+            "forty",
+            "fifty",
+            "sixty",
+            "seventy",
+            "eighty",
+            "ninety",
+            "one hundred"
+          ],
+          "Personal information 2": [
+            "address",
+            "city",
+            "country",
+            "name",
+            "title",
+            "town",
+            "zip code"
+          ],
+          "Technology": [
+            "alarm clock",
+            "camera",
+            "computer",
+            "games console",
+            "phone",
+            "radio",
+            "tablet",
+            "TV",
+            "video games",
+            "watch"
+          ],
+          "Months": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+          ],
+          "Ordinal numbers": [
+            "first",
+            "second",
+            "third",
+            "fourth",
+            "fifth",
+            "sixth",
+            "seventh",
+            "eighth",
+            "ninth",
+            "tenth",
+            "eleventh",
+            "twelfth",
+            "thirteenth",
+            "fourteenth",
+            "fifteenth",
+            "sixteenth",
+            "seventeenth",
+            "eighteenth",
+            "nineteenth",
+            "twentieth",
+            "twenty-first",
+            "twenty-second",
+            "twenty-third",
+            "twenty-fourth",
+            "twenty-fifth",
+            "twenty-sixth",
+            "twenty-seventh",
+            "twenty-eighth",
+            "twenty-ninth",
+            "thirtieth",
+            "thirty-first"
+          ]
+        },
+        "Inglés III": {
+          "Snacks and drinks": [
+            "black coffee",
+            "chips",
+            "chocolate bars",
+            "coffee with milk",
+            "cookies",
+            "hot chocolate",
+            "milk",
+            "orange juice",
+            "sandwiches",
+            "soda",
+            "tea",
+            "water"
+          ],
+          "Rooms": [
+            "bathroom",
+            "bedroom",
+            "kitchen",
+            "living room"
+          ],
+          "Furniture": [
+            "bed",
+            "chair",
+            "couch",
+            "shower",
+            "table",
+            "window"
+          ],
+          "Family": [
+            "brother",
+            "dad",
+            "daughter",
+            "father",
+            "friend",
+            "mom",
+            "mother",
+            "parents",
+            "pet",
+            "sister",
+            "son"
+          ],
+          "Daily routines": [
+            "finish class",
+            "finish work",
+            "get home",
+            "get up",
+            "go to bed",
+            "go to class",
+            "go to work",
+            "have a shower",
+            "have breakfast",
+            "have dinner",
+            "have lunch",
+            "leave home",
+            "start class",
+            "start work",
+            "wake up"
+          ]
+        },
+        "Inglés IV": {
+          "Sports and exercise": [
+            "exercise",
+            "play basketball",
+            "play soccer",
+            "play tennis",
+            "ride a bike",
+            "run",
+            "swim",
+            "walk",
+            "walk your dog"
+          ],
+          "Verbs and prepositions": [
+            "come from",
+            "listen to",
+            "live in",
+            "love",
+            "talk about",
+            "work for",
+            "work in"
+          ],
+          "Adjectives": [
+            "boring",
+            "difficult",
+            "easy",
+            "happy",
+            "horrible",
+            "interesting",
+            "nice",
+            "right",
+            "sad",
+            "wrong"
+          ]
+        }
+      }
+    },
+    "memory-game": {
+      "title": "Memory Game",
+      "file": "Memory Game.html",
+      "bankType": "words",
+      "usesTranslation": false,
+      "entryFormat": "word",
+      "levels": {
+        "Inglés I": {
+          "Different things": [
+            {
+              "word": "apple",
+              "translation": "Manzana"
+            },
+            {
+              "word": "book",
+              "translation": "Libro"
+            },
+            {
+              "word": "coffee",
+              "translation": "Café"
+            },
+            {
+              "word": "guitar",
+              "translation": "Guitarra"
+            },
+            {
+              "word": "pen",
+              "translation": "Bolígrafo"
+            },
+            {
+              "word": "taxi",
+              "translation": "Taxi"
+            },
+            {
+              "word": "zebra",
+              "translation": "Cebra"
+            }
+          ],
+          "Colors": [
+            {
+              "word": "black",
+              "translation": "Negro"
+            },
+            {
+              "word": "blue",
+              "translation": "Azul"
+            },
+            {
+              "word": "brown",
+              "translation": "Café"
+            },
+            {
+              "word": "green",
+              "translation": "Verde"
+            },
+            {
+              "word": "orange",
+              "translation": "Naranja"
+            },
+            {
+              "word": "red",
+              "translation": "Rojo"
+            },
+            {
+              "word": "white",
+              "translation": "Blanco"
+            },
+            {
+              "word": "yellow",
+              "translation": "Amarillo"
+            }
+          ],
+          "Days of the week": [
+            {
+              "word": "Monday",
+              "translation": "Lunes"
+            },
+            {
+              "word": "Tuesday",
+              "translation": "Martes"
+            },
+            {
+              "word": "Wednesday",
+              "translation": "Miércoles"
+            },
+            {
+              "word": "Thursday",
+              "translation": "Jueves"
+            },
+            {
+              "word": "Friday",
+              "translation": "Viernes"
+            },
+            {
+              "word": "Saturday",
+              "translation": "Sábado"
+            },
+            {
+              "word": "Sunday",
+              "translation": "Domingo"
+            }
+          ],
+          "Numbers 0-10": [
+            {
+              "word": "zero",
+              "translation": "Cero"
+            },
+            {
+              "word": "one",
+              "translation": "Uno"
+            },
+            {
+              "word": "two",
+              "translation": "Dos"
+            },
+            {
+              "word": "three",
+              "translation": "Tres"
+            },
+            {
+              "word": "four",
+              "translation": "Cuatro"
+            },
+            {
+              "word": "five",
+              "translation": "Cinco"
+            },
+            {
+              "word": "six",
+              "translation": "Seis"
+            },
+            {
+              "word": "seven",
+              "translation": "Siete"
+            },
+            {
+              "word": "eight",
+              "translation": "Ocho"
+            },
+            {
+              "word": "nine",
+              "translation": "Nueve"
+            },
+            {
+              "word": "ten",
+              "translation": "Diez"
+            }
+          ],
+          "Personal information 1": [
+            {
+              "word": "email address",
+              "translation": "Correo electrónico"
+            },
+            {
+              "word": "first name",
+              "translation": "Nombre"
+            },
+            {
+              "word": "last name",
+              "translation": "Apellido"
+            },
+            {
+              "word": "phone number",
+              "translation": "Número de teléfono"
+            }
+          ]
+        },
+        "Inglés II": {
+          "Countries": [
+            {
+              "word": "Brazil",
+              "translation": "Brasil"
+            },
+            {
+              "word": "Chile",
+              "translation": "Chile"
+            },
+            {
+              "word": "Egypt",
+              "translation": "Egipto"
+            },
+            {
+              "word": "England",
+              "translation": "Inglaterra"
+            },
+            {
+              "word": "Italy",
+              "translation": "Italia"
+            },
+            {
+              "word": "Russia",
+              "translation": "Rusia"
+            },
+            {
+              "word": "Turkey",
+              "translation": "Turquía"
+            },
+            {
+              "word": "the United States",
+              "translation": "Estados Unidos"
+            }
+          ],
+          "Numbers 11-100": [
+            {
+              "word": "eleven",
+              "translation": "Once"
+            },
+            {
+              "word": "twelve",
+              "translation": "Doce"
+            },
+            {
+              "word": "thirteen",
+              "translation": "Trece"
+            },
+            {
+              "word": "fourteen",
+              "translation": "Catorce"
+            },
+            {
+              "word": "fifteen",
+              "translation": "Quince"
+            },
+            {
+              "word": "sixteen",
+              "translation": "Dieciséis"
+            },
+            {
+              "word": "seventeen",
+              "translation": "Diecisiete"
+            },
+            {
+              "word": "eighteen",
+              "translation": "Dieciocho"
+            },
+            {
+              "word": "nineteen",
+              "translation": "Diecinueve"
+            },
+            {
+              "word": "twenty",
+              "translation": "Veinte"
+            },
+            {
+              "word": "twenty-one",
+              "translation": "Veintiuno"
+            },
+            {
+              "word": "twenty-two",
+              "translation": "Veintidós"
+            },
+            {
+              "word": "twenty-three",
+              "translation": "Veintitrés"
+            },
+            {
+              "word": "twenty-four",
+              "translation": "Veinticuatro"
+            },
+            {
+              "word": "twenty-five",
+              "translation": "Veinticinco"
+            },
+            {
+              "word": "twenty-six",
+              "translation": "Veintiséis"
+            },
+            {
+              "word": "twenty-seven",
+              "translation": "Veintisiete"
+            },
+            {
+              "word": "twenty-eight",
+              "translation": "Veintiocho"
+            },
+            {
+              "word": "twenty-nine",
+              "translation": "Veintinueve"
+            },
+            {
+              "word": "thirty",
+              "translation": "Treinta"
+            },
+            {
+              "word": "forty",
+              "translation": "Cuarenta"
+            },
+            {
+              "word": "fifty",
+              "translation": "Cincuenta"
+            },
+            {
+              "word": "sixty",
+              "translation": "Sesenta"
+            },
+            {
+              "word": "seventy",
+              "translation": "Setenta"
+            },
+            {
+              "word": "eighty",
+              "translation": "Ochenta"
+            },
+            {
+              "word": "ninety",
+              "translation": "Noventa"
+            },
+            {
+              "word": "one hundred",
+              "translation": "Cien"
+            }
+          ],
+          "Personal information 2": [
+            {
+              "word": "address",
+              "translation": "Dirección"
+            },
+            {
+              "word": "city",
+              "translation": "Ciudad"
+            },
+            {
+              "word": "country",
+              "translation": "País"
+            },
+            {
+              "word": "name",
+              "translation": "Nombre"
+            },
+            {
+              "word": "title",
+              "translation": "Título"
+            },
+            {
+              "word": "town",
+              "translation": "Pueblo"
+            },
+            {
+              "word": "zip code",
+              "translation": "Código postal"
+            }
+          ],
+          "Technology": [
+            {
+              "word": "alarm clock",
+              "translation": "Reloj despertador"
+            },
+            {
+              "word": "camera",
+              "translation": "Cámara"
+            },
+            {
+              "word": "computer",
+              "translation": "Computadora"
+            },
+            {
+              "word": "games console",
+              "translation": "Consola de videojuegos"
+            },
+            {
+              "word": "phone",
+              "translation": "Teléfono"
+            },
+            {
+              "word": "radio",
+              "translation": "Radio"
+            },
+            {
+              "word": "tablet",
+              "translation": "Tableta"
+            },
+            {
+              "word": "TV",
+              "translation": "Televisor"
+            },
+            {
+              "word": "video games",
+              "translation": "Videojuegos"
+            },
+            {
+              "word": "watch",
+              "translation": "Reloj"
+            }
+          ],
+          "Months": [
+            {
+              "word": "January",
+              "translation": "Enero"
+            },
+            {
+              "word": "February",
+              "translation": "Febrero"
+            },
+            {
+              "word": "March",
+              "translation": "Marzo"
+            },
+            {
+              "word": "April",
+              "translation": "Abril"
+            },
+            {
+              "word": "May",
+              "translation": "Mayo"
+            },
+            {
+              "word": "June",
+              "translation": "Junio"
+            },
+            {
+              "word": "July",
+              "translation": "Julio"
+            },
+            {
+              "word": "August",
+              "translation": "Agosto"
+            },
+            {
+              "word": "September",
+              "translation": "Septiembre"
+            },
+            {
+              "word": "October",
+              "translation": "Octubre"
+            },
+            {
+              "word": "November",
+              "translation": "Noviembre"
+            },
+            {
+              "word": "December",
+              "translation": "Diciembre"
+            }
+          ],
+          "Ordinal numbers": [
+            {
+              "word": "first",
+              "translation": "Primero"
+            },
+            {
+              "word": "second",
+              "translation": "Segundo"
+            },
+            {
+              "word": "third",
+              "translation": "Tercero"
+            },
+            {
+              "word": "fourth",
+              "translation": "Cuarto"
+            },
+            {
+              "word": "fifth",
+              "translation": "Quinto"
+            },
+            {
+              "word": "sixth",
+              "translation": "Sexto"
+            },
+            {
+              "word": "seventh",
+              "translation": "Séptimo"
+            },
+            {
+              "word": "eighth",
+              "translation": "Octavo"
+            },
+            {
+              "word": "ninth",
+              "translation": "Noveno"
+            },
+            {
+              "word": "tenth",
+              "translation": "Décimo"
+            },
+            {
+              "word": "eleventh",
+              "translation": "Undécimo"
+            },
+            {
+              "word": "twelfth",
+              "translation": "Duodécimo"
+            },
+            {
+              "word": "thirteenth",
+              "translation": "Decimotercero"
+            },
+            {
+              "word": "fourteenth",
+              "translation": "Decimocuarto"
+            },
+            {
+              "word": "fifteenth",
+              "translation": "Decimoquinto"
+            },
+            {
+              "word": "sixteenth",
+              "translation": "Decimosexto"
+            },
+            {
+              "word": "seventeenth",
+              "translation": "Decimoséptimo"
+            },
+            {
+              "word": "eighteenth",
+              "translation": "Decimoctavo"
+            },
+            {
+              "word": "nineteenth",
+              "translation": "Decimonoveno"
+            },
+            {
+              "word": "twentieth",
+              "translation": "Vigésimo"
+            },
+            {
+              "word": "twenty-first",
+              "translation": "Vigésimo primero"
+            },
+            {
+              "word": "twenty-second",
+              "translation": "Vigésimo segundo"
+            },
+            {
+              "word": "twenty-third",
+              "translation": "Vigésimo tercero"
+            },
+            {
+              "word": "twenty-fourth",
+              "translation": "Vigésimo cuarto"
+            },
+            {
+              "word": "twenty-fifth",
+              "translation": "Vigésimo quinto"
+            },
+            {
+              "word": "twenty-sixth",
+              "translation": "Vigésimo sexto"
+            },
+            {
+              "word": "twenty-seventh",
+              "translation": "Vigésimo séptimo"
+            },
+            {
+              "word": "twenty-eighth",
+              "translation": "Vigésimo octavo"
+            },
+            {
+              "word": "twenty-ninth",
+              "translation": "Vigésimo noveno"
+            },
+            {
+              "word": "thirtieth",
+              "translation": "Trigésimo"
+            },
+            {
+              "word": "thirty-first",
+              "translation": "Trigésimo primero"
+            }
+          ]
+        },
+        "Inglés III": {
+          "Snacks and drinks": [
+            {
+              "word": "black coffee",
+              "translation": "Café negro"
+            },
+            {
+              "word": "chips",
+              "translation": "Papas fritas"
+            },
+            {
+              "word": "chocolate bars",
+              "translation": "Barras de chocolate"
+            },
+            {
+              "word": "coffee with milk",
+              "translation": "Café con leche"
+            },
+            {
+              "word": "cookies",
+              "translation": "Galletas"
+            },
+            {
+              "word": "hot chocolate",
+              "translation": "Chocolate caliente"
+            },
+            {
+              "word": "milk",
+              "translation": "Leche"
+            },
+            {
+              "word": "orange juice",
+              "translation": "Jugo de naranja"
+            },
+            {
+              "word": "sandwiches",
+              "translation": "Sándwiches"
+            },
+            {
+              "word": "soda",
+              "translation": "Gaseosa"
+            },
+            {
+              "word": "tea",
+              "translation": "Té"
+            },
+            {
+              "word": "water",
+              "translation": "Agua"
+            }
+          ],
+          "Rooms": [
+            {
+              "word": "bathroom",
+              "translation": "Baño"
+            },
+            {
+              "word": "bedroom",
+              "translation": "Dormitorio"
+            },
+            {
+              "word": "kitchen",
+              "translation": "Cocina"
+            },
+            {
+              "word": "living room",
+              "translation": "Sala"
+            }
+          ],
+          "Furniture": [
+            {
+              "word": "bed",
+              "translation": "Cama"
+            },
+            {
+              "word": "chair",
+              "translation": "Silla"
+            },
+            {
+              "word": "couch",
+              "translation": "Sofá"
+            },
+            {
+              "word": "shower",
+              "translation": "Ducha"
+            },
+            {
+              "word": "table",
+              "translation": "Mesa"
+            },
+            {
+              "word": "window",
+              "translation": "Ventana"
+            }
+          ],
+          "Family": [
+            {
+              "word": "brother",
+              "translation": "Hermano"
+            },
+            {
+              "word": "dad",
+              "translation": "Papá"
+            },
+            {
+              "word": "daughter",
+              "translation": "Hija"
+            },
+            {
+              "word": "father",
+              "translation": "Padre"
+            },
+            {
+              "word": "friend",
+              "translation": "Amigo"
+            },
+            {
+              "word": "mom",
+              "translation": "Mamá"
+            },
+            {
+              "word": "mother",
+              "translation": "Madre"
+            },
+            {
+              "word": "parents",
+              "translation": "Padres"
+            },
+            {
+              "word": "pet",
+              "translation": "Mascota"
+            },
+            {
+              "word": "sister",
+              "translation": "Hermana"
+            },
+            {
+              "word": "son",
+              "translation": "Hijo"
+            }
+          ],
+          "Daily routines": [
+            {
+              "word": "finish class",
+              "translation": "Terminar clase"
+            },
+            {
+              "word": "finish work",
+              "translation": "Terminar el trabajo"
+            },
+            {
+              "word": "get home",
+              "translation": "Llegar a casa"
+            },
+            {
+              "word": "get up",
+              "translation": "Levantarse"
+            },
+            {
+              "word": "go to bed",
+              "translation": "Ir a dormir"
+            },
+            {
+              "word": "go to class",
+              "translation": "Ir a clase"
+            },
+            {
+              "word": "go to work",
+              "translation": "Ir al trabajo"
+            },
+            {
+              "word": "have a shower",
+              "translation": "Ducharse"
+            },
+            {
+              "word": "have breakfast",
+              "translation": "Desayunar"
+            },
+            {
+              "word": "have dinner",
+              "translation": "Cenar"
+            },
+            {
+              "word": "have lunch",
+              "translation": "Almorzar"
+            },
+            {
+              "word": "leave home",
+              "translation": "Salir de casa"
+            },
+            {
+              "word": "start class",
+              "translation": "Empezar clase"
+            },
+            {
+              "word": "start work",
+              "translation": "Empezar el trabajo"
+            },
+            {
+              "word": "wake up",
+              "translation": "Despertarse"
+            }
+          ]
+        },
+        "Inglés IV": {
+          "Sports and exercise": [
+            {
+              "word": "exercise",
+              "translation": "Ejercicio"
+            },
+            {
+              "word": "play basketball",
+              "translation": "Jugar baloncesto"
+            },
+            {
+              "word": "play soccer",
+              "translation": "Jugar fútbol"
+            },
+            {
+              "word": "play tennis",
+              "translation": "Jugar tenis"
+            },
+            {
+              "word": "ride a bike",
+              "translation": "Montar bicicleta"
+            },
+            {
+              "word": "run",
+              "translation": "Correr"
+            },
+            {
+              "word": "swim",
+              "translation": "Nadar"
+            },
+            {
+              "word": "walk",
+              "translation": "Caminar"
+            },
+            {
+              "word": "walk your dog",
+              "translation": "Pasear a tu perro"
+            }
+          ],
+          "Verbs and prepositions": [
+            {
+              "word": "come from",
+              "translation": "Venir de"
+            },
+            {
+              "word": "listen to",
+              "translation": "Escuchar"
+            },
+            {
+              "word": "live in",
+              "translation": "Vivir en"
+            },
+            {
+              "word": "love",
+              "translation": "Amar"
+            },
+            {
+              "word": "talk about",
+              "translation": "Hablar sobre"
+            },
+            {
+              "word": "work for",
+              "translation": "Trabajar para"
+            },
+            {
+              "word": "work in",
+              "translation": "Trabajar en"
+            }
+          ],
+          "Adjectives": [
+            {
+              "word": "boring",
+              "translation": "Aburrido"
+            },
+            {
+              "word": "difficult",
+              "translation": "Difícil"
+            },
+            {
+              "word": "easy",
+              "translation": "Fácil"
+            },
+            {
+              "word": "happy",
+              "translation": "Feliz"
+            },
+            {
+              "word": "horrible",
+              "translation": "Horrible"
+            },
+            {
+              "word": "interesting",
+              "translation": "Interesante"
+            },
+            {
+              "word": "nice",
+              "translation": "Agradable"
+            },
+            {
+              "word": "right",
+              "translation": "Correcto"
+            },
+            {
+              "word": "sad",
+              "translation": "Triste"
+            },
+            {
+              "word": "wrong",
+              "translation": "Incorrecto"
+            }
+          ]
+        }
+      }
+    },
+    "word-match": {
+      "title": "Word Match",
+      "file": "Word Match.html",
+      "bankType": "pairs",
+      "usesTranslation": true,
+      "entryFormat": "word_translation",
+      "levels": {
+        "Inglés I": {
+          "Different things": [
+            {
+              "word": "apple",
+              "translation": "manzana"
+            },
+            {
+              "word": "book",
+              "translation": "Libro"
+            },
+            {
+              "word": "coffee",
+              "translation": "Café"
+            },
+            {
+              "word": "guitar",
+              "translation": "Guitarra"
+            },
+            {
+              "word": "pen",
+              "translation": "Bolígrafo"
+            },
+            {
+              "word": "taxi",
+              "translation": "Taxi"
+            },
+            {
+              "word": "zebra",
+              "translation": "Cebra"
+            }
+          ],
+          "Colors": [
+            {
+              "word": "black",
+              "translation": "Negro"
+            },
+            {
+              "word": "blue",
+              "translation": "Azul"
+            },
+            {
+              "word": "brown",
+              "translation": "Café"
+            },
+            {
+              "word": "green",
+              "translation": "Verde"
+            },
+            {
+              "word": "orange",
+              "translation": "Naranja"
+            },
+            {
+              "word": "red",
+              "translation": "Rojo"
+            },
+            {
+              "word": "white",
+              "translation": "Blanco"
+            },
+            {
+              "word": "yellow",
+              "translation": "Amarillo"
+            }
+          ],
+          "Days of the week": [
+            {
+              "word": "Monday",
+              "translation": "Lunes"
+            },
+            {
+              "word": "Tuesday",
+              "translation": "Martes"
+            },
+            {
+              "word": "Wednesday",
+              "translation": "Miércoles"
+            },
+            {
+              "word": "Thursday",
+              "translation": "Jueves"
+            },
+            {
+              "word": "Friday",
+              "translation": "Viernes"
+            },
+            {
+              "word": "Saturday",
+              "translation": "Sábado"
+            },
+            {
+              "word": "Sunday",
+              "translation": "Domingo"
+            }
+          ],
+          "Numbers 0-10": [
+            {
+              "word": "zero",
+              "translation": "Cero"
+            },
+            {
+              "word": "one",
+              "translation": "Uno"
+            },
+            {
+              "word": "two",
+              "translation": "Dos"
+            },
+            {
+              "word": "three",
+              "translation": "Tres"
+            },
+            {
+              "word": "four",
+              "translation": "Cuatro"
+            },
+            {
+              "word": "five",
+              "translation": "Cinco"
+            },
+            {
+              "word": "six",
+              "translation": "Seis"
+            },
+            {
+              "word": "seven",
+              "translation": "Siete"
+            },
+            {
+              "word": "eight",
+              "translation": "Ocho"
+            },
+            {
+              "word": "nine",
+              "translation": "Nueve"
+            },
+            {
+              "word": "ten",
+              "translation": "Diez"
+            }
+          ],
+          "Personal information 1": [
+            {
+              "word": "email address",
+              "translation": "Correo electrónico"
+            },
+            {
+              "word": "first name",
+              "translation": "Primer Nombre"
+            },
+            {
+              "word": "last name",
+              "translation": "Apellido"
+            },
+            {
+              "word": "phone number",
+              "translation": "Número de teléfono"
+            }
+          ],
+          "Countries": [
+            {
+              "word": "Brazil",
+              "translation": "Brasil"
+            },
+            {
+              "word": "Chile",
+              "translation": "Chile"
+            },
+            {
+              "word": "Egypt",
+              "translation": "Egipto"
+            },
+            {
+              "word": "England",
+              "translation": "Inglaterra"
+            },
+            {
+              "word": "Italy",
+              "translation": "Italia"
+            },
+            {
+              "word": "Russia",
+              "translation": "Rusia"
+            },
+            {
+              "word": "Turkey",
+              "translation": "Turquía"
+            },
+            {
+              "word": "the United States",
+              "translation": "Estados Unidos"
+            }
+          ],
+          "Numbers 11-100": [
+            {
+              "word": "eleven",
+              "translation": "Once"
+            },
+            {
+              "word": "twelve",
+              "translation": "Doce"
+            },
+            {
+              "word": "thirteen",
+              "translation": "Trece"
+            },
+            {
+              "word": "fourteen",
+              "translation": "Catorce"
+            },
+            {
+              "word": "fifteen",
+              "translation": "Quince"
+            },
+            {
+              "word": "sixteen",
+              "translation": "Dieciséis"
+            },
+            {
+              "word": "seventeen",
+              "translation": "Diecisiete"
+            },
+            {
+              "word": "eighteen",
+              "translation": "Dieciocho"
+            },
+            {
+              "word": "nineteen",
+              "translation": "Diecinueve"
+            },
+            {
+              "word": "twenty",
+              "translation": "Veinte"
+            },
+            {
+              "word": "twenty-one",
+              "translation": "Veintiuno"
+            },
+            {
+              "word": "twenty-two",
+              "translation": "Veintidós"
+            },
+            {
+              "word": "twenty-three",
+              "translation": "Veintitrés"
+            },
+            {
+              "word": "twenty-four",
+              "translation": "Veinticuatro"
+            },
+            {
+              "word": "twenty-five",
+              "translation": "Veinticinco"
+            },
+            {
+              "word": "twenty-six",
+              "translation": "Veintiséis"
+            },
+            {
+              "word": "twenty-seven",
+              "translation": "Veintisiete"
+            },
+            {
+              "word": "twenty-eight",
+              "translation": "Veintiocho"
+            },
+            {
+              "word": "twenty-nine",
+              "translation": "Veintinueve"
+            },
+            {
+              "word": "thirty",
+              "translation": "Treinta"
+            },
+            {
+              "word": "forty",
+              "translation": "Cuarenta"
+            },
+            {
+              "word": "fifty",
+              "translation": "Cincuenta"
+            },
+            {
+              "word": "sixty",
+              "translation": "Sesenta"
+            },
+            {
+              "word": "seventy",
+              "translation": "Setenta"
+            },
+            {
+              "word": "eighty",
+              "translation": "Ochenta"
+            },
+            {
+              "word": "ninety",
+              "translation": "Noventa"
+            },
+            {
+              "word": "one hundred",
+              "translation": "Cien"
+            }
+          ],
+          "Personal information 2": [
+            {
+              "word": "address",
+              "translation": "Dirección"
+            },
+            {
+              "word": "city",
+              "translation": "Ciudad"
+            },
+            {
+              "word": "country",
+              "translation": "País"
+            },
+            {
+              "word": "name",
+              "translation": "Nombre"
+            },
+            {
+              "word": "title",
+              "translation": "Título"
+            },
+            {
+              "word": "town",
+              "translation": "Pueblo"
+            },
+            {
+              "word": "zip code",
+              "translation": "Código postal"
+            }
+          ],
+          "Technology": [
+            {
+              "word": "alarm clock",
+              "translation": "Reloj despertador"
+            },
+            {
+              "word": "camera",
+              "translation": "Cámara"
+            },
+            {
+              "word": "computer",
+              "translation": "Computadora"
+            },
+            {
+              "word": "games console",
+              "translation": "Consola de videojuegos"
+            },
+            {
+              "word": "phone",
+              "translation": "Teléfono"
+            },
+            {
+              "word": "radio",
+              "translation": "Radio"
+            },
+            {
+              "word": "tablet",
+              "translation": "Tableta"
+            },
+            {
+              "word": "TV",
+              "translation": "Televisor"
+            },
+            {
+              "word": "video games",
+              "translation": "Videojuegos"
+            },
+            {
+              "word": "watch",
+              "translation": "Reloj"
+            }
+          ],
+          "Months": [
+            {
+              "word": "January",
+              "translation": "Enero"
+            },
+            {
+              "word": "February",
+              "translation": "Febrero"
+            },
+            {
+              "word": "March",
+              "translation": "Marzo"
+            },
+            {
+              "word": "April",
+              "translation": "Abril"
+            },
+            {
+              "word": "May",
+              "translation": "Mayo"
+            },
+            {
+              "word": "June",
+              "translation": "Junio"
+            },
+            {
+              "word": "July",
+              "translation": "Julio"
+            },
+            {
+              "word": "August",
+              "translation": "Agosto"
+            },
+            {
+              "word": "September",
+              "translation": "Septiembre"
+            },
+            {
+              "word": "October",
+              "translation": "Octubre"
+            },
+            {
+              "word": "November",
+              "translation": "Noviembre"
+            },
+            {
+              "word": "December",
+              "translation": "Diciembre"
+            }
+          ],
+          "Ordinal numbers": [
+            {
+              "word": "first",
+              "translation": "Primero"
+            },
+            {
+              "word": "second",
+              "translation": "Segundo"
+            },
+            {
+              "word": "third",
+              "translation": "Tercero"
+            },
+            {
+              "word": "fourth",
+              "translation": "Cuarto"
+            },
+            {
+              "word": "fifth",
+              "translation": "Quinto"
+            },
+            {
+              "word": "sixth",
+              "translation": "Sexto"
+            },
+            {
+              "word": "seventh",
+              "translation": "Séptimo"
+            },
+            {
+              "word": "eighth",
+              "translation": "Octavo"
+            },
+            {
+              "word": "ninth",
+              "translation": "Noveno"
+            },
+            {
+              "word": "tenth",
+              "translation": "Décimo"
+            },
+            {
+              "word": "eleventh",
+              "translation": "Décimo primero"
+            },
+            {
+              "word": "twelfth",
+              "translation": "Décimo segundo"
+            },
+            {
+              "word": "thirteenth",
+              "translation": "Decimotercero"
+            },
+            {
+              "word": "fourteenth",
+              "translation": "Decimocuarto"
+            },
+            {
+              "word": "fifteenth",
+              "translation": "Decimoquinto"
+            },
+            {
+              "word": "sixteenth",
+              "translation": "Decimosexto"
+            },
+            {
+              "word": "seventeenth",
+              "translation": "Decimoséptimo"
+            },
+            {
+              "word": "eighteenth",
+              "translation": "Decimoctavo"
+            },
+            {
+              "word": "nineteenth",
+              "translation": "Decimonoveno"
+            },
+            {
+              "word": "twentieth",
+              "translation": "Vigésimo"
+            },
+            {
+              "word": "twenty-first",
+              "translation": "Vigésimo primero"
+            },
+            {
+              "word": "twenty-second",
+              "translation": "Vigésimo segundo"
+            },
+            {
+              "word": "twenty-third",
+              "translation": "Vigésimo tercero"
+            },
+            {
+              "word": "twenty-fourth",
+              "translation": "Vigésimo cuarto"
+            },
+            {
+              "word": "twenty-fifth",
+              "translation": "Vigésimo quinto"
+            },
+            {
+              "word": "twenty-sixth",
+              "translation": "Vigésimo sexto"
+            },
+            {
+              "word": "twenty-seventh",
+              "translation": "Vigésimo séptimo"
+            },
+            {
+              "word": "twenty-eighth",
+              "translation": "Vigésimo octavo"
+            },
+            {
+              "word": "twenty-ninth",
+              "translation": "Vigésimo noveno"
+            },
+            {
+              "word": "thirtieth",
+              "translation": "Trigésimo"
+            },
+            {
+              "word": "thirty-first",
+              "translation": "Trigésimo primero"
+            }
+          ],
+          "Snacks and drinks": [
+            {
+              "word": "black coffee",
+              "translation": "Café negro"
+            },
+            {
+              "word": "chips",
+              "translation": "Papas fritas"
+            },
+            {
+              "word": "chocolate bars",
+              "translation": "Barras de chocolate"
+            },
+            {
+              "word": "coffee with milk",
+              "translation": "Café con leche"
+            },
+            {
+              "word": "cookies",
+              "translation": "Galletas"
+            },
+            {
+              "word": "hot chocolate",
+              "translation": "Chocolate caliente"
+            },
+            {
+              "word": "milk",
+              "translation": "Leche"
+            },
+            {
+              "word": "orange juice",
+              "translation": "Jugo de naranja"
+            },
+            {
+              "word": "sandwiches",
+              "translation": "Sándwiches"
+            },
+            {
+              "word": "soda",
+              "translation": "Gaseosa"
+            },
+            {
+              "word": "tea",
+              "translation": "Té"
+            },
+            {
+              "word": "water",
+              "translation": "Agua"
+            }
+          ],
+          "Rooms": [
+            {
+              "word": "bathroom",
+              "translation": "Baño"
+            },
+            {
+              "word": "bedroom",
+              "translation": "Dormitorio"
+            },
+            {
+              "word": "kitchen",
+              "translation": "Cocina"
+            },
+            {
+              "word": "living room",
+              "translation": "Sala"
+            }
+          ],
+          "Furniture": [
+            {
+              "word": "bed",
+              "translation": "Cama"
+            },
+            {
+              "word": "chair",
+              "translation": "Silla"
+            },
+            {
+              "word": "couch",
+              "translation": "Sofá"
+            },
+            {
+              "word": "shower",
+              "translation": "Ducha"
+            },
+            {
+              "word": "table",
+              "translation": "Mesa"
+            },
+            {
+              "word": "window",
+              "translation": "Ventana"
+            }
+          ],
+          "Family": [
+            {
+              "word": "brother",
+              "translation": "Hermano"
+            },
+            {
+              "word": "dad",
+              "translation": "Papá"
+            },
+            {
+              "word": "daughter",
+              "translation": "Hija"
+            },
+            {
+              "word": "father",
+              "translation": "Padre"
+            },
+            {
+              "word": "friend",
+              "translation": "Amigo"
+            },
+            {
+              "word": "mom",
+              "translation": "Mamá"
+            },
+            {
+              "word": "mother",
+              "translation": "Madre"
+            },
+            {
+              "word": "parents",
+              "translation": "Padres"
+            },
+            {
+              "word": "pet",
+              "translation": "Mascota"
+            },
+            {
+              "word": "sister",
+              "translation": "Hermana"
+            },
+            {
+              "word": "son",
+              "translation": "Hijo"
+            }
+          ],
+          "Daily routines": [
+            {
+              "word": "finish class",
+              "translation": "Terminar clase"
+            },
+            {
+              "word": "finish work",
+              "translation": "Terminar el trabajo"
+            },
+            {
+              "word": "get home",
+              "translation": "Llegar a casa"
+            },
+            {
+              "word": "get up",
+              "translation": "Levantarse"
+            },
+            {
+              "word": "go to bed",
+              "translation": "Ir a dormir"
+            },
+            {
+              "word": "go to class",
+              "translation": "Ir a clase"
+            },
+            {
+              "word": "go to work",
+              "translation": "Ir al trabajo"
+            },
+            {
+              "word": "have a shower",
+              "translation": "Ducharse"
+            },
+            {
+              "word": "have breakfast",
+              "translation": "Desayunar"
+            },
+            {
+              "word": "have dinner",
+              "translation": "Cenar"
+            },
+            {
+              "word": "have lunch",
+              "translation": "Almorzar"
+            },
+            {
+              "word": "leave home",
+              "translation": "Salir de casa"
+            },
+            {
+              "word": "start class",
+              "translation": "Empezar clase"
+            },
+            {
+              "word": "start work",
+              "translation": "Empezar el trabajo"
+            },
+            {
+              "word": "wake up",
+              "translation": "Despertarse"
+            }
+          ],
+          "Sports and exercise": [
+            {
+              "word": "exercise",
+              "translation": "Ejercicio"
+            },
+            {
+              "word": "play basketball",
+              "translation": "Jugar baloncesto"
+            },
+            {
+              "word": "play soccer",
+              "translation": "Jugar fútbol"
+            },
+            {
+              "word": "play tennis",
+              "translation": "Jugar tenis"
+            },
+            {
+              "word": "ride a bike",
+              "translation": "Montar bicicleta"
+            },
+            {
+              "word": "run",
+              "translation": "Correr"
+            },
+            {
+              "word": "swim",
+              "translation": "Nadar"
+            },
+            {
+              "word": "walk",
+              "translation": "Caminar"
+            },
+            {
+              "word": "walk your dog",
+              "translation": "Pasear a tu perro"
+            }
+          ],
+          "Verbs and prepositions": [
+            {
+              "word": "come from",
+              "translation": "Venir de"
+            },
+            {
+              "word": "listen to",
+              "translation": "Escuchar"
+            },
+            {
+              "word": "live in",
+              "translation": "Vivir en"
+            },
+            {
+              "word": "love",
+              "translation": "Amar"
+            },
+            {
+              "word": "talk about",
+              "translation": "Hablar sobre"
+            },
+            {
+              "word": "work for",
+              "translation": "Trabajar para"
+            },
+            {
+              "word": "work in",
+              "translation": "Trabajar en"
+            }
+          ],
+          "Adjectives": [
+            {
+              "word": "boring",
+              "translation": "Aburrido"
+            },
+            {
+              "word": "difficult",
+              "translation": "Difícil"
+            },
+            {
+              "word": "easy",
+              "translation": "Fácil"
+            },
+            {
+              "word": "happy",
+              "translation": "Feliz"
+            },
+            {
+              "word": "horrible",
+              "translation": "Horrible"
+            },
+            {
+              "word": "interesting",
+              "translation": "Interesante"
+            },
+            {
+              "word": "nice",
+              "translation": "Agradable"
+            },
+            {
+              "word": "right",
+              "translation": "Correcto"
+            },
+            {
+              "word": "sad",
+              "translation": "Triste"
+            },
+            {
+              "word": "wrong",
+              "translation": "Incorrecto"
+            }
+          ],
+          "Family Members 2": [
+            {
+              "word": "mother-in-law",
+              "translation": "suegra"
+            },
+            {
+              "word": "father-in-law",
+              "translation": "suegro"
+            },
+            {
+              "word": "brother-in-law",
+              "translation": "cuñado"
+            },
+            {
+              "word": "sister-in-law",
+              "translation": "cuñada"
+            },
+            {
+              "word": "son-in-law",
+              "translation": "yerno"
+            },
+            {
+              "word": "daughter-in-law",
+              "translation": "nuera"
+            },
+            {
+              "word": "stepmother",
+              "translation": "madrastra"
+            },
+            {
+              "word": "stepfather",
+              "translation": "padrastro"
+            },
+            {
+              "word": "stepson",
+              "translation": "hijastro"
+            },
+            {
+              "word": "stepdaughter",
+              "translation": "hijastra"
+            },
+            {
+              "word": "stepbrother",
+              "translation": "hermanastro"
+            },
+            {
+              "word": "stepsister",
+              "translation": "hermanastra"
+            }
+          ],
+          "Posessive Adjectives": [
+            {
+              "word": "My",
+              "translation": "Mi"
+            },
+            {
+              "word": "Your",
+              "translation": "Su (ustedes)"
+            },
+            {
+              "word": "His",
+              "translation": "Su (hombre)"
+            },
+            {
+              "word": "Her",
+              "translation": "Su (mujer)"
+            },
+            {
+              "word": "Its",
+              "translation": "Su (algo)"
+            },
+            {
+              "word": "Our",
+              "translation": "Nuestro"
+            },
+            {
+              "word": "Their",
+              "translation": "Su (ellos)"
+            }
+          ],
+          "Personal Pronouns": [
+            {
+              "word": "I",
+              "translation": "Yo"
+            },
+            {
+              "word": "You",
+              "translation": "Tú"
+            },
+            {
+              "word": "He",
+              "translation": "Él"
+            },
+            {
+              "word": "She",
+              "translation": "Ella"
+            },
+            {
+              "word": "It",
+              "translation": "Esto"
+            },
+            {
+              "word": "We",
+              "translation": "Nosotros"
+            },
+            {
+              "word": "You (plural)",
+              "translation": "Ustedes"
+            },
+            {
+              "word": "They",
+              "translation": "Ellos"
+            }
+          ]
+        },
+        "Inglés II": {},
+        "Inglés III": {},
+        "Inglés IV": {}
+      }
+    },
+    "wordsearch": {
+      "title": "Wordsearch",
+      "file": "Wordsearch.html",
+      "bankType": "words",
+      "usesTranslation": false,
+      "entryFormat": "word",
+      "levels": {
+        "Inglés I": {
+          "Different things": [
+            "apple",
+            "book",
+            "coffee",
+            "guitar",
+            "pen",
+            "taxi",
+            "zebra"
+          ],
+          "Colors": [
+            "black",
+            "blue",
+            "brown",
+            "green",
+            "orange",
+            "red",
+            "white",
+            "yellow"
+          ],
+          "Days of the week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "Numbers 0-10": [
+            "zero",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "ten"
+          ],
+          "Personal information 1": [
+            "email address",
+            "first name",
+            "last name",
+            "phone number"
+          ],
+          "Countries": [
+            "Brazil",
+            "Chile",
+            "Egypt",
+            "England",
+            "Italy",
+            "Russia",
+            "Turkey",
+            "the United States"
+          ],
+          "Numbers 11-100": [
+            "eleven",
+            "twelve",
+            "thirteen",
+            "fourteen",
+            "fifteen",
+            "sixteen",
+            "seventeen",
+            "eighteen",
+            "nineteen",
+            "twenty",
+            "twenty-one",
+            "twenty-two",
+            "twenty-three",
+            "twenty-four",
+            "twenty-five",
+            "twenty-six",
+            "twenty-seven",
+            "twenty-eight",
+            "twenty-nine",
+            "thirty",
+            "forty",
+            "fifty",
+            "sixty",
+            "seventy",
+            "eighty",
+            "ninety",
+            "one hundred"
+          ],
+          "Personal information 2": [
+            "address",
+            "city",
+            "country",
+            "name",
+            "title",
+            "town",
+            "zip code"
+          ],
+          "Technology": [
+            "alarm clock",
+            "camera",
+            "computer",
+            "games console",
+            "phone",
+            "radio",
+            "tablet",
+            "TV",
+            "video games",
+            "watch"
+          ],
+          "Months": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+          ],
+          "Ordinal numbers": [
+            "first",
+            "second",
+            "third",
+            "fourth",
+            "fifth",
+            "sixth",
+            "seventh",
+            "eighth",
+            "ninth",
+            "tenth",
+            "eleventh",
+            "twelfth",
+            "thirteenth",
+            "fourteenth",
+            "fifteenth",
+            "sixteenth",
+            "seventeenth",
+            "eighteenth",
+            "nineteenth",
+            "twentieth",
+            "twenty-first",
+            "twenty-second",
+            "twenty-third",
+            "twenty-fourth",
+            "twenty-fifth",
+            "twenty-sixth",
+            "twenty-seventh",
+            "twenty-eighth",
+            "twenty-ninth",
+            "thirtieth",
+            "thirty-first"
+          ],
+          "Snacks and drinks": [
+            "black coffee",
+            "chips",
+            "chocolate bars",
+            "coffee with milk",
+            "cookies",
+            "hot chocolate",
+            "milk",
+            "orange juice",
+            "sandwiches",
+            "soda",
+            "tea",
+            "water"
+          ],
+          "Rooms": [
+            "bathroom",
+            "bedroom",
+            "kitchen",
+            "living room"
+          ],
+          "Furniture": [
+            "bed",
+            "chair",
+            "couch",
+            "shower",
+            "table",
+            "window"
+          ],
+          "Family": [
+            "brother",
+            "dad",
+            "daughter",
+            "father",
+            "friend",
+            "mom",
+            "mother",
+            "parents",
+            "pet",
+            "sister",
+            "son"
+          ],
+          "Daily routines": [
+            "finish class",
+            "finish work",
+            "get home",
+            "get up",
+            "go to bed",
+            "go to class",
+            "go to work",
+            "have a shower",
+            "have breakfast",
+            "have dinner",
+            "have lunch",
+            "leave home",
+            "start class",
+            "start work",
+            "wake up"
+          ],
+          "Sports and exercise": [
+            "exercise",
+            "play basketball",
+            "play soccer",
+            "play tennis",
+            "ride a bike",
+            "run",
+            "swim",
+            "walk",
+            "walk your dog"
+          ],
+          "Verbs and prepositions": [
+            "come from",
+            "listen to",
+            "live in",
+            "love",
+            "talk about",
+            "work for",
+            "work in"
+          ],
+          "Adjectives": [
+            "boring",
+            "difficult",
+            "easy",
+            "happy",
+            "horrible",
+            "interesting",
+            "nice",
+            "right",
+            "sad",
+            "wrong"
+          ]
+        },
+        "Inglés II": {},
+        "Inglés III": {},
+        "Inglés IV": {}
+      }
+    }
+  },
+  "notes": "Cada actividad tiene su propio banco independiente. Las actividades con usesTranslation=true usan pares word/translation; las demás usan solo word."
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ESL English</title>
+  <style>
+    :root {
+      --text: #0f172a;
+      --glass: rgba(255,255,255,.44);
+      --line: rgba(255,255,255,.55);
+      --shadow: 0 22px 70px rgba(15, 23, 42, .14);
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; margin: 0; }
+    body {
+      min-height: 100dvh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(96,165,250,.38), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(250,204,21,.30), transparent 28%),
+        radial-gradient(circle at 65% 86%, rgba(134,239,172,.34), transparent 32%),
+        linear-gradient(135deg, #eff6ff 0%, #fff7ed 52%, #f0fdf4 100%);
+      display: grid;
+      place-items: center;
+      padding: clamp(22px, 5vw, 64px);
+      overflow-x: hidden;
+    }
+    .shell { width: min(980px, 100%); display: grid; gap: clamp(34px, 6vw, 72px); }
+    header { text-align: center; }
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 11vw, 7.2rem);
+      line-height: .9;
+      letter-spacing: -.07em;
+      font-weight: 900;
+      text-wrap: balance;
+    }
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: clamp(12px, 2.2vw, 20px);
+    }
+    .tile {
+      min-height: clamp(120px, 18vw, 168px);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--glass);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      color: #0f172a;
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+    .tile:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,.64);
+      box-shadow: 0 28px 86px rgba(15, 23, 42, .18);
+    }
+    .tile span {
+      font-size: clamp(1.15rem, 2.5vw, 1.7rem);
+      font-weight: 850;
+      letter-spacing: -.03em;
+      text-align: center;
+    }
+    .empty-message {
+      text-align: center;
+      font-weight: 800;
+      color: #475569;
+      background: rgba(255,255,255,.52);
+      border: 1px solid rgba(255,255,255,.7);
+      border-radius: 24px;
+      padding: 22px;
+      backdrop-filter: blur(14px);
+    }
+    @media (max-width: 520px) {
+      body { align-items: start; padding-top: 58px; }
+      .tiles { grid-template-columns: 1fr 1fr; }
+      .tile { min-height: 112px; border-radius: 22px; }
+      h1 { font-size: clamp(3.1rem, 16vw, 5rem); }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell" aria-label="ESL English">
+    <header><h1>ESL English</h1></header>
+    <section class="tiles" id="activityTiles" aria-label="Actividades"></section>
+  </main>
+
+  <script>
+    const fallbackActivities = [
+      { title: "Anagrama", file: "Anagrama.html", enabled: true },
+      { title: "Flashcards", file: "Flashcards.html", enabled: true },
+      { title: "Hangman", file: "Hangman Game.html", enabled: true },
+      { title: "Memory Game", file: "Memory Game.html", enabled: true },
+      { title: "Word Match", file: "Word Match.html", enabled: true },
+      { title: "Wordsearch", file: "Wordsearch.html", enabled: true }
+    ];
+
+    function renderActivities(activities) {
+      const container = document.getElementById("activityTiles");
+      const list = (activities || []).filter(activity => activity && activity.enabled !== false && activity.file && activity.title);
+      container.innerHTML = "";
+      if (!list.length) {
+        container.innerHTML = '<div class="empty-message">No hay actividades activas.</div>';
+        return;
+      }
+      list.forEach(activity => {
+        const link = document.createElement("a");
+        link.className = "tile";
+        link.href = activity.file;
+        link.innerHTML = `<span>${activity.title}</span>`;
+        container.appendChild(link);
+      });
+    }
+
+    async function loadManifest() {
+      try {
+        const response = await fetch("activities-manifest.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("No manifest");
+        const manifest = await response.json();
+        renderActivities(manifest.activities);
+      } catch (error) {
+        renderActivities(fallbackActivities);
+      }
+    }
+
+    loadManifest();
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nueva actividad</title>
+  <script src="activity-bank-helper.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #eff6ff, #fff7ed, #f0fdf4);
+      color: #0f172a;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .home-btn {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.46);
+      border: 1px solid rgba(255,255,255,.72);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 12px 28px rgba(15,23,42,.12);
+      color: #0f172a;
+      text-decoration: none;
+    }
+    .card {
+      width: min(720px, 100%);
+      border-radius: 28px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(255,255,255,.75);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 70px rgba(15,23,42,.14);
+      padding: clamp(18px, 4vw, 34px);
+      display: grid;
+      gap: 14px;
+      text-align: center;
+    }
+    h1 { margin: 0; font-size: clamp(2rem, 7vw, 4rem); }
+    button {
+      border: 0;
+      border-radius: 16px;
+      background: #2563eb;
+      color: white;
+      padding: 12px 16px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    pre {
+      text-align: left;
+      white-space: pre-wrap;
+      background: #0f172a;
+      color: #e5e7eb;
+      border-radius: 18px;
+      padding: 16px;
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+  <a class="home-btn" href="index.html" aria-label="Inicio">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M3.5 11.2 12 4l8.5 7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6.5 10.5V20h11v-9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+
+  <main class="card">
+    <h1>Nueva actividad</h1>
+    <p>Este archivo es una plantilla para futuras actividades.</p>
+    <button id="loadBtn">Cargar banco de esta actividad</button>
+    <pre id="output">Presiona el botón para probar.</pre>
+  </main>
+
+  <script>
+    const ACTIVITY_ID = "nueva-actividad";
+
+    document.getElementById("loadBtn").addEventListener("click", async () => {
+      try {
+        const activityBank = await ESLBank.getActivityBank(ACTIVITY_ID);
+        document.getElementById("output").textContent = JSON.stringify(activityBank, null, 2);
+      } catch (error) {
+        document.getElementById("output").textContent = error.message;
+      }
+    });
+  </script>
+</body>
+</html>
