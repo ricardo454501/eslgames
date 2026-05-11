@@ -82,6 +82,28 @@
     .cat-list{display:grid;gap:8px;padding:8px;background:#f8fafc}.word-panel{padding:8px;background:#fff;display:grid;gap:8px}.word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:7px;contain:layout paint}.word-chip{min-height:48px;display:flex;align-items:center;gap:8px;border:2px solid #dbeafe;background:#f8fafc;border-radius:999px;padding:8px 10px;font-weight:1000;color:#0f172a;overflow:hidden}.word-chip input{width:20px;height:20px;flex:0 0 auto}.word-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.word-chip.on{background:#dcfce7;border-color:#86efac;color:#166534}
     .editor-panel{display:none;border:2px solid #ddd6fe;background:#faf5ff;border-radius:20px;padding:10px;gap:10px}.editor-panel.show{display:grid}.editor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.editor-card{background:#fff;border:2px solid #ddd6fe;border-radius:18px;padding:10px;display:grid;gap:8px}.editor-card h4{margin:0;color:#5b21b6}.editor-textarea{min-height:220px;font-family:Consolas,Monaco,monospace;font-size:.9rem;line-height:1.35;resize:vertical;text-align:left;white-space:pre;overflow:auto}
 
+
+
+    /* Microefectos SOLO para la zona del juego: livianos para Android TV */
+    .key{position:relative;transform:translateZ(0);will-change:transform}
+    .key:active,.key.touch-active{transform:scale(.94);filter:brightness(.98)}
+    .key.hit-good{animation:keyPopLite .28s ease both}
+    .key.hit-bad{animation:keyShakeLite .3s ease both}
+    .slot.new-letter{animation:letterJumpLite .34s cubic-bezier(.2,1.35,.35,1) both}
+    .game-card.good-feedback .word-board{animation:boardHappyLite .32s ease both}
+    .game-card.bad-feedback .play-area,
+    .player-panel.bad-feedback{animation:softShakeLite .28s ease both}
+    .hangman-box.bad-feedback{animation:badPulseLite .32s ease both}
+    @keyframes keyPopLite{0%{transform:scale(.88)}55%{transform:scale(1.12)}100%{transform:scale(1)}}
+    @keyframes keyShakeLite{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+    @keyframes letterJumpLite{0%{transform:translateY(10px) scale(.72);opacity:.35}58%{transform:translateY(-10px) scale(1.12);opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}
+    @keyframes boardHappyLite{0%,100%{transform:scale(1)}50%{transform:scale(1.012)}}
+    @keyframes softShakeLite{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
+    @keyframes badPulseLite{0%,100%{box-shadow:none}50%{box-shadow:0 0 0 5px rgba(239,68,68,.18)}}
+    @media (prefers-reduced-motion: reduce){
+      .key.hit-good,.key.hit-bad,.slot.new-letter,.game-card.good-feedback .word-board,.game-card.bad-feedback .play-area,.player-panel.bad-feedback,.hangman-box.bad-feedback{animation:none!important}
+    }
+
     @media (max-width:1100px){.play-area{grid-template-columns:1fr}.setup-grid{grid-template-columns:1fr}.level-list{max-height:none}.editor-grid{grid-template-columns:1fr}.arena{grid-template-columns:1fr;overflow:auto}.two-player-card{overflow:auto}.player-panel{min-height:520px}.player-play,.p2 .player-play{grid-template-columns:1fr 1fr}}
     @media (orientation:landscape) and (min-width:1200px){.setup-card{height:calc(var(--vh) - 20px);overflow:hidden}.setup-grid{min-height:0}.setup-panel{min-height:0}.config-grid{align-content:start}.level-list{max-height:none;min-height:0}.setup-panel:first-child{grid-template-rows:auto auto auto minmax(0,1fr)}}
     @media (max-height:650px){:root{--touch:46px}.setup-card{border-radius:18px;padding:8px}.setup-top{padding:8px 10px}.setup-top p{display:none}.level-head,.cat-head{min-height:50px;padding:7px 9px}.word-chip{min-height:42px}.field textarea{min-height:82px}.game-header{min-height:48px}.word-board{min-height:74px}.slot{width:46px;height:46px;font-size:2rem}.key{min-height:40px}.drawer{width:min(360px,94vw)}}
@@ -538,6 +560,8 @@
     $("levelList").addEventListener("click", handleLevelClick);
     $("levelList").addEventListener("change", handleLevelChange);
     $("gameCard").addEventListener("click", handleGameClick);
+    $("gameCard").addEventListener("pointerdown", handleGamePointerDown, {passive:true});
+    ["pointerup","pointercancel","pointerleave"].forEach(ev=>$("gameCard").addEventListener(ev, clearTouchEffects, {passive:true}));
     window.addEventListener("keydown", handleKeyboardInput);
   }
 
@@ -737,7 +761,7 @@
     if(p.index >= p.words.length || p.lives <= 0){ p.finished = true; p.current=null; p.message = p.lives<=0 ? "Sin vidas disponibles" : "Completado"; return; }
     p.current = p.words[p.index]; resetRound(p);
   }
-  function resetRound(p){ p.guessed = new Set(); p.wrong = new Set(); p.timeLeft = p.seconds; p.finished = false; p.message = ""; }
+  function resetRound(p){ p.guessed = new Set(); p.wrong = new Set(); p.timeLeft = p.seconds; p.finished = false; p.message = ""; p.feedback = null; }
   function nextWord(playerId){ const p = getPlayer(playerId); if(!p) return; p.index++; loadPlayerWord(p); renderGame(); }
   function getPlayer(id){ return state.game?.players.find(p=>p.id===Number(id)); }
   function startTimer(){
@@ -756,10 +780,33 @@
     const p=getPlayer(playerId); if(!p || !p.current || p.finished) return;
     const L=String(letter).toUpperCase(); if(p.guessed.has(L) || p.wrong.has(L)) return;
     const target = cleanWord(p.current.text);
-    if(target.includes(L)){ p.guessed.add(L); beep(720,55); if(isSolved(p)) finishWord(p,true); }
-    else { p.wrong.add(L); beep(180,70); if(p.wrong.size >= MAX_WRONG) finishWord(p,false); }
+    if(target.includes(L)){
+      p.guessed.add(L);
+      setFeedback(p,"good",L);
+      vibrate(12);
+      beep(720,55);
+      if(isSolved(p)) finishWord(p,true);
+    }
+    else {
+      p.wrong.add(L);
+      setFeedback(p,"bad",L);
+      vibrate([38,22,38]);
+      beep(180,70);
+      if(p.wrong.size >= MAX_WRONG) finishWord(p,false);
+    }
     renderGame();
+    scheduleFeedbackClear(p);
   }
+  function setFeedback(p,type,letter){ p.feedback = {type, letter, token:Date.now()+":"+Math.random().toString(16).slice(2)}; }
+  function scheduleFeedbackClear(p){
+    const token = p.feedback && p.feedback.token;
+    if(!token) return;
+    setTimeout(()=>{ if(p.feedback && p.feedback.token === token) p.feedback = null; }, 520);
+  }
+  function vibrate(pattern){
+    try{ if(window.navigator && typeof navigator.vibrate === "function") navigator.vibrate(pattern); }catch(e){}
+  }
+
   function isSolved(p){ return cleanWord(p.current.text).split("").every(ch=>p.guessed.has(ch)); }
   function finishWord(p, won, revealed=false){
     if(!p.current || p.finished) return;
@@ -777,12 +824,12 @@
     if(state.game.players.every(p=>p.finished && !p.current)){ renderFinalMessage(card); }
   }
   function renderOnePlayer(card){
-    const p=state.game.players[0]; card.className="game-card";
+    const p=state.game.players[0]; card.className="game-card" + (p.feedback ? ` ${p.feedback.type}-feedback` : "");
     card.innerHTML = `${renderHeader("Hangman", p.current ? `${p.current.level} · ${state.game.hint ? p.current.category : "Adivina la palabra"}` : "Juego finalizado", [
       `Palabra ${Math.min(p.index+1,p.words.length)}/${p.words.length}`, `Vidas ${p.lives}/${p.totalLives}`, p.seconds?`Tiempo ${formatTime(p.timeLeft)}`:"Sin tiempo", `Correctas ${p.correct}`, `Falladas ${p.failed}`
     ])}
     ${p.current ? renderWordBoard(p) : ""}
-    ${p.current ? `<div class="play-area"><div>${renderKeyboard(p)}</div><div>${renderHangman(p.wrong.size)}</div></div>` : `<div class="round-message">Juego terminado</div>`}
+    ${p.current ? `<div class="play-area"><div>${renderKeyboard(p)}</div><div>${renderHangman(p.wrong.size, p.feedback && p.feedback.type)}</div></div>` : `<div class="round-message">Juego terminado</div>`}
     ${p.finished && p.current ? renderRoundMessage(p) : ""}`;
   }
   function renderTwoPlayer(card){
@@ -792,21 +839,29 @@
   function totalHud(){ const p=state.game.players; return [`J1 ✅ ${p[0].correct} / ❌ ${p[0].failed}`, `J2 ✅ ${p[1].correct} / ❌ ${p[1].failed}`, `Vidas J1 ${p[0].lives}`, `Vidas J2 ${p[1].lives}`]; }
   function renderHeader(title, sub, pills){ return `<div class="game-header"><div class="title-block"><h1>${escapeHtml(title)}</h1><p>${escapeHtml(sub||"")}</p></div><div class="hud">${pills.map(x=>`<span class="pill">${escapeHtml(x)}</span>`).join("")}</div></div>`; }
   function renderPlayerPanel(p){
-    return `<section class="player-panel p${p.id}" data-player="${p.id}"><div class="player-head"><div><h2>${escapeHtml(p.name)}</h2><small>${p.current ? escapeHtml(state.game.hint ? `${p.current.level} · ${p.current.category}` : p.current.level) : escapeHtml(p.message)}</small></div><div class="hud"><span class="pill">❤️ ${p.lives}</span>${p.seconds?`<span class="pill">⏱ ${formatTime(p.timeLeft)}</span>`:""}<span class="pill">✅ ${p.correct}</span><span class="pill">❌ ${p.failed}</span></div></div>${p.current ? renderWordBoard(p) : `<div class="round-message">${escapeHtml(p.message||"Terminado")}</div>`}<div class="player-play">${p.id===1 ? renderKeyboard(p)+renderHangman(p.wrong.size) : renderHangman(p.wrong.size)+renderKeyboard(p)}</div>${p.finished && p.current ? renderRoundMessage(p) : ""}</section>`;
+    const fbClass = p.feedback ? ` ${p.feedback.type}-feedback` : "";
+    return `<section class="player-panel p${p.id}${fbClass}" data-player="${p.id}"><div class="player-head"><div><h2>${escapeHtml(p.name)}</h2><small>${p.current ? escapeHtml(state.game.hint ? `${p.current.level} · ${p.current.category}` : p.current.level) : escapeHtml(p.message)}</small></div><div class="hud"><span class="pill">❤️ ${p.lives}</span>${p.seconds?`<span class="pill">⏱ ${formatTime(p.timeLeft)}</span>`:""}<span class="pill">✅ ${p.correct}</span><span class="pill">❌ ${p.failed}</span></div></div>${p.current ? renderWordBoard(p) : `<div class="round-message">${escapeHtml(p.message||"Terminado")}</div>`}<div class="player-play">${p.id===1 ? renderKeyboard(p)+renderHangman(p.wrong.size, p.feedback && p.feedback.type) : renderHangman(p.wrong.size, p.feedback && p.feedback.type)+renderKeyboard(p)}</div>${p.finished && p.current ? renderRoundMessage(p) : ""}</section>`;
   }
   function renderWordBoard(p){
     const chars = Array.from(p.current.text);
     return `<div class="word-board">${chars.map(ch=>{
       const c=cleanChar(ch); if(!c) return `<span class="slot sep">${ch === " " ? "·" : escapeHtml(ch)}</span>`;
-      const on = p.guessed.has(c) || p.finished; return `<span class="slot ${on?"on":""}">${on ? escapeHtml(ch.toUpperCase()) : ""}</span>`;
+      const on = p.guessed.has(c) || p.finished;
+      const fresh = p.feedback && p.feedback.type === "good" && p.feedback.letter === c;
+      return `<span class="slot ${on?"on":""} ${fresh?"new-letter":""}">${on ? escapeHtml(ch.toUpperCase()) : ""}</span>`;
     }).join("")}</div>`;
   }
   function renderKeyboard(p){
-    return `<div class="keyboard" data-player="${p.id}">${ALPHABET.map(L=>{ const good=p.guessed.has(L), bad=p.wrong.has(L), dis=good||bad||p.finished; return `<button class="key ${good?"good":bad?"bad":""}" data-letter="${L}" data-player="${p.id}" ${dis?"disabled":""}>${L}</button>`; }).join("")}</div>`;
+    return `<div class="keyboard" data-player="${p.id}">${ALPHABET.map(L=>{
+      const good=p.guessed.has(L), bad=p.wrong.has(L), dis=good||bad||p.finished;
+      const hit = p.feedback && p.feedback.letter === L ? (p.feedback.type === "good" ? "hit-good" : "hit-bad") : "";
+      return `<button class="key ${good?"good":bad?"bad":""} ${hit}" data-letter="${L}" data-player="${p.id}" ${dis?"disabled":""}>${L}</button>`;
+    }).join("")}</div>`;
   }
-  function renderHangman(wrong){
+  function renderHangman(wrong, feedbackType){
     const show=i=>wrong>=i?"":"hide-part";
-    return `<div class="hangman-box"><svg viewBox="0 0 320 320" aria-hidden="true"><path class="gallows" d="M42 286H258M80 286V40M80 40H206M206 40V78"/><path class="rope ${show(1)}" d="M206 78V104"/><circle class="body-part ${show(2)}" cx="206" cy="128" r="24"/><path class="body-part ${show(3)}" d="M206 154V214"/><path class="body-part ${show(4)}" d="M206 174L166 198"/><path class="body-part ${show(5)}" d="M206 174L246 198"/><path class="body-part ${show(6)}" d="M206 214L172 258"/><path class="body-part ${show(7)}" d="M206 214L240 258"/><path class="body-part ${show(8)}" d="M196 122L190 116M216 122L222 116"/><path class="body-part ${show(9)}" d="M194 140Q206 150 218 140"/><path class="body-part ${show(10)}" d="M80 72L112 40"/></svg></div>`;
+    const fb = feedbackType === "bad" ? " bad-feedback" : "";
+    return `<div class="hangman-box${fb}"><svg viewBox="0 0 320 320" aria-hidden="true"><path class="gallows" d="M42 286H258M80 286V40M80 40H206M206 40V78"/><path class="rope ${show(1)}" d="M206 78V104"/><circle class="body-part ${show(2)}" cx="206" cy="128" r="24"/><path class="body-part ${show(3)}" d="M206 154V214"/><path class="body-part ${show(4)}" d="M206 174L166 198"/><path class="body-part ${show(5)}" d="M206 174L246 198"/><path class="body-part ${show(6)}" d="M206 214L172 258"/><path class="body-part ${show(7)}" d="M206 214L240 258"/><path class="body-part ${show(8)}" d="M196 122L190 116M216 122L222 116"/><path class="body-part ${show(9)}" d="M194 140Q206 150 218 140"/><path class="body-part ${show(10)}" d="M80 72L112 40"/></svg></div>`;
   }
   function renderRoundMessage(p){ return `<div class="round-message"><div>${escapeHtml(p.message)}</div><button class="btn green" type="button" data-action="next-word" data-player="${p.id}">Siguiente palabra</button></div>`; }
   function renderFinalMessage(card){
@@ -814,6 +869,14 @@
     card.innerHTML = `${renderHeader("CONGRATULATIONS!", "Juego finalizado", [totals])}<div class="round-message"><h2>🏆 Resultado final</h2><p>${escapeHtml(totals)}</p><div class="action-row"><button class="btn green" data-action="new-config" type="button">Nueva configuración</button><button class="btn" data-action="restart-game" type="button">Jugar otra vez</button></div></div>`;
     updateDrawerInfo();
   }
+  function handleGamePointerDown(e){
+    const key = e.target.closest(".key");
+    if(key && !key.disabled) key.classList.add("touch-active");
+  }
+  function clearTouchEffects(){
+    $("gameCard").querySelectorAll(".key.touch-active").forEach(k=>k.classList.remove("touch-active"));
+  }
+
   function handleGameClick(e){
     const key=e.target.closest(".key"); if(key){ guess(key.dataset.player, key.dataset.letter); return; }
     const btn=e.target.closest("[data-action]"); if(!btn) return;
