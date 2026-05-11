@@ -13,8 +13,8 @@
       "title": "Anagrama",
       "file": "Anagrama.html",
       "bankType": "words",
-      "usesTranslation": false,
-      "entryFormat": "word",
+      "usesTranslation": true,
+      "entryFormat": "word_translation",
       "levels": {
         "Inglés I": {
           "Different things": [
