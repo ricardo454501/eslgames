@@ -1,0 +1,825 @@
+/* ==========================================================
+   ESL English — Configuración/Banco unificados
+   Un solo diseño para todas las actividades.
+   Mantiene las funciones existentes; solo normaliza la ventana.
+   ========================================================== */
+:root {
+  --config-vh: 100dvh;
+  --config-vw: 100vw;
+  --config-bg: rgba(15, 23, 42, 0.38);
+  --config-card: rgba(255, 255, 255, 0.985);
+  --config-panel: #f8fafc;
+  --config-panel-2: #ffffff;
+  --config-line: #dbeafe;
+  --config-line-strong: #bfdbfe;
+  --config-blue: #2563eb;
+  --config-blue-dark: #1d4ed8;
+  --config-text: #0f172a;
+  --config-muted: #64748b;
+  --config-good: #16a34a;
+  --config-danger: #ef4444;
+  --config-warning: #ca8a04;
+  --config-purple: #7c3aed;
+  --config-radius: clamp(18px, 2.4vmin, 28px);
+  --config-gap: clamp(8px, 1.45vmin, 14px);
+  --config-pad: clamp(10px, 2vmin, 20px);
+}
+
+html.setup-first-run,
+html.setup-open,
+html.setup-first-run body,
+html.setup-open body {
+  overscroll-behavior: none !important;
+}
+
+/* La primera configuración no debe renderizar visualmente el juego detrás. */
+html.setup-first-run .stage,
+html.setup-first-run .game-stage,
+html.setup-first-run .flashcard-board,
+html.setup-first-run .memory-grid,
+html.setup-first-run .game-wrap,
+html.setup-first-run .topbar,
+html.setup-first-run .counter-pill,
+html.setup-first-run .menu-tab,
+html.setup-first-run .drawer {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html.setup-first-run .stage *,
+html.setup-first-run .game-stage *,
+html.setup-first-run .flashcard-board *,
+html.setup-first-run .memory-grid *,
+html.setup-first-run .game-wrap *,
+html.setup-first-run .topbar * {
+  animation: none !important;
+  transition: none !important;
+}
+
+html.setup-first-run #setupOverlay,
+html.setup-first-run #setupOverlay *,
+html.setup-open #setupOverlay,
+html.setup-open #setupOverlay * {
+  visibility: visible !important;
+}
+
+/* Overlay raíz: se reconstruye visualmente igual en todos los juegos. */
+body #setupOverlay.setup-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 10000 !important;
+  width: var(--config-vw, 100vw) !important;
+  height: var(--config-vh, 100dvh) !important;
+  min-height: var(--config-vh, 100dvh) !important;
+  display: none !important;
+  place-items: center !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding:
+    max(8px, env(safe-area-inset-top))
+    max(8px, env(safe-area-inset-right))
+    max(8px, env(safe-area-inset-bottom))
+    max(8px, env(safe-area-inset-left)) !important;
+  overflow: hidden !important;
+  background: var(--config-bg) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay.setup-overlay.show {
+  display: grid !important;
+}
+
+body #setupOverlay .setup-card {
+  width: min(1120px, calc(var(--config-vw, 100vw) - 16px)) !important;
+  height: min(880px, calc(var(--config-vh, 100dvh) - 16px)) !important;
+  max-width: calc(var(--config-vw, 100vw) - 16px) !important;
+  max-height: calc(var(--config-vh, 100dvh) - 16px) !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  gap: var(--config-gap) !important;
+  padding: var(--config-pad) !important;
+  overflow: hidden !important;
+  border: 2px solid rgba(191, 219, 254, 0.95) !important;
+  border-radius: var(--config-radius) !important;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(219, 234, 254, 0.78), transparent 28%),
+    radial-gradient(circle at 90% 12%, rgba(254, 240, 138, 0.32), transparent 26%),
+    var(--config-card) !important;
+  color: var(--config-text) !important;
+  box-shadow: 0 26px 80px rgba(15, 23, 42, 0.28) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay .setup-top {
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: clamp(8px, 1.2vmin, 12px) !important;
+  margin: 0 !important;
+  padding: 0 0 clamp(8px, 1.25vmin, 12px) !important;
+  border: 0 !important;
+  border-bottom: 2px dashed var(--config-line-strong) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body #setupOverlay .setup-top > div {
+  min-width: 0 !important;
+}
+
+body #setupOverlay .setup-top h1,
+body #setupOverlay .setup-card > h1 {
+  margin: 0 !important;
+  color: var(--config-blue-dark) !important;
+  font-size: clamp(1.12rem, 3.1vmin, 2.05rem) !important;
+  line-height: 1.05 !important;
+  font-weight: 1000 !important;
+  letter-spacing: -0.035em !important;
+  overflow-wrap: anywhere !important;
+}
+
+body #setupOverlay .setup-top p,
+body #setupOverlay .setup-card > p,
+body #setupOverlay .helper {
+  color: #475569 !important;
+  font-size: clamp(0.76rem, 1.45vmin, 0.92rem) !important;
+  line-height: 1.28 !important;
+  font-weight: 750 !important;
+}
+
+body #setupOverlay .close-btn {
+  width: clamp(38px, 5.6vmin, 44px) !important;
+  height: clamp(38px, 5.6vmin, 44px) !important;
+  min-width: clamp(38px, 5.6vmin, 44px) !important;
+  min-height: clamp(38px, 5.6vmin, 44px) !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: #0f172a !important;
+  color: #ffffff !important;
+  font-size: clamp(1rem, 2.6vmin, 1.25rem) !important;
+  font-weight: 1000 !important;
+  line-height: 1 !important;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18) !important;
+  cursor: pointer !important;
+}
+
+/* Cuerpo común: banco a la izquierda, configuración a la derecha. */
+body #setupOverlay .setup-grid {
+  min-width: 0 !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.36fr) minmax(270px, 0.78fr) !important;
+  grid-auto-rows: minmax(0, 1fr) !important;
+  align-items: stretch !important;
+  gap: var(--config-gap) !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay .setup-grid > * {
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay .setup-grid > .panel,
+body #setupOverlay .setup-grid > .setup-panel,
+body #setupOverlay .setup-grid > .config-group,
+body #setupOverlay .setup-grid > .teacher-box,
+body #setupOverlay .setup-grid > .mini-setup-box {
+  display: grid !important;
+  grid-template-rows: auto auto minmax(0, 1fr) auto !important;
+  align-content: stretch !important;
+  gap: clamp(7px, 1.1vmin, 10px) !important;
+  padding: clamp(9px, 1.45vmin, 13px) !important;
+  border: 2px solid var(--config-line) !important;
+  border-radius: clamp(16px, 2vmin, 22px) !important;
+  background: rgba(248, 250, 252, 0.92) !important;
+  box-shadow: inset 0 -2px 0 rgba(15, 23, 42, 0.025) !important;
+}
+
+body #setupOverlay .setup-grid > *:first-child {
+  background: rgba(255, 255, 255, 0.94) !important;
+}
+
+body #setupOverlay .setup-grid > *:last-child {
+  background: rgba(248, 250, 252, 0.96) !important;
+}
+
+body #setupOverlay .panel h3,
+body #setupOverlay .setup-panel h3,
+body #setupOverlay .config-group > label,
+body #setupOverlay .player-mode-box > strong,
+body #setupOverlay .field-label,
+body #setupOverlay .bank-save-field label,
+body #setupOverlay .field-row label {
+  margin: 0 !important;
+  color: var(--config-blue-dark) !important;
+  font-size: clamp(0.86rem, 1.75vmin, 1rem) !important;
+  line-height: 1.15 !important;
+  font-weight: 1000 !important;
+}
+
+body #setupOverlay .category-actions,
+body #setupOverlay .setup-actions,
+body #setupOverlay .word-actions,
+body #setupOverlay .code-actions,
+body #setupOverlay .code-bank-actions,
+body #setupOverlay .bank-save-actions,
+body #setupOverlay .inline-actions,
+body #setupOverlay .inline-category-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: clamp(6px, 1vmin, 8px) !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+}
+
+body #setupOverlay .setup-actions {
+  justify-content: center !important;
+}
+
+body #setupOverlay button,
+body #setupOverlay .setup-btn,
+body #setupOverlay .control-btn,
+body #setupOverlay .tiny-btn,
+body #setupOverlay .inline-add-btn,
+body #setupOverlay .inline-small-btn,
+body #setupOverlay .add-category-main-btn,
+body #setupOverlay .bank-icon-btn {
+  min-height: 36px !important;
+  border: 0 !important;
+  border-radius: 13px !important;
+  padding: 9px 11px !important;
+  font-size: clamp(0.76rem, 1.42vmin, 0.9rem) !important;
+  line-height: 1.05 !important;
+  font-weight: 950 !important;
+  color: #ffffff !important;
+  background: var(--config-blue) !important;
+  box-shadow: 0 7px 16px rgba(37, 99, 235, 0.16) !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  transition: transform 0.08s ease, filter 0.12s ease !important;
+}
+
+body #setupOverlay button:hover,
+body #setupOverlay .setup-btn:hover,
+body #setupOverlay .tiny-btn:hover {
+  transform: translateY(-1px) !important;
+  filter: brightness(0.98) !important;
+}
+
+body #setupOverlay .setup-btn.secondary,
+body #setupOverlay .control-btn.secondary,
+body #setupOverlay .inline-small-btn.secondary {
+  background: #0f172a !important;
+  box-shadow: 0 7px 16px rgba(15, 23, 42, 0.14) !important;
+}
+
+body #setupOverlay .setup-btn.green,
+body #setupOverlay .control-btn.green,
+body #setupOverlay .inline-add-btn,
+body #setupOverlay .inline-small-btn:not(.secondary):not(.danger),
+body #setupOverlay .bank-icon-btn.plus {
+  background: var(--config-good) !important;
+  box-shadow: 0 7px 16px rgba(22, 163, 74, 0.16) !important;
+}
+
+body #setupOverlay .setup-btn.danger,
+body #setupOverlay .control-btn.danger,
+body #setupOverlay .inline-small-btn.danger,
+body #setupOverlay .bank-icon-btn.minus {
+  background: var(--config-danger) !important;
+  box-shadow: 0 7px 16px rgba(239, 68, 68, 0.16) !important;
+}
+
+body #setupOverlay .setup-btn.yellow,
+body #setupOverlay .setup-btn.warning,
+body #setupOverlay .control-btn.warning {
+  background: var(--config-warning) !important;
+}
+
+body #setupOverlay .setup-btn.purple,
+body #setupOverlay .setup-btn.editing,
+body #setupOverlay #editModeBtn.active,
+body.edit-mode #setupOverlay #editModeBtn,
+body.bank-editing #setupOverlay #editModeBtn {
+  background: var(--config-purple) !important;
+}
+
+body #setupOverlay .setup-btn.light,
+body #setupOverlay .tiny-btn,
+body #setupOverlay .category-toggle-btn,
+body #setupOverlay .toggle-words-btn {
+  background: #eff6ff !important;
+  color: #1d4ed8 !important;
+  border: 1px solid var(--config-line-strong) !important;
+  box-shadow: none !important;
+}
+
+body #setupOverlay input,
+body #setupOverlay select,
+body #setupOverlay textarea {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  border: 2px solid var(--config-line-strong) !important;
+  border-radius: 12px !important;
+  padding: 9px 10px !important;
+  background: #ffffff !important;
+  color: var(--config-text) !important;
+  font-size: clamp(0.82rem, 1.55vmin, 0.94rem) !important;
+  font-weight: 850 !important;
+  line-height: 1.25 !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay textarea {
+  min-height: 82px !important;
+  resize: vertical !important;
+  text-align: left !important;
+}
+
+body #setupOverlay input[type="checkbox"],
+body #setupOverlay input[type="radio"] {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  padding: 0 !important;
+  accent-color: var(--config-blue) !important;
+  cursor: pointer !important;
+}
+
+body #setupOverlay .config-grid,
+body #setupOverlay .config-stack,
+body #setupOverlay .setup-summary,
+body #setupOverlay .teacher-box,
+body #setupOverlay .mini-setup-box,
+body #setupOverlay .player-mode-box,
+body #setupOverlay .config-group,
+body #setupOverlay .option-row,
+body #setupOverlay .check-row,
+body #setupOverlay .two-col,
+body #setupOverlay .teacher-row,
+body #setupOverlay .field-row {
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  display: grid !important;
+  gap: clamp(6px, 1vmin, 9px) !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay .two-col,
+body #setupOverlay .teacher-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+body #setupOverlay .summary-pill,
+body #setupOverlay .status,
+body #setupOverlay .info-card,
+body #setupOverlay .bank-save-hint,
+body #setupOverlay .setup-inline-message,
+body #setupOverlay .code-status,
+body #setupOverlay .code-bank-status {
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 8px 10px !important;
+  border: 2px solid var(--config-line) !important;
+  border-radius: 14px !important;
+  background: #eff6ff !important;
+  color: #1e3a8a !important;
+  font-size: clamp(0.76rem, 1.35vmin, 0.88rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.25 !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay .status,
+body #setupOverlay .code-status,
+body #setupOverlay .code-bank-status {
+  background: #fef9c3 !important;
+  border-color: #fde68a !important;
+  color: #713f12 !important;
+}
+
+/* Lista del banco: scroll único y tarjetas iguales. */
+body #setupOverlay .category-list,
+body #setupOverlay .mini-list,
+body #setupOverlay .word-list,
+body #setupOverlay .round-list,
+body #setupOverlay .bank-levels,
+body #setupOverlay .level-list {
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  height: auto !important;
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  align-content: start !important;
+  gap: clamp(7px, 1.1vmin, 10px) !important;
+  padding: 2px 4px 2px 2px !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay .level-section,
+body #setupOverlay .level-code-editor,
+body #setupOverlay .category-card,
+body #setupOverlay .category-block,
+body #setupOverlay .category-option {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  border: 2px solid #e0f2fe !important;
+  border-radius: 15px !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay .level-section[open],
+body #setupOverlay .level-code-editor[open],
+body #setupOverlay .category-card.has-selected,
+body #setupOverlay .category-block.has-selected,
+body #setupOverlay .category-option.has-selected {
+  border-color: #93c5fd !important;
+  background: #eff6ff !important;
+}
+
+body #setupOverlay .level-summary,
+body #setupOverlay .level-code-editor summary {
+  min-width: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 11px !important;
+  cursor: pointer !important;
+  color: var(--config-text) !important;
+  background: linear-gradient(135deg, #ffffff, #eff6ff) !important;
+  border: 0 !important;
+  list-style: none !important;
+}
+
+body #setupOverlay .level-summary::-webkit-details-marker,
+body #setupOverlay .level-code-editor summary::-webkit-details-marker {
+  display: none !important;
+}
+
+body #setupOverlay .level-summary::after,
+body #setupOverlay .level-code-editor summary::after {
+  content: "›" !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 999px !important;
+  background: #dbeafe !important;
+  color: #1d4ed8 !important;
+  font-size: 1.35rem !important;
+  font-weight: 1000 !important;
+  line-height: 1 !important;
+  transition: transform 0.15s ease !important;
+}
+
+body #setupOverlay .level-section[open] .level-summary::after,
+body #setupOverlay .level-code-editor[open] summary::after {
+  transform: rotate(90deg) !important;
+}
+
+body #setupOverlay .level-left,
+body #setupOverlay .category-main,
+body #setupOverlay .category-head,
+body #setupOverlay .category-header,
+body #setupOverlay .category-title-row,
+body #setupOverlay .word-select-label,
+body #setupOverlay .category-title {
+  min-width: 0 !important;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  align-items: start !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+}
+
+body #setupOverlay .category-head,
+body #setupOverlay .category-header {
+  padding: 9px !important;
+}
+
+body #setupOverlay .level-left strong,
+body #setupOverlay .category-title strong,
+body #setupOverlay .category-title-row strong,
+body #setupOverlay .category-title span,
+body #setupOverlay .word-check-row span,
+body #setupOverlay .word-chip span {
+  min-width: 0 !important;
+  color: var(--config-text) !important;
+  font-size: clamp(0.78rem, 1.45vmin, 0.92rem) !important;
+  font-weight: 950 !important;
+  line-height: 1.15 !important;
+  overflow-wrap: anywhere !important;
+}
+
+body #setupOverlay .level-summary small,
+body #setupOverlay .category-title small,
+body #setupOverlay .category-title-row small,
+body #setupOverlay .word-chip small,
+body #setupOverlay .mini-list small,
+body #setupOverlay .word-item small {
+  min-width: 0 !important;
+  color: var(--config-muted) !important;
+  font-size: clamp(0.66rem, 1.15vmin, 0.78rem) !important;
+  font-weight: 850 !important;
+  line-height: 1.1 !important;
+  white-space: normal !important;
+}
+
+body #setupOverlay .level-category-list,
+body #setupOverlay .category-words,
+body #setupOverlay .category-word-list,
+body #setupOverlay .word-chip-grid {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)) !important;
+  gap: 6px !important;
+  padding: 9px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  max-height: min(250px, 34vh) !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay .level-section:not([open]) .level-category-list {
+  display: none !important;
+}
+
+body #setupOverlay .word-chip,
+body #setupOverlay .word-check-row,
+body #setupOverlay .category-word-option,
+body #setupOverlay .option-row,
+body #setupOverlay .check-row {
+  min-width: 0 !important;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 7px !important;
+  padding: 7px 8px !important;
+  border: 1px solid var(--config-line) !important;
+  border-radius: 11px !important;
+  background: #f8fafc !important;
+  color: var(--config-text) !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay .word-chip:has(input:checked),
+body #setupOverlay .word-check-row:has(input:checked),
+body #setupOverlay .category-word-option:has(input:checked),
+body #setupOverlay .option-row:has(input:checked) {
+  border-color: #86efac !important;
+  background: #dcfce7 !important;
+  color: #166534 !important;
+}
+
+/* Editor de banco: mismo formato y oculto cuando no se edita. */
+body:not(.edit-mode):not(.bank-editing) #setupOverlay .level-code-editor-wrap,
+body:not(.edit-mode):not(.bank-editing) #setupOverlay .code-editor-card,
+body:not(.edit-mode):not(.bank-editing) #setupOverlay .bank-editor,
+body:not(.edit-mode):not(.bank-editing) #setupOverlay .edit-toolbar,
+body:not(.edit-mode):not(.bank-editing) #setupOverlay .code-bank-editor {
+  display: none !important;
+}
+
+body #setupOverlay .level-code-editor-wrap,
+body #setupOverlay .code-editor-card,
+body #setupOverlay .bank-editor,
+body #setupOverlay .edit-toolbar,
+body #setupOverlay .code-bank-editor,
+body #setupOverlay .level-code-editor-grid {
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: min(420px, 48vh) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 8px !important;
+  padding: 8px !important;
+  border: 2px solid #ddd6fe !important;
+  border-radius: 15px !important;
+  background: #faf5ff !important;
+  box-sizing: border-box !important;
+}
+
+body #setupOverlay .level-code-editor textarea,
+body #setupOverlay .code-bank-editor textarea,
+body #setupOverlay .bank-code-editor,
+body #setupOverlay .bank-code-textarea,
+body #setupOverlay #wordBankCode {
+  min-height: 150px !important;
+  max-height: min(260px, 34vh) !important;
+  font-family: Consolas, Monaco, "Courier New", monospace !important;
+  font-size: clamp(0.75rem, 1.35vmin, 0.88rem) !important;
+  white-space: pre !important;
+}
+
+body #setupOverlay .category-empty-message,
+body #setupOverlay .empty-word-message {
+  padding: 8px 10px !important;
+  border: 1px dashed #fecaca !important;
+  border-radius: 12px !important;
+  background: #fff1f2 !important;
+  color: #991b1b !important;
+  font-weight: 900 !important;
+  font-size: 0.78rem !important;
+}
+
+/* Scrollbar suave y consistente. */
+body #setupOverlay *::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+body #setupOverlay *::-webkit-scrollbar-thumb {
+  background: #bfdbfe !important;
+  border-radius: 999px !important;
+}
+body #setupOverlay *::-webkit-scrollbar-track {
+  background: rgba(239, 246, 255, 0.7) !important;
+  border-radius: 999px !important;
+}
+
+/* Android horizontal / pantallas bajas: conservar dos columnas, pero compactas. */
+@media (orientation: landscape) and (max-height: 620px) {
+  body #setupOverlay.setup-overlay {
+    padding:
+      max(5px, env(safe-area-inset-top))
+      max(6px, env(safe-area-inset-right))
+      max(5px, env(safe-area-inset-bottom))
+      max(6px, env(safe-area-inset-left)) !important;
+  }
+
+  body #setupOverlay .setup-card {
+    width: calc(var(--config-vw, 100vw) - 12px) !important;
+    height: calc(var(--config-vh, 100dvh) - 10px) !important;
+    max-width: calc(var(--config-vw, 100vw) - 12px) !important;
+    max-height: calc(var(--config-vh, 100dvh) - 10px) !important;
+    padding: clamp(7px, 1.25vmin, 11px) !important;
+    border-radius: 18px !important;
+    gap: 7px !important;
+  }
+
+  body #setupOverlay .setup-top {
+    padding-bottom: 6px !important;
+  }
+
+  body #setupOverlay .setup-top h1,
+  body #setupOverlay .setup-card > h1 {
+    font-size: clamp(1rem, 3.4vmin, 1.42rem) !important;
+  }
+
+  body #setupOverlay .setup-top p,
+  body #setupOverlay .setup-card > p {
+    display: none !important;
+  }
+
+  body #setupOverlay .setup-grid {
+    grid-template-columns: minmax(0, 1.24fr) minmax(210px, 0.76fr) !important;
+    gap: 7px !important;
+  }
+
+  body #setupOverlay .setup-grid > .panel,
+  body #setupOverlay .setup-grid > .setup-panel,
+  body #setupOverlay .setup-grid > .config-group,
+  body #setupOverlay .setup-grid > .teacher-box,
+  body #setupOverlay .setup-grid > .mini-setup-box {
+    padding: 7px !important;
+    border-radius: 14px !important;
+    gap: 6px !important;
+  }
+
+  body #setupOverlay .category-actions,
+  body #setupOverlay .setup-actions,
+  body #setupOverlay .code-bank-actions,
+  body #setupOverlay .code-actions {
+    gap: 5px !important;
+  }
+
+  body #setupOverlay button,
+  body #setupOverlay .setup-btn,
+  body #setupOverlay .control-btn,
+  body #setupOverlay .tiny-btn {
+    min-height: 31px !important;
+    padding: 7px 8px !important;
+    border-radius: 10px !important;
+    font-size: clamp(0.68rem, 1.85vmin, 0.8rem) !important;
+  }
+
+  body #setupOverlay input,
+  body #setupOverlay select,
+  body #setupOverlay textarea {
+    padding: 7px 8px !important;
+    border-radius: 10px !important;
+    font-size: clamp(0.72rem, 1.7vmin, 0.82rem) !important;
+  }
+
+  body #setupOverlay .level-category-list,
+  body #setupOverlay .category-words,
+  body #setupOverlay .category-word-list,
+  body #setupOverlay .word-chip-grid {
+    grid-template-columns: repeat(auto-fit, minmax(95px, 1fr)) !important;
+    max-height: min(210px, 44vh) !important;
+    padding: 7px !important;
+  }
+}
+
+/* Tablet vertical y pantallas medianas: dos columnas cuando caben. */
+@media (orientation: portrait) and (min-width: 560px) {
+  body #setupOverlay .setup-grid {
+    grid-template-columns: minmax(0, 1.28fr) minmax(240px, 0.78fr) !important;
+  }
+}
+
+/* Celular vertical angosto: una columna real para que sea usable y rápido. */
+@media (orientation: portrait) and (max-width: 559px) {
+  body #setupOverlay.setup-overlay {
+    padding: max(6px, env(safe-area-inset-top)) max(6px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) max(6px, env(safe-area-inset-left)) !important;
+  }
+
+  body #setupOverlay .setup-card {
+    width: calc(var(--config-vw, 100vw) - 12px) !important;
+    height: calc(var(--config-vh, 100dvh) - 12px) !important;
+    max-width: calc(var(--config-vw, 100vw) - 12px) !important;
+    max-height: calc(var(--config-vh, 100dvh) - 12px) !important;
+    padding: 9px !important;
+    border-radius: 18px !important;
+  }
+
+  body #setupOverlay .setup-grid {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    align-items: start !important;
+    padding-right: 2px !important;
+  }
+
+  body #setupOverlay .setup-grid > .panel,
+  body #setupOverlay .setup-grid > .setup-panel,
+  body #setupOverlay .setup-grid > .config-group,
+  body #setupOverlay .setup-grid > .teacher-box,
+  body #setupOverlay .setup-grid > .mini-setup-box {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  body #setupOverlay .category-list,
+  body #setupOverlay .mini-list,
+  body #setupOverlay .word-list,
+  body #setupOverlay .round-list {
+    max-height: min(360px, 46vh) !important;
+  }
+
+  body #setupOverlay .level-category-list,
+  body #setupOverlay .category-words,
+  body #setupOverlay .category-word-list,
+  body #setupOverlay .word-chip-grid {
+    grid-template-columns: 1fr !important;
+    max-height: min(280px, 38vh) !important;
+  }
+
+  body #setupOverlay .two-col,
+  body #setupOverlay .teacher-row {
+    grid-template-columns: 1fr !important;
+  }
+}
