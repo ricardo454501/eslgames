@@ -9,7 +9,7 @@
       "title": "Anagrama",
       "file": "Anagrama.html",
       "bankType": "words",
-      "usesTranslation": false,
+      "usesTranslation": true,
       "enabled": true
     },
     {
