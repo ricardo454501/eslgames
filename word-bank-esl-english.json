@@ -1337,9 +1337,9 @@
     "memory-game": {
       "title": "Memory Game",
       "file": "Memory Game.html",
-      "bankType": "words",
-      "usesTranslation": false,
-      "entryFormat": "word",
+      "bankType": "pairs",
+      "usesTranslation": true,
+      "entryFormat": "word_translation",
       "levels": {
         "Inglés I": {
           "Different things": [
