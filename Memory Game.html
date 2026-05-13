@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f2a5f" />
+  <script src="activity-bank-helper.js"></script>
+  <title>Memory Game</title>
+  <style>
+    :root{
+      --vh:100dvh; --ink:#0b1736; --muted:#61708d; --white:#fff;
+      --blue:#2563eb; --blue2:#1d4ed8; --cyan:#06b6d4; --green:#16a34a;
+      --orange:#f59e0b; --red:#ef4444; --violet:#7c3aed; --yellow:#facc15;
+      --card:#ffffff; --soft:#eff6ff; --line:#bfdbfe; --shadow:0 8px 20px rgba(15,23,42,.13);
+      --r:24px; --touch:58px;
+    }
+    *{box-sizing:border-box}
+    html,body{width:100%;height:100%;margin:0;overflow:hidden;color:var(--ink);font-family:Arial,"Arial Rounded MT Bold",Helvetica,sans-serif;touch-action:manipulation;-webkit-text-size-adjust:100%}
+    body{height:var(--vh);background:#0f2a5f}
+    button,input,textarea,select{font:inherit}
+    button{border:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+    .hidden,[hidden]{display:none!important}.app{width:100vw;height:var(--vh);display:grid;grid-template-rows:1fr;overflow:hidden;padding:12px}
+    .btn{min-height:var(--touch);border-radius:18px;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;font-weight:1000;padding:10px 14px;border:2px solid rgba(255,255,255,.2);transition:transform .12s ease,opacity .12s ease;box-shadow:none}.btn:active,.btn.press{transform:scale(.96)}.btn.small{min-height:44px;padding:7px 11px;font-size:.92rem}.btn.green{background:linear-gradient(135deg,#22c55e,#15803d)}.btn.red{background:linear-gradient(135deg,#ef4444,#b91c1c)}.btn.dark{background:linear-gradient(135deg,#334155,#0f172a)}.btn.yellow{background:linear-gradient(135deg,#f59e0b,#b45309)}.btn.purple{background:linear-gradient(135deg,#8b5cf6,#5b21b6)}.btn.white{background:#fff;color:#1e40af;border-color:#bfdbfe}.btn:disabled{opacity:.5;cursor:not-allowed}
+    .menu-fab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:45;width:62px;min-height:126px;border-radius:0 24px 24px 0;background:linear-gradient(180deg,#2563eb,#0f2a5f);color:#fff;border:2px solid rgba(255,255,255,.5);border-left:0;font-weight:1000;box-shadow:none}
+    .home-fab{position:fixed;right:18px;bottom:18px;z-index:120;width:62px;height:62px;border-radius:22px;background:linear-gradient(135deg,#f59e0b,#ef4444);display:grid;place-items:center;color:#fff;text-decoration:none;border:2px solid rgba(255,255,255,.75);box-shadow:var(--shadow)}.home-fab svg{width:34px;height:34px;fill:currentColor}
+    .drawer{position:fixed;z-index:60;left:0;top:0;bottom:0;width:min(430px,94vw);background:#f8fbff;border-right:3px solid #93c5fd;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:auto;transform:translateX(-106%);transition:transform .22s ease;box-shadow:none}.drawer.open{transform:translateX(0)}
+    .drawer-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:2px dashed #bfdbfe;padding-bottom:10px}.drawer h2{margin:0;color:#1e40af;font-size:1.45rem}.close-btn{width:48px;height:48px;border-radius:999px;background:#0f2a5f;color:white;font-size:1.5rem;font-weight:1000}.drawer-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.drawer-info,.notice{border:2px solid #bfdbfe;border-radius:18px;background:#eff6ff;color:#1e3a8a;padding:10px;font-weight:900;line-height:1.3}
+    .arena-root{height:100%;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr);gap:10px;border:2px solid rgba(255,255,255,.42);border-radius:30px;background:linear-gradient(135deg,rgba(14,165,233,.34),rgba(124,58,237,.28) 48%,rgba(245,158,11,.22));padding:12px;overflow:hidden}.game-top{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:24px;background:linear-gradient(135deg,#0f3e99,#075985 56%,#7c2d12);border:2px solid rgba(255,255,255,.55)}.brand h1{margin:0;color:#fff;font-size:clamp(1.5rem,2.65vmin,3.2rem);line-height:1}.brand p{margin:4px 0 0;font-size:clamp(.88rem,1.3vmin,1.25rem);font-weight:900;color:#dff6ff}.hud{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.pill{min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:8px 13px;border-radius:999px;background:#fff;color:#0f3e99;border:2px solid rgba(14,165,233,.45);font-weight:1000;white-space:nowrap;font-size:clamp(.82rem,1.22vmin,1.08rem)}
+    .empty-state{height:100%;display:grid;place-items:center;text-align:center;color:#fff;padding:30px;border-radius:28px;background:linear-gradient(135deg,rgba(29,78,216,.88),rgba(8,145,178,.75),rgba(124,58,237,.74));border:2px solid rgba(255,255,255,.55)}.empty-state h1{font-size:clamp(2rem,4vmin,4.5rem);line-height:.98;margin:0 0 10px}.empty-state p{font-size:clamp(1rem,1.8vmin,1.7rem);font-weight:900;max-width:980px;margin:0 auto;color:#f8fafc}
+    .players{min-height:0;min-width:0;display:grid;gap:12px;overflow:hidden}.players.one{grid-template-columns:minmax(0,1fr)}.players.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.player-card{min-height:0;min-width:0;background:#ffffff;border:3px solid rgba(255,255,255,.95);border-radius:28px;padding:12px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:10px;overflow:hidden;position:relative;box-shadow:none}.player-card.p1{outline:3px solid rgba(37,99,235,.8)}.player-card.p2{outline:3px solid rgba(22,163,74,.78)}.player-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border-radius:20px;background:linear-gradient(135deg,#1d4ed8,#0891b2);border:2px solid rgba(255,255,255,.48);color:#fff}.p2 .player-head{background:linear-gradient(135deg,#15803d,#0d9488)}.player-head h2{margin:0;font-size:clamp(1.2rem,2vmin,2rem)}.player-head small{display:block;margin-top:2px;color:#e0f2fe;font-weight:900;font-size:clamp(.8rem,1.15vmin,1.05rem);max-width:60ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.game-host{min-height:0;overflow:hidden;border-radius:24px;background:#dbeafe;border:3px solid rgba(37,99,235,.72);padding:10px;display:grid;grid-template-rows:minmax(0,1fr);align-content:stretch;justify-items:stretch;text-align:center;gap:10px;position:relative}.round-message{display:none;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:20px;background:#f59e0b;border:2px solid #b45309;color:#451a03;font-weight:1000}.round-message.show{display:flex}.final-card{position:absolute;inset:12px;z-index:25;display:grid;place-items:center;text-align:center;border-radius:26px;background:linear-gradient(135deg,rgba(15,42,95,.95),rgba(37,99,235,.9),rgba(245,158,11,.86));color:#fff;border:2px solid rgba(255,255,255,.65);padding:24px}.final-card h2{font-size:clamp(2rem,5vmin,5.4rem);margin:0 0 8px}.final-card p{font-size:clamp(1rem,1.8vmin,1.7rem);font-weight:900;margin:0 0 18px;color:#f8fafc}.final-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    .setup-overlay{position:fixed;z-index:80;inset:0;background:linear-gradient(135deg,#e0f2fe,#eff6ff 52%,#eef2ff);display:none;overflow:auto;-webkit-overflow-scrolling:touch;padding:12px;overscroll-behavior:contain}.setup-overlay.show{display:grid;place-items:start center}.setup-card{width:min(1660px,calc(100vw - 24px));min-height:calc(var(--vh) - 24px);background:#fff;border:3px solid #93c5fd;border-radius:30px;padding:14px;display:grid;grid-template-rows:auto minmax(0,1fr);gap:12px;box-shadow:none}.setup-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;border-radius:24px;background:linear-gradient(135deg,#1d4ed8,#0f2a5f);color:#fff}.setup-top h1{margin:0;font-size:clamp(1.55rem,2.75vmin,3rem);line-height:1}.setup-top p{margin:4px 0 0;color:#dbeafe;font-weight:900;font-size:clamp(.82rem,1.15vmin,1.1rem)}.setup-grid{min-height:0;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(360px,.55fr);gap:12px;align-items:start}.setup-panel{min-height:0;background:#f8fafc;border:2px solid #dbeafe;border-radius:24px;padding:12px;display:grid;gap:10px;align-content:start;overflow:hidden}.setup-panel h3{margin:0;color:#1e40af;font-size:clamp(1.08rem,1.55vmin,1.45rem)}.action-row{display:flex;gap:8px;flex-wrap:wrap}.level-list{min-height:0;overflow:auto;display:grid;gap:8px;padding-right:2px}.level-card,.category-card{border:2px solid #bfdbfe;border-radius:20px;background:#fff;overflow:hidden}.level-head,.cat-head{width:100%;min-height:62px;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;text-align:left;padding:10px 12px;background:linear-gradient(135deg,#dbeafe,#eef2ff);color:#1e40af;font-weight:1000}.cat-head{background:#fff;color:#0f172a;border-bottom:1px solid #dbeafe}.arrow{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;background:#fff;border:2px solid #bfdbfe;font-size:1.25rem}.level-card.open>.level-head .arrow,.category-card.open>.cat-head .arrow{transform:rotate(90deg)}.level-title,.cat-title{display:grid;gap:2px;min-width:0}.level-title strong,.cat-title strong{font-size:clamp(1rem,1.35vmin,1.28rem);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.level-title small,.cat-title small{font-size:.82rem;color:#64748b;font-weight:900}.select-box{display:flex;align-items:center;gap:8px;font-size:.86rem;color:#1e3a8a;background:#eff6ff;border:2px solid #bfdbfe;border-radius:999px;padding:8px 10px;white-space:nowrap}.select-box input,.word-chip input{width:22px;height:22px}.cat-list{display:grid;gap:8px;padding:8px;background:#f8fafc}.word-panel{padding:8px;background:#fff;display:grid;gap:8px}.word-grid-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:7px}.word-chip{min-height:47px;display:flex;align-items:center;gap:8px;border:2px solid #dbeafe;background:#f8fafc;border-radius:999px;padding:8px 10px;font-weight:1000;color:#0f172a;overflow:hidden}.word-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.word-chip.on{background:#dcfce7;border-color:#86efac;color:#166534}.word-chip small{display:none!important}.config-grid{display:grid;gap:10px;align-content:start}.field{display:grid;gap:6px;color:#1e40af;font-weight:1000}.field input,.field select,.field textarea,.editor-textarea{width:100%;min-height:var(--touch);border:2px solid #bfdbfe;border-radius:17px;background:#fff;color:#0f172a;padding:10px;font-weight:900;outline:0}.field textarea{min-height:126px;resize:vertical}.check{display:flex;align-items:center;gap:10px;min-height:var(--touch);padding:10px;border:2px solid #bfdbfe;border-radius:17px;background:#fff;color:#0f172a;font-weight:1000}.check input{width:22px;height:22px}.summary{border:2px solid #bfdbfe;border-radius:17px;background:#eff6ff;color:#1e3a8a;padding:10px;font-weight:1000;line-height:1.25}.status{border:2px solid #fde68a;background:#fef9c3;color:#713f12;border-radius:16px;padding:9px;font-weight:1000;min-height:42px}.status:empty{display:none}.editor-panel{display:none;border:2px solid #ddd6fe;background:#faf5ff;border-radius:22px;padding:10px;gap:10px}.editor-panel.show{display:grid}.editor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.editor-card{background:#fff;border:2px solid #ddd6fe;border-radius:18px;padding:10px;display:grid;gap:8px}.editor-card h4{margin:0;color:#5b21b6}.editor-textarea{min-height:210px;font-family:Consolas,Monaco,monospace;font-size:.9rem;line-height:1.35;resize:vertical;text-align:left;white-space:pre;overflow:auto}
+    .ws-wrap{width:100%;height:100%;min-height:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:8px;align-items:stretch;overflow:hidden}.ws-wrap.side-beside{grid-template-columns:minmax(0,1fr) minmax(120px,var(--ws-side-w,220px));grid-template-rows:minmax(0,1fr)}.players.two .ws-wrap{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}.players.two .ws-wrap.side-beside{grid-template-columns:minmax(0,1fr) minmax(100px,var(--ws-side-w,170px));grid-template-rows:minmax(0,1fr)}.ws-grid{--grid-count:14;--ws-grid-px:min(100%,100%);width:var(--ws-grid-px);height:var(--ws-grid-px);max-width:100%;max-height:100%;aspect-ratio:1/1;justify-self:center;align-self:center;display:grid;grid-template-columns:repeat(var(--grid-count),1fr);grid-template-rows:repeat(var(--grid-count),1fr);gap:clamp(1px,.22vmin,4px);padding:clamp(2px,.45vmin,7px);border-radius:clamp(14px,2.5vmin,28px);background:rgba(255,255,255,.9);border:3px solid #93c5fd;box-shadow:inset 0 -5px 0 rgba(37,99,235,.06);touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;align-self:center;justify-self:center}.ws-cell{min-width:0;min-height:0;width:100%;height:100%;border:clamp(1px,.2vmin,3px) solid #bfdbfe;border-radius:clamp(5px,.8vmin,14px);background:#fff;color:#0f172a;display:flex;align-items:center;justify-content:center;font-weight:1000;font-size:clamp(.38rem,calc(var(--ws-grid-px,520px)/var(--grid-count)*.58),2.45rem);line-height:1;padding:0;transition:transform .08s ease,background .12s ease,border-color .12s ease,color .12s ease;box-shadow:inset 0 -3px 0 rgba(15,23,42,.05);touch-action:none}.ws-cell.selected{background:#facc15;border-color:#eab308;color:#111827;transform:scale(1.04)}.ws-cell.found{background:#16a34a;border-color:#86efac;color:#fff}.ws-cell.answer{background:#fb7185;border-color:#e11d48;color:#fff}.ws-cell.bad-flash{animation:wsBad .26s ease both}.ws-cell.good-burst{animation:wsGood .72s ease both;z-index:3}.ws-side{min-height:0;display:grid;grid-template-rows:minmax(0,1fr);gap:8px;overflow:hidden}.ws-word-list{min-height:0;overflow:auto;display:grid;align-content:start;gap:6px;padding:7px;border-radius:18px;background:#eff6ff;border:2px solid #bfdbfe}.ws-word{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;min-height:38px;padding:7px 9px;border-radius:14px;background:#fff;border:1px solid #dbeafe;color:#0f172a;font-weight:1000;text-align:left}.ws-word small{color:#64748b;font-weight:900;text-align:right}.ws-word.found{background:#dcfce7;border-color:#86efac;color:#166534;text-decoration:line-through}.players.two .ws-word-list{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));max-height:96px}.players.two .ws-wrap.side-beside .ws-word-list{grid-template-columns:1fr;max-height:none}.players.two .ws-side{grid-template-rows:minmax(0,1fr)}.ws-toast{position:absolute;left:50%;top:50%;z-index:35;transform:translate(-50%,-50%);pointer-events:none;width:min(460px,calc(100% - 32px));border-radius:28px;padding:18px;border:3px solid rgba(255,255,255,.82);background:linear-gradient(135deg,rgba(22,163,74,.98),rgba(37,99,235,.96));color:#fff;box-shadow:0 24px 55px rgba(15,23,42,.28),inset 0 -5px 0 rgba(15,23,42,.12);animation:wsToast 1.15s ease forwards;text-align:center}.ws-toast.bad{background:linear-gradient(135deg,#ef4444,#f97316)}.ws-toast b{display:block;font-size:clamp(1.6rem,4.5vmin,3.5rem);line-height:1;text-shadow:0 3px 0 rgba(15,23,42,.18);overflow-wrap:anywhere}.ws-toast span{display:block;font-weight:1000;margin-bottom:6px}.pop{animation:pop .18s ease-out both}.shake{animation:shake .24s ease both}.banner-pop{animation:pop .18s ease-out both}@keyframes pop{0%{transform:scale(.93);opacity:.7}100%{transform:scale(1);opacity:1}}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}@keyframes wsBad{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}}@keyframes wsGood{0%{transform:scale(1)}30%{transform:scale(1.18) rotate(-2deg);filter:brightness(1.14);box-shadow:0 0 0 5px rgba(250,204,21,.45), inset 0 -4px 0 rgba(15,23,42,.12)}60%{transform:scale(.96) rotate(1deg)}100%{transform:scale(1)}}@keyframes wsToast{0%{opacity:0;transform:translate(-50%,-44%) scale(.62) rotate(-4deg)}20%{opacity:1;transform:translate(-50%,-52%) scale(1.06) rotate(1deg)}70%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-58%) scale(.94)}}@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+    @media (max-width:1180px){.app{padding:8px}.setup-grid{grid-template-columns:1fr}.setup-card{height:auto;overflow:visible}.setup-panel{overflow:visible}.level-list{max-height:none}.players.two{grid-template-columns:1fr}.player-card{min-height:520px}.editor-grid{grid-template-columns:1fr}.ws-wrap{grid-template-columns:1fr}.ws-side{grid-template-rows:auto auto}.ws-word-list{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));max-height:150px}}
+    @media (max-height:680px){:root{--touch:48px}.app{padding:8px}.arena-root{padding:8px;border-radius:22px}.game-top{padding:8px 10px}.brand p,.setup-top p{display:none}.player-card{padding:8px;border-radius:20px}.player-head{padding:7px 9px}.drawer{width:min(360px,94vw)}.level-head,.cat-head{min-height:50px;padding:7px 9px}.word-chip{min-height:42px}.setup-card{border-radius:20px;padding:8px}}
+    @media (orientation:landscape) and (max-height:760px){.players.two .player-card{min-height:0}.players.two .ws-wrap.side-beside{grid-template-columns:minmax(0,1fr) minmax(100px,160px);grid-template-rows:minmax(0,1fr)}.players.two .ws-wrap.side-beside .ws-word-list{grid-template-columns:1fr;max-height:none}}
+
+    /* =========================================================
+       MEMORY GAME — giro extraído del archivo de referencia + texto optimizado
+       ========================================================= */
+    .memory-wrap{width:100%;height:100%;min-width:0;min-height:0;display:grid;place-items:center;overflow:hidden;padding:clamp(2px,.45vmin,6px)}
+    .memory-grid{width:100%;height:100%;min-width:0;min-height:0;display:grid;gap:clamp(5px,.9vmin,12px);align-content:center;justify-content:center;padding:clamp(6px,1.1vmin,14px);border-radius:clamp(16px,2.4vmin,28px);background:rgba(255,255,255,.88);border:3px solid #93c5fd;box-shadow:inset 0 -5px 0 rgba(37,99,235,.06);touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overflow:hidden;perspective:1200px;-webkit-perspective:1200px;contain:layout paint size}
+    .memory-card{position:relative;width:100%;height:100%;min-width:0;min-height:0;border:0;border-radius:clamp(12px,1.9vmin,22px);background:transparent;padding:0;cursor:pointer;touch-action:none;-webkit-tap-highlight-color:transparent;animation:memIn .2s ease both;will-change:transform;perspective:900px;-webkit-perspective:900px;transform:translateZ(0);isolation:isolate}
+    .memory-card .card-inner{position:absolute;inset:1px;border-radius:inherit;transform:rotateY(0deg);-webkit-transform:rotateY(0deg);transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .46s cubic-bezier(.22,.8,.18,1);will-change:transform;transform-origin:center center}
+    .memory-card.flipped .card-inner,.memory-card.matched .card-inner{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+    .memory-card.flipped,.memory-card.matched{z-index:5}
+    .memory-card.tap-soft{animation:memTap .16s ease-out both} /* No se usa durante el flip: animar transform en el botón mientras rota el hijo provoca destello de texto en WebKit/Android. */
+    .memory-card.matched{pointer-events:none}
+    .memory-card.removed{visibility:hidden}
+    .card-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:inherit;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;overflow-wrap:anywhere;word-break:normal;hyphens:auto;padding:clamp(1px,.34vmin,6px);font-weight:1000;line-height:1.08;box-shadow:0 6px 14px rgba(15,23,42,.12),inset 0 -3px 0 rgba(15,23,42,.055);transform-style:flat;-webkit-transform-style:flat;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;contain:paint}
+
+    .card-text{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;width:100%;height:100%;max-width:100%;max-height:100%;min-width:0;min-height:0;line-height:1.08;text-align:center;overflow:hidden;overflow-wrap:normal;word-break:normal;hyphens:none;white-space:normal;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:none!important;-webkit-transform:none!important;will-change:auto;pointer-events:none}
+    .card-label{display:block;width:100%;max-width:100%;min-width:0;line-height:inherit;text-align:center;white-space:normal;overflow-wrap:normal;word-break:normal;hyphens:none;letter-spacing:-.01em}
+    .card-front{transform:rotateY(0deg);-webkit-transform:rotateY(0deg);background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;border:3px solid rgba(255,255,255,.72);font-size:clamp(1.35rem,4vmin,4.8rem);text-shadow:0 3px 0 rgba(15,23,42,.18)}
+    .card-front::after{content:"";position:absolute;width:48%;height:48%;border-radius:999px;background:rgba(250,204,21,.24);filter:blur(2px);z-index:0}
+    .card-back{transform:rotateY(180deg);-webkit-transform:rotateY(180deg);background:linear-gradient(135deg,#fff,#eff6ff);color:#0f172a;border:3px solid #bfdbfe;font-size:clamp(.72rem,1.7vmin,1.5rem);text-transform:none}
+    .card-back.spanish{background:linear-gradient(135deg,#fff7ed,#fff);border-color:#fdba74}
+
+    /* Jugador 2: color diferenciado solo en la cara frontal de las tarjetas.
+       Es CSS estático, sin cálculos extra. */
+    .player-card.p2 .card-front{background:linear-gradient(135deg,#7c3aed,#db2777)!important;border-color:rgba(255,255,255,.76)!important;color:#fff!important}
+    .player-card.p2 .card-front::after{background:rgba(255,255,255,.18)!important}
+    .memory-card.wrong{filter:saturate(1.12);animation:memWrongCard .34s ease both}
+    .memory-card.wrong .card-back{border-color:#ef4444!important;background:linear-gradient(135deg,#fee2e2,#fff7ed)!important;color:#7f1d1d!important;box-shadow:0 0 0 4px rgba(239,68,68,.24),inset 0 -3px 0 rgba(127,29,29,.10)!important}
+    .memory-card.wrong::after{content:"";position:absolute;inset:-3px;border-radius:inherit;border:3px solid rgba(239,68,68,.92);box-shadow:0 0 0 5px rgba(239,68,68,.16);pointer-events:none;animation:memWrongRing .44s ease both;z-index:9}
+    .memory-card.match-pop{animation:memMatchCard .46s ease both}
+    .memory-grid.wrong-pulse{background:linear-gradient(135deg,rgba(254,226,226,.98),rgba(255,247,237,.98));border-color:#ef4444;animation:memBoardWrong .38s ease both}
+    .memory-wrong-x{position:absolute;left:50%;top:50%;z-index:10;width:min(44px,46%);height:min(44px,46%);transform:translate(-50%,-50%) scale(.72);pointer-events:none;animation:memWrongX .62s ease-out forwards}
+    .memory-wrong-x::before,.memory-wrong-x::after{content:"";position:absolute;left:50%;top:50%;width:100%;height:clamp(5px,1.1vmin,10px);border-radius:999px;background:#ef4444;box-shadow:0 2px 0 rgba(127,29,29,.22)}
+    .memory-wrong-x::before{transform:translate(-50%,-50%) rotate(45deg)}
+    .memory-wrong-x::after{transform:translate(-50%,-50%) rotate(-45deg)}
+
+    .memory-toast{position:absolute;left:50%;top:50%;z-index:35;transform:translate(-50%,-50%);pointer-events:none;width:min(460px,calc(100% - 32px));border-radius:28px;padding:18px;border:3px solid rgba(255,255,255,.82);background:linear-gradient(135deg,rgba(22,163,74,.98),rgba(37,99,235,.96));color:#fff;box-shadow:0 24px 55px rgba(15,23,42,.28),inset 0 -5px 0 rgba(15,23,42,.12);animation:memToast 1.15s ease forwards;text-align:center}
+    .memory-toast.bad{background:linear-gradient(135deg,#ef4444,#f97316)}
+    .memory-toast b{display:block;font-size:clamp(1.4rem,4.2vmin,3.2rem);line-height:1;text-shadow:0 3px 0 rgba(15,23,42,.18);overflow-wrap:anywhere}
+    .memory-toast span{display:block;font-weight:1000;margin-bottom:6px}
+    .mem-word-list{position:absolute;right:10px;bottom:10px;z-index:4;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 20px);max-height:78px;overflow:auto;padding:6px;border-radius:16px;background:rgba(239,246,255,.86);border:2px solid #bfdbfe}
+    .mem-word{border-radius:999px;background:#fff;border:1px solid #dbeafe;color:#0f172a;font-size:clamp(.68rem,1.1vmin,.86rem);font-weight:1000;padding:5px 8px;white-space:nowrap}.mem-word.found{background:#dcfce7;border-color:#86efac;color:#166534;text-decoration:line-through}
+
+    /* MODO LIMPIO: solo contenedores de tarjetas.
+       Se controla desde VIEW_OPTIONS en la fuente JS. */
+    .arena-root.hide-game-title{grid-template-rows:minmax(0,1fr);gap:0}
+    .arena-root.hide-game-title>.game-top{display:none!important}
+    .arena-root.hide-player-bars .player-card{grid-template-rows:minmax(0,1fr) auto;gap:6px;padding:8px}
+    .arena-root.hide-player-bars .player-head{display:none!important}
+    .arena-root.hide-player-bars .game-host{border-width:3px;padding:8px}
+    .arena-root.hide-player-bars .players{height:100%;gap:8px}
+    .arena-root.hide-player-bars .round-message{min-height:44px}
+    .arena-root.hide-player-bars .memory-wrap{padding:2px}
+    .arena-root.hide-player-bars .memory-grid{border-width:2px}
+
+    @keyframes memIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+    @keyframes memTap{0%{transform:scale(1)}48%{transform:scale(.965)}100%{transform:scale(1)}}
+    @keyframes memWrongCard{0%,100%{transform:translateX(0)}18%{transform:translateX(-8px) rotateZ(-.8deg)}36%{transform:translateX(8px) rotateZ(.8deg)}58%{transform:translateX(-5px)}78%{transform:translateX(4px)}}
+    @keyframes memMatchCard{0%{transform:scale(1)}40%{transform:scale(1.045)}100%{transform:scale(1)}}
+    @keyframes memWrongX{0%{opacity:0;transform:translate(-50%,-50%) scale(.45) rotate(-8deg)}28%{opacity:1;transform:translate(-50%,-50%) scale(1.08) rotate(3deg)}78%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(.82)}}
+    @keyframes memWrongRing{0%,100%{opacity:0;transform:scale(.98)}25%,75%{opacity:1;transform:scale(1.02)}}
+    @keyframes memBoardWrong{0%,100%{box-shadow:inset 0 -5px 0 rgba(37,99,235,.06)}35%{box-shadow:0 0 0 5px rgba(239,68,68,.22), inset 0 -5px 0 rgba(239,68,68,.10)}}
+    @keyframes memToast{0%{opacity:0;transform:translate(-50%,-44%) scale(.62) rotate(-4deg)}20%{opacity:1;transform:translate(-50%,-52%) scale(1.06) rotate(1deg)}70%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-58%) scale(.94)}}
+
+  </style>
+</head>
+<body>
+  <button class="menu-fab" id="menuBtn" type="button" aria-label="Abrir menú">☰<br>Menú</button>
+  <a class="home-fab" id="homeBtn" href="index.html" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2v8.3a1.5 1.5 0 0 1-1.5 1.5h-4.5v-6h-5v6H5a1.5 1.5 0 0 1-1.5-1.5z"/></svg></a>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head"><h2 id="drawerTitle">🧠 Memory Game</h2><button class="close-btn" id="drawerClose" type="button">×</button></div>
+    <div class="drawer-info" id="drawerProgress">Sin juego activo</div>
+    <div class="drawer-info" id="drawerLives">Tiempo: —</div>
+    <div class="drawer-info" id="drawerScore">Puntaje: —</div>
+    <div class="drawer-grid">
+      <button class="btn green" id="openConfigBtn" type="button">Configurar</button>
+      <button class="btn" id="restartBtn" type="button">Reiniciar</button>
+      <button class="btn dark" id="clearSelectionBtn" type="button">Ocultar cartas</button>
+      <button class="btn red" id="revealBtn" type="button">Revelar</button>
+      <button class="btn" id="fullscreenBtn" type="button">Pantalla completa</button>
+      <button class="btn dark" id="soundBtn" type="button">Sonido: ON</button>
+    </div>
+    <div class="notice">Memory Game reconstruido: banco con traducción compatible con GitHub. Soporta multitouch real para 2 jugadores.</div>
+  </aside>
+
+  <main class="app">
+    <section class="arena-root" id="arenaRoot"></section>
+  </main>
+
+  <section class="setup-overlay show" id="setupOverlay" aria-hidden="false">
+    <div class="setup-card">
+      <div class="setup-top">
+        <div><h1 id="setupTitle">⚙️ Configuración · Memory Game</h1><p>Banco con traducción, editor, modo individual o competencia 2 jugadores para pantalla interactiva Android.</p></div>
+        <button class="close-btn" id="closeSetupBtn" type="button">×</button>
+      </div>
+      <div class="setup-grid">
+        <section class="setup-panel">
+          <h3>1. Banco de palabras por nivel</h3>
+          <div class="action-row">
+            <button class="btn small" id="selectAllBtn" type="button">Seleccionar todo</button>
+            <button class="btn small dark" id="clearAllBtn" type="button">Limpiar</button>
+            <button class="btn small yellow" id="collapseBtn" type="button">Contraer todo</button>
+            <button class="btn small purple" id="editModeBtn" type="button">✏️ Editor</button>
+          </div>
+          <div class="editor-panel" id="editorPanel">
+            <div class="notice">Formato: <b>Categoría: Pets</b> y debajo <b>dog = perro</b>. En categorías se muestra solo inglés; en el editor se conserva inglés = español.</div>
+            <div class="editor-grid" id="editorGrid"></div>
+            <div class="action-row"><button class="btn green" id="downloadWordBankBtn" type="button">Descargar WordBank completo</button></div>
+          </div>
+          <div class="level-list" id="levelList"></div>
+        </section>
+        <aside class="setup-panel">
+          <h3>2. Opciones</h3>
+          <div class="config-grid">
+            <label class="field">Modo de palabras
+              <select id="wordMode"><option value="manual">Usar palabras marcadas</option><option value="random5">Generar al azar 5 palabras</option><option value="random10">Generar al azar 10 palabras</option><option value="random15">Generar al azar 15 palabras</option><option value="random20">Generar al azar 20 palabras</option></select>
+            </label>
+            <label class="field">Modo de juego
+              <select id="playerMode"><option value="1">1 jugador</option><option value="2">2 jugadores</option></select>
+            </label>
+            <label class="field">Tipo de parejas
+              <select id="pairMode"><option value="translation" selected>Inglés - Español</option><option value="english">Inglés - Inglés</option></select>
+            </label>
+            <label class="check"><input type="checkbox" id="showNumbers"> Mostrar números en las tarjetas</label>
+            <label class="check"><input type="checkbox" id="soundEnabled" checked> Activar sonido</label>
+            <label class="field">Custom words
+              <textarea id="customWords" placeholder="Una palabra o frase por línea. También puedes usar traducción:&#10;dog = perro&#10;school bag = mochila escolar&#10;English class = clase de inglés"></textarea>
+            </label>
+            <div class="summary" id="setupSummary">Seleccionadas: 0 · Custom: 0 · Se jugarán: 0</div>
+            <div class="summary" id="splitSummary">Modo 2 jugadores: ambos juegan con el mismo banco en tableros independientes.</div>
+            <div class="status" id="setupStatus"></div>
+            <button class="btn green" id="startGameBtn" type="button">Iniciar juego</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+<script>
+(() => {
+  "use strict";
+
+  const ACTIVITY_CONFIG = {
+    id: "memory-game",
+    aliases: ["memory"],
+    title: "Memory Game",
+    file: "Memory Game.html",
+    bankType: "pairs",
+    usesTranslation: true,
+    entryFormat: "word_translation"
+  };
+
+  // Controles visuales del área de juego.
+  // Cambia a true si en el futuro quieres volver a mostrar las barras.
+  const VIEW_OPTIONS = {
+    showGameTitleBar: false,
+    showPlayerHeaderBars: false
+  };
+
+  const LEVELS = ["Inglés I", "Inglés II", "Inglés III", "Inglés IV"];
+  const STORAGE_FULL_BANK = "ESL_WORD_BANK_PLATFORM_SNAPSHOT";
+  const STORAGE_ACTIVITY_PREFIX = "ESL_ACTIVITY_BANK_";
+  const EMBEDDED_BANK = {
+    "Inglés I": { "Example": ["apple = manzana", "book = libro", "dog = perro", "cat = gato"] },
+    "Inglés II": {}, "Inglés III": {}, "Inglés IV": {}
+  };
+
+  const UI = {};
+  const state = {
+    bank: normalizeBank(EMBEDDED_BANK), selected:new Set(), expandedLevels:new Set(), expandedCategories:new Set(), editMode:false,
+    game:null, timer:null, sound:true, audioCtx:null, startTime:0
+  };
+
+  const ids = ["menuBtn","drawer","drawerClose","drawerProgress","drawerLives","drawerScore","openConfigBtn","restartBtn","clearSelectionBtn","revealBtn","fullscreenBtn","soundBtn","arenaRoot","setupOverlay","closeSetupBtn","selectAllBtn","clearAllBtn","collapseBtn","editModeBtn","editorPanel","editorGrid","downloadWordBankBtn","levelList","wordMode","playerMode","pairMode","showNumbers","soundEnabled","customWords","setupSummary","splitSummary","setupStatus","homeBtn","drawerTitle","setupTitle","startGameBtn"];
+  function $(id){ return document.getElementById(id); }
+  function cacheDom(){ ids.forEach(id=>UI[id]=$(id)); }
+  function updateViewport(){ const h=Math.round((window.visualViewport&&window.visualViewport.height)||window.innerHeight||720); document.documentElement.style.setProperty("--vh", h+"px"); }
+  function escapeHtml(v){ return String(v??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch])); }
+  function normalizeText(v){ return String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim().toLowerCase().replace(/\s+/g," "); }
+  function cleanCategoryName(v){ const text=String(v||"").trim().replace(/\s+/g," " ); const marker="__WB_LEVEL__"; const i=text.indexOf(marker); if(i>=0) return text.slice(i+marker.length).trim()||"General"; return text.replace(/^\s*(?:English|Ingl[eé]s)\s*(?:I|II|III|IV|[1-4])\s*[:\-–—|]\s*/i,"") || "General"; }
+  function toSpanishLevel(level){ const s=String(level||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); if(/iv|4/.test(s)) return "Inglés IV"; if(/iii|3/.test(s)) return "Inglés III"; if(/ii|2/.test(s)) return "Inglés II"; return "Inglés I"; }
+  function splitPair(raw){ const text=String(raw||"").trim(); const m=text.match(/^(.+?)\s*(?:=|→|->|\|)\s*(.+)$/); return m ? {word:m[1].trim(), translation:m[2].trim()} : {word:text, translation:""}; }
+  function getWord(entry){ if(typeof entry==="string") return splitPair(entry).word; if(entry&&typeof entry==="object") return String(entry.word||entry.en||entry.english||entry.term||entry.text||"").trim(); return String(entry||"").trim(); }
+  function getTranslation(entry){ if(typeof entry==="string") return splitPair(entry).translation; if(entry&&typeof entry==="object") return String(entry.translation||entry.es||entry.spanish||entry.meaning||"").trim(); return ""; }
+  function normalizeEntry(entry){ const word=getWord(entry); if(!word) return null; const translation=getTranslation(entry); return translation ? {word, translation} : word; }
+  function entryToObject(entry, level, category){ return { word:getWord(entry), translation:getTranslation(entry), level, category, raw:entry }; }
+  function normalizeBank(raw){ const out={}; LEVELS.forEach(l=>out[l]={}); Object.entries(raw||{}).forEach(([level,cats])=>{ const lv=toSpanishLevel(level); if(!out[lv]) out[lv]={}; Object.entries(cats||{}).forEach(([cat,entries])=>{ const arr=(Array.isArray(entries)?entries:[]).map(normalizeEntry).filter(Boolean); if(arr.length) out[lv][cleanCategoryName(cat)] = uniqueEntries(arr); }); }); return out; }
+  function uniqueEntries(arr){ const seen=new Set(), out=[]; arr.forEach(e=>{ const word=getWord(e); const key=normalizeText(word); if(key&&!seen.has(key)){ seen.add(key); out.push(e); } }); return out; }
+  function wordKey(level,cat,index){ return level+"||"+cat+"||"+index; }
+  function catKey(level,cat){ return level+"||"+cat; }
+  function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function rand(max){ return Math.floor(Math.random()*max); }
+  function formatTime(ms){ const s=Math.max(0,Math.floor(ms/1000)); return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0"); }
+  function displayWord(raw){ return String(raw||"").trim().replace(/\s+/g," "); }
+  function cssEscape(value){ return (window.CSS && typeof CSS.escape === "function") ? CSS.escape(value) : String(value).replace(/["\\]/g, "\\$&"); }
+
+  function activityIds(){ return [ACTIVITY_CONFIG.id].concat(ACTIVITY_CONFIG.aliases||[]); }
+  function snapshotToBank(snapshot){
+    if(!snapshot) return null;
+    if(snapshot.activities){
+      for(const id of activityIds()) if(snapshot.activities[id]) return snapshotToBank(snapshot.activities[id]);
+    }
+    if(snapshot.levels) return normalizeBank(snapshot.levels);
+    if(LEVELS.some(l=>snapshot[l])) return normalizeBank(snapshot);
+    return null;
+  }
+  function currentActivityToSnapshot(){ return { title:ACTIVITY_CONFIG.title, file:ACTIVITY_CONFIG.file, bankType:ACTIVITY_CONFIG.bankType, usesTranslation:ACTIVITY_CONFIG.usesTranslation, entryFormat:ACTIVITY_CONFIG.entryFormat, levels:state.bank }; }
+  function defaultFullBank(){ return { app:"ESL English", schema:"esl-word-bank-v3", updatedAt:new Date().toISOString(), levels:LEVELS.slice(), activities:{}, notes:"Cada actividad tiene su propio banco independiente." }; }
+  async function readFullWordBank(){
+    try { const res = await fetch("word-bank-esl-english.json", { cache:"no-store" }); if(res.ok){ const json=await res.json(); if(json && json.activities) return json; } } catch(e) {}
+    try { const raw=localStorage.getItem(STORAGE_FULL_BANK); if(raw){ const json=JSON.parse(raw); if(json && json.activities) return json; } } catch(e) {}
+    return defaultFullBank();
+  }
+  async function loadExternalOrLocalBank(){
+    let snapshot=null;
+    for(const id of activityIds()){
+      try { if(window.ESLBank && typeof window.ESLBank.getActivityBank === "function") snapshot = await window.ESLBank.getActivityBank(id); } catch(e) {}
+      if(snapshot) break;
+    }
+    if(!snapshot){ try { const full = await readFullWordBank(); for(const id of activityIds()){ if(full.activities && full.activities[id]){ snapshot=full.activities[id]; break; } } } catch(e) {} }
+    try { if(!snapshot && window.ESL_ACTIVITY_BANKS){ for(const id of activityIds()){ if(window.ESL_ACTIVITY_BANKS[id]){ snapshot=window.ESL_ACTIVITY_BANKS[id]; break; } } } } catch(e) {}
+    try { if(!snapshot){ for(const id of activityIds()){ const raw=localStorage.getItem(STORAGE_ACTIVITY_PREFIX+id); if(raw){ snapshot=JSON.parse(raw); break; } } } } catch(e) {}
+    const bank = snapshotToBank(snapshot);
+    if(bank){ state.bank=bank; saveActivityLocal(); return true; }
+    saveActivityLocal(); return false;
+  }
+  function saveActivityLocal(){
+    const snapshot=currentActivityToSnapshot();
+    try { localStorage.setItem(STORAGE_ACTIVITY_PREFIX+ACTIVITY_CONFIG.id, JSON.stringify(snapshot)); } catch(e) {}
+    try { window.ESL_ACTIVITY_BANKS = Object.assign(window.ESL_ACTIVITY_BANKS||{}, { [ACTIVITY_CONFIG.id]: snapshot }); } catch(e) {}
+    try { if(window.ESLBank){ ["setActivityBank","saveActivityBank","updateActivityBank"].forEach(name=>{ try{ if(typeof window.ESLBank[name]==="function") window.ESLBank[name](ACTIVITY_CONFIG.id, snapshot); }catch(e){} }); } } catch(e) {}
+    return snapshot;
+  }
+  async function downloadFullWordBank(){
+    syncEditorsToBank();
+    const snapshot=saveActivityLocal();
+    const full=await readFullWordBank();
+    full.schema = full.schema || "esl-word-bank-v3"; full.app = full.app || "ESL English"; full.levels = full.levels || LEVELS.slice(); full.updatedAt = new Date().toISOString(); full.activities = full.activities || {}; full.activities[ACTIVITY_CONFIG.id] = snapshot;
+    try { localStorage.setItem(STORAGE_FULL_BANK, JSON.stringify(full)); } catch(e) {}
+    const blob=new Blob([JSON.stringify(full,null,2)],{type:"application/json;charset=utf-8"});
+    const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="word-bank-esl-english.json"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+    renderEditor(); renderLevels(); updateSummary(); setStatus("✅ WordBank completo descargado. Reemplaza ese JSON en GitHub.");
+  }
+
+  function bankCounts(level,cat){ const cats=state.bank[level]||{}; if(cat){ const words=cats[cat]||[]; let selected=0; words.forEach((_,i)=>{ if(state.selected.has(wordKey(level,cat,i))) selected++; }); return {total:words.length,selected}; } let total=0,selected=0; Object.entries(cats).forEach(([c,words])=>{ total+=words.length; words.forEach((_,i)=>{ if(state.selected.has(wordKey(level,c,i))) selected++; }); }); return {total,selected}; }
+  function renderLevels(){
+    UI.levelList.textContent="";
+    LEVELS.forEach(level=>{
+      const counts=bankCounts(level), open=state.expandedLevels.has(level);
+      const card=document.createElement("article"); card.className="level-card"+(open?" open":""); card.dataset.level=level;
+      card.innerHTML=`<button class="level-head" type="button" data-action="toggle-level" data-level="${escapeHtml(level)}"><span class="arrow">›</span><span class="level-title"><strong>${escapeHtml(level)}</strong><small>${counts.selected}/${counts.total} palabras seleccionadas</small></span><label class="select-box"><input type="checkbox" class="level-check" data-level="${escapeHtml(level)}"> Nivel</label></button>`;
+      const cb=card.querySelector(".level-check"); cb.checked=counts.total>0&&counts.selected===counts.total; cb.indeterminate=counts.selected>0&&counts.selected<counts.total;
+      if(open){ const list=document.createElement("div"); list.className="cat-list"; Object.entries(state.bank[level]||{}).forEach(([cat,words])=>list.appendChild(renderCategory(level,cat,words))); card.appendChild(list); }
+      UI.levelList.appendChild(card);
+    });
+  }
+  function renderCategory(level,cat,words){
+    const counts=bankCounts(level,cat), open=state.expandedCategories.has(catKey(level,cat));
+    const card=document.createElement("article"); card.className="category-card"+(open?" open":""); card.dataset.level=level; card.dataset.cat=cat;
+    card.innerHTML=`<button class="cat-head" type="button" data-action="toggle-cat" data-level="${escapeHtml(level)}" data-cat="${escapeHtml(cat)}"><span class="arrow">›</span><span class="cat-title"><strong>${escapeHtml(cat)}</strong><small>${counts.selected}/${counts.total} seleccionadas</small></span><label class="select-box"><input type="checkbox" class="cat-check" data-level="${escapeHtml(level)}" data-cat="${escapeHtml(cat)}"> Categoría</label></button>`;
+    const cb=card.querySelector(".cat-check"); cb.checked=counts.total>0&&counts.selected===counts.total; cb.indeterminate=counts.selected>0&&counts.selected<counts.total;
+    if(open){ const panel=document.createElement("div"); panel.className="word-panel"; const grid=document.createElement("div"); grid.className="word-grid-list"; words.forEach((entry,i)=>{ const key=wordKey(level,cat,i); const w=getWord(entry), tr=getTranslation(entry); const chip=document.createElement("label"); chip.className="word-chip"+(state.selected.has(key)?" on":""); chip.title = tr ? `${w} = ${tr}` : w; chip.innerHTML=`<input type="checkbox" class="word-check" data-key="${escapeHtml(key)}" ${state.selected.has(key)?"checked":""}><span>${escapeHtml(w)}</span>`; grid.appendChild(chip); }); panel.appendChild(grid); card.appendChild(panel); }
+    return card;
+  }
+  function cleanSelections(){ const valid=new Set(); LEVELS.forEach(level=>Object.entries(state.bank[level]||{}).forEach(([cat,words])=>words.forEach((_,i)=>valid.add(wordKey(level,cat,i))))); state.selected.forEach(k=>{ if(!valid.has(k)) state.selected.delete(k); }); }
+  function handleLevelClick(ev){ const btn=ev.target.closest("button[data-action]"); if(!btn) return; if(ev.target.closest("input")) return; const {action,level,cat}=btn.dataset; if(action==="toggle-level"){ state.expandedLevels.has(level)?state.expandedLevels.delete(level):state.expandedLevels.add(level); renderLevels(); } if(action==="toggle-cat"){ const k=catKey(level,cat); state.expandedCategories.has(k)?state.expandedCategories.delete(k):state.expandedCategories.add(k); renderLevels(); } }
+  function handleLevelChange(ev){ const t=ev.target; if(t.classList.contains("level-check")){ setLevelSelected(t.dataset.level,t.checked); } if(t.classList.contains("cat-check")){ setCategorySelected(t.dataset.level,t.dataset.cat,t.checked); } if(t.classList.contains("word-check")){ t.checked?state.selected.add(t.dataset.key):state.selected.delete(t.dataset.key); } renderLevels(); updateSummary(); }
+  function setLevelSelected(level,on){ Object.entries(state.bank[level]||{}).forEach(([cat,words])=>words.forEach((_,i)=>on?state.selected.add(wordKey(level,cat,i)):state.selected.delete(wordKey(level,cat,i)))); }
+  function setCategorySelected(level,cat,on){ (state.bank[level]?.[cat]||[]).forEach((_,i)=>on?state.selected.add(wordKey(level,cat,i)):state.selected.delete(wordKey(level,cat,i))); }
+  function selectAll(on){ LEVELS.forEach(l=>setLevelSelected(l,on)); renderLevels(); updateSummary(); }
+  function collapseAll(){ state.expandedLevels.clear(); state.expandedCategories.clear(); renderLevels(); }
+
+  function formatLevelText(level){ const lines=[]; Object.entries(state.bank[level]||{}).forEach(([cat,entries])=>{ lines.push(`Categoría: ${cat}`); entries.forEach(e=>{ const w=getWord(e), tr=getTranslation(e); lines.push(tr?`${w} = ${tr}`:w); }); lines.push(""); }); return lines.join("\n").trim(); }
+  function parseLevelText(text){ const out={}; let current="General"; String(text||"").split(/\r?\n/).forEach(line=>{ const raw=line.trim(); if(!raw) return; const cat=raw.match(/^Categor[ií]a\s*:\s*(.+)$/i); if(cat){ current=cleanCategoryName(cat[1]); out[current]=out[current]||[]; return; } out[current]=out[current]||[]; out[current].push(normalizeEntry(raw)); }); Object.keys(out).forEach(cat=>{ out[cat]=uniqueEntries(out[cat].filter(Boolean)); if(!out[cat].length) delete out[cat]; }); return out; }
+  function renderEditor(){ UI.editorGrid.textContent=""; LEVELS.forEach(level=>{ const card=document.createElement("div"); card.className="editor-card"; card.innerHTML=`<h4>${escapeHtml(level)}</h4><textarea class="editor-textarea" data-level="${escapeHtml(level)}" spellcheck="false">${escapeHtml(formatLevelText(level))}</textarea><button class="btn green small" type="button" data-action="apply-editor" data-level="${escapeHtml(level)}">Aplicar ${escapeHtml(level)}</button>`; UI.editorGrid.appendChild(card); }); }
+  function syncEditorsToBank(){ UI.editorGrid.querySelectorAll("textarea[data-level]").forEach(area=>{ state.bank[area.dataset.level]=parseLevelText(area.value); }); cleanSelections(); saveActivityLocal(); }
+  function toggleEditor(){ state.editMode=!state.editMode; UI.editorPanel.classList.toggle("show",state.editMode); UI.editModeBtn.textContent=state.editMode?"✅ Cerrar editor":"✏️ Editor"; if(state.editMode) renderEditor(); }
+  function handleEditorClick(ev){ const btn=ev.target.closest("button[data-action='apply-editor']"); if(!btn) return; const area=UI.editorGrid.querySelector(`textarea[data-level="${cssEscape(btn.dataset.level)}"]`); if(!area) return; state.bank[btn.dataset.level]=parseLevelText(area.value); cleanSelections(); saveActivityLocal(); renderLevels(); updateSummary(); setStatus(`✅ ${btn.dataset.level} aplicado.`); }
+
+  function customEntries(){ return String(UI.customWords.value||"").split(/[\n,]+/).map(s=>s.trim()).filter(Boolean).map(raw=>entryToObject(normalizeEntry(raw),"Custom","Custom")); }
+  function allBankEntries(){ const out=[]; LEVELS.forEach(level=>Object.entries(state.bank[level]||{}).forEach(([cat,entries])=>entries.forEach(e=>out.push(entryToObject(e,level,cat))))); return out; }
+  function selectedEntries(){ const out=[]; LEVELS.forEach(level=>Object.entries(state.bank[level]||{}).forEach(([cat,entries])=>entries.forEach((e,i)=>{ if(state.selected.has(wordKey(level,cat,i))) out.push(entryToObject(e,level,cat)); }))); return out; }
+  function buildPlaylist(){ const mode=UI.wordMode.value; let base=selectedEntries(); if(mode!=="manual" && !base.length) base=allBankEntries(); let list=base.concat(customEntries()).filter(e=>e.word); if(mode!=="manual"){ const n=Number(mode.replace("random","")||0); list=shuffle(list).slice(0,n); } const byClean=new Map(); list.forEach(e=>{ const key=normalizeText(e.word); if(!byClean.has(key)) byClean.set(key,e); }); return Array.from(byClean.values()); }
+  function updateSummary(){
+    const selected=selectedEntries().length, custom=customEntries().length, playlist=buildPlaylist(), play=playlist.length;
+    const pairText=UI.pairMode?.value==="english"?"Inglés - Inglés":"Inglés - Español";
+    UI.setupSummary.textContent=`Seleccionadas: ${selected} · Custom: ${custom} · Se jugarán: ${play} palabra(s) · ${play*2} tarjeta(s) · ${pairText}`;
+    UI.splitSummary.style.display=UI.playerMode.value==="2"?"block":"none";
+  }
+
+  function createCards(entries, mode){
+    const cards=[];
+    entries.forEach((entry,index)=>{
+      const word=displayWord(entry.word);
+      const translation=displayWord(entry.translation || entry.word);
+      const pairId=`pair-${index}-${normalizeText(word)}`;
+      cards.push({pairId, text:word, type:"english", word, translation});
+      cards.push({pairId, text:mode==="english"?word:translation, type:mode==="english"?"english":"spanish", word, translation});
+    });
+    return shuffle(cards);
+  }
+  function createGameState(id, entries){ return { id, name:`Jugador ${id+1}`, entries:entries.slice(), cards:createCards(entries, UI.pairMode.value), first:null, second:null, lock:false, moves:0, pairsFound:0, totalPairs:entries.length, done:false, showingAnswers:false, ui:null }; }
+
+  function startGame(){
+    const entries=buildPlaylist();
+    if(entries.length<2){ setStatus("⚠️ Selecciona o escribe al menos 2 palabras para jugar Memory Game."); return; }
+    clearInterval(state.timer);
+    const count=Number(UI.playerMode.value)===2?2:1;
+    state.game={ mode:String(count), entries, pairMode:UI.pairMode.value, showNumbers:!!UI.showNumbers.checked, players:[] };
+    for(let i=0;i<count;i++) state.game.players.push(createGameState(i,entries));
+    state.startTime=Date.now(); mountGame(); closeSetupAfterStart(); startTimer(); beep(660,70);
+  }
+  function mountGame(){
+    const mode=state.game.mode;
+    UI.arenaRoot.classList.toggle("hide-game-title", !VIEW_OPTIONS.showGameTitleBar);
+    UI.arenaRoot.classList.toggle("hide-player-bars", !VIEW_OPTIONS.showPlayerHeaderBars);
+    UI.arenaRoot.innerHTML=`<div class="game-top"><div class="brand"><h1>${escapeHtml(ACTIVITY_CONFIG.title)} ${mode==="2"?"· 2 jugadores":""}</h1><p>Memory con traducción · Banco compatible con GitHub</p></div><div class="hud" id="globalHud"></div></div><div class="players ${mode==="2"?"two":"one"}" id="playersRoot"></div>`;
+    const root=UI.arenaRoot.querySelector("#playersRoot");
+    state.game.players.forEach(p=>{
+      const sec=document.createElement("section"); sec.className=`player-card p${p.id+1}`; sec.dataset.player=p.id;
+      sec.innerHTML=`<div class="player-head"><div><h2>${escapeHtml(p.name)}</h2><small class="hint">${p.totalPairs} parejas · ${p.cards.length} tarjetas</small></div><div class="hud"><span class="pill progress">0/${p.totalPairs}</span><span class="pill timer">⏱ 00:00</span><span class="pill moves">Intentos: 0</span></div></div><div class="game-host"></div><div class="round-message"><strong class="msg-text"></strong><button class="btn green next-btn" data-player="${p.id}" type="button">Continuar</button></div>`;
+      root.appendChild(sec);
+      p.ui={panel:sec,hint:sec.querySelector(".hint"),progress:sec.querySelector(".progress"),timer:sec.querySelector(".timer"),moves:sec.querySelector(".moves"),host:sec.querySelector(".game-host"),message:sec.querySelector(".round-message"),msgText:sec.querySelector(".msg-text")};
+      renderPlayer(p);
+    });
+    updateGlobalHud(); updateDrawerInfo();
+  }
+  function renderPlayer(p){
+    const host=p.ui.host;
+    host.innerHTML=`<div class="memory-wrap"><div class="memory-grid" data-player="${p.id}" aria-label="Memory Game ${escapeHtml(p.name)}"></div></div>`;
+    const grid=host.querySelector(".memory-grid");
+    p.cards.forEach((card,index)=>{
+      const btn=document.createElement("button"); btn.type="button"; btn.className="memory-card"; btn.dataset.player=String(p.id); btn.dataset.index=String(index); btn.dataset.pairId=card.pairId; btn.style.animationDelay=`${Math.min(index*.014,.28)}s`;
+      const front=state.game.showNumbers?String(index+1):"?";
+      btn.innerHTML=`<div class="card-inner"><div class="card-face card-front"><span class="card-text"><span class="card-label">${escapeHtml(front)}</span></span></div><div class="card-face card-back ${escapeHtml(card.type)}"><span class="card-text"><span class="card-label">${escapeHtml(card.text)}</span></span></div></div>`;
+      btn.addEventListener("pointerdown", ev=>handleCardPointer(ev, btn), {passive:false});
+      btn.addEventListener("click", ev=>ev.preventDefault());
+      grid.appendChild(btn);
+    });
+    renderMemoryWordList(p); updatePlayerHud(p); requestAnimationFrame(()=>fitMemoryGrid(p));
+  }
+  function renderMemoryWordList(p){
+    const list=p.ui.host.querySelector(".mem-word-list"); if(!list) return; list.innerHTML="";
+    p.entries.forEach((entry,index)=>{ const item=document.createElement("span"); item.className="mem-word"; item.dataset.pairId=`pair-${index}-${normalizeText(entry.word)}`; item.textContent=entry.word; list.appendChild(item); });
+  }
+  function fitMemoryGrid(p){
+    if(!p?.ui?.host) return;
+    const host=p.ui.host, wrap=host.querySelector(".memory-wrap"), grid=host.querySelector(".memory-grid");
+    if(!grid) return;
+    const rect=(wrap||host).getBoundingClientRect();
+    if(rect.width<40||rect.height<40) return;
+
+    const cardCount=p.cards.length;
+    const minSide=Math.min(rect.width,rect.height);
+    const gap=Math.max(4, Math.min(10, Math.round(minSide*.010)));
+    const pad=Math.max(6, Math.min(12, Math.round(minSide*.012)));
+    const border=6;
+    const safety=10; // margen fijo para evitar recorte inferior en Android/fullscreen
+    const contentW=Math.max(96, rect.width - pad*2 - border - safety);
+    const contentH=Math.max(96, rect.height - pad*2 - border - safety);
+
+    let best=null;
+    for(let cols=1; cols<=cardCount; cols++){
+      const rows=Math.ceil(cardCount/cols);
+      const cw=(contentW-gap*(cols-1))/cols;
+      const ch=(contentH-gap*(rows-1))/rows;
+      if(cw<24||ch<24) continue;
+      const target=1.08, ratio=cw/ch, empty=cols*rows-cardCount;
+      const useful=Math.min(cw/target,ch);
+      const score=useful - Math.abs(ratio-target)*10 - empty*1.1 - rows*.08;
+      if(!best||score>best.score) best={cols,rows,cw,ch,score};
+    }
+    best=best||{cols:cardCount,rows:1,cw:Math.max(24,contentW/cardCount),ch:Math.max(24,contentH),score:0};
+
+    const cw=Math.max(24, Math.floor(best.cw*.965));
+    const ch=Math.max(24, Math.floor(best.ch*.965));
+    const gridW=Math.min(rect.width-safety, best.cols*cw + gap*(best.cols-1) + pad*2 + border);
+    const gridH=Math.min(rect.height-safety, best.rows*ch + gap*(best.rows-1) + pad*2 + border);
+
+    grid.style.width=Math.max(120,Math.floor(gridW))+"px";
+    grid.style.height=Math.max(120,Math.floor(gridH))+"px";
+    grid.style.gap=gap+"px";
+    grid.style.padding=pad+"px";
+    grid.style.gridTemplateColumns=`repeat(${best.cols}, minmax(0, ${cw}px))`;
+    grid.style.gridAutoRows=`${ch}px`;
+
+    const small=Math.min(cw,ch);
+    const frontSize=Math.max(14, Math.min(56, Math.floor(small*.44)));
+    const backSize=Math.max(8, Math.min(42, Math.floor(small*.31)));
+    grid.querySelectorAll(".card-front").forEach(face=>fitText(face, frontSize, true));
+    grid.querySelectorAll(".card-back").forEach(face=>fitText(face, backSize, false));
+  }
+  function fitAllGrids(){ if(state.game) state.game.players.forEach(fitMemoryGrid); }
+  function fitText(face, base, isFront=false){
+    const box = face.querySelector(".card-text") || face;
+    let label = face.querySelector(".card-label");
+    if(!label){
+      label = document.createElement("span");
+      label.className = "card-label";
+      label.textContent = box.textContent || "";
+      box.textContent = "";
+      box.appendChild(label);
+    }
+
+    const raw = (label.textContent || "").trim();
+    if(!raw) return;
+
+    // Regla solicitada:
+    // - Una sola palabra nunca se parte en varias líneas.
+    // - Frases con espacios sí pueden usar 2 o más líneas, pero solo cortando en espacios.
+    const csFace = getComputedStyle(face);
+    const boxW = Math.max(8, Math.floor(box.clientWidth || face.clientWidth || face.getBoundingClientRect().width || 8));
+    const boxH = Math.max(8, Math.floor(box.clientHeight || face.clientHeight || face.getBoundingClientRect().height || 8));
+    const hasSpaces = /\s/.test(raw);
+    const minSize = isFront ? 5 : 2.5;
+    const maxByBox = Math.max(minSize, Math.min(isFront ? 68 : 54, Math.floor(boxH * .86), Math.floor(boxW * .92)));
+    const highSize = Math.max(minSize, maxByBox, base);
+    const lineHeight = isFront ? 1.02 : (hasSpaces ? 1.04 : 1.0);
+    const mode = hasSpaces
+      ? {whiteSpace:"normal", overflowWrap:"normal", wordBreak:"normal"}
+      : {whiteSpace:"nowrap", overflowWrap:"normal", wordBreak:"normal"};
+
+    let measurer = document.getElementById("memoryTextMeasureBox");
+    if(!measurer){
+      measurer = document.createElement("div");
+      measurer.id = "memoryTextMeasureBox";
+      measurer.setAttribute("aria-hidden","true");
+      measurer.style.cssText = "position:fixed;left:-10000px;top:-10000px;visibility:hidden;pointer-events:none;z-index:-1;box-sizing:border-box;margin:0;padding:0;border:0;display:block;text-align:center;";
+      document.body.appendChild(measurer);
+    }
+
+    const applyMeasureStyle = (size) => {
+      measurer.textContent = raw;
+      measurer.style.width = boxW + "px";
+      measurer.style.maxWidth = boxW + "px";
+      measurer.style.fontFamily = csFace.fontFamily;
+      measurer.style.fontWeight = csFace.fontWeight || "1000";
+      measurer.style.fontSize = size + "px";
+      measurer.style.lineHeight = String(lineHeight);
+      measurer.style.letterSpacing = raw.length > 10 ? "-.012em" : "0";
+      measurer.style.whiteSpace = mode.whiteSpace;
+      measurer.style.overflowWrap = mode.overflowWrap;
+      measurer.style.wordBreak = mode.wordBreak;
+      measurer.style.hyphens = "none";
+    };
+
+    const fitsAt = (size) => {
+      applyMeasureStyle(size);
+      return measurer.scrollWidth <= boxW + 1 && measurer.scrollHeight <= boxH + 1;
+    };
+
+    let low = minSize;
+    let high = highSize;
+    let best = minSize;
+    let guard = 0;
+    while(high - low > .2 && guard++ < 36){
+      const mid = (low + high) / 2;
+      if(fitsAt(mid)){ best = mid; low = mid; }
+      else high = mid;
+    }
+
+    let finalSize = Math.max(minSize, Math.floor(best * 10) / 10);
+    face.style.fontSize = finalSize + "px";
+    box.style.fontSize = "inherit";
+    box.style.lineHeight = String(lineHeight);
+    box.style.overflowWrap = "normal";
+    box.style.wordBreak = "normal";
+    box.style.hyphens = "none";
+    label.style.fontSize = "inherit";
+    label.style.lineHeight = "inherit";
+    label.style.width = "100%";
+    label.style.maxWidth = "100%";
+    label.style.whiteSpace = mode.whiteSpace;
+    label.style.overflowWrap = mode.overflowWrap;
+    label.style.wordBreak = mode.wordBreak;
+    label.style.hyphens = "none";
+    label.style.letterSpacing = raw.length > 10 ? "-.012em" : "0";
+    label.style.transformOrigin = "center center";
+    label.style.transform = "none";
+
+    // Verificación final en la tarjeta real. Si el navegador mide diferente,
+    // reducimos la fuente sin partir palabras.
+    let safe = finalSize;
+    guard = 0;
+    while(safe > minSize && (label.scrollWidth > box.clientWidth + 1 || label.scrollHeight > box.clientHeight + 1) && guard++ < 100){
+      safe -= .4;
+      face.style.fontSize = safe + "px";
+    }
+
+    // Último seguro para palabras extremadamente largas en tarjetas muy pequeñas:
+    // mantiene una sola línea y comprime horizontalmente, sin cortar letras ni saltar línea.
+    const overflowW = label.scrollWidth - box.clientWidth;
+    if(!hasSpaces && overflowW > 1 && label.scrollWidth > 0){
+      const scale = Math.max(.62, Math.min(1, box.clientWidth / label.scrollWidth));
+      label.style.transform = `scaleX(${scale})`;
+      label.style.width = (100 / scale) + "%";
+      label.style.maxWidth = (100 / scale) + "%";
+    }
+  }
+
+  const FLIP_OPEN_MS = 460;
+  const FLIP_CLOSE_MS = 460;
+  function restartCardAnim(card, cls, ms){
+    if(!card) return;
+    card.classList.remove(cls);
+    void card.offsetWidth;
+    card.classList.add(cls);
+    setTimeout(()=>card.classList.remove(cls), ms);
+  }
+  function openCard(card){
+    if(!card || card.classList.contains("matched") || card.classList.contains("removed")) return;
+    if(card.classList.contains("flipped")) return;
+    // El giro se conserva igual: solo cambia .flipped, que activa rotateY(180deg) en .card-inner.
+    // Se eliminaron las clases temporales flip-open/flip-close porque forzaban recomposición al final del giro.
+    card.classList.remove("flip-open","flip-close","tap-soft");
+    card.classList.add("flipped");
+  }
+  function closeCard(card){
+    if(!card || card.classList.contains("matched") || card.classList.contains("removed")) return;
+    if(!card.classList.contains("flipped")) return;
+    card.classList.remove("flip-open","flip-close","tap-soft");
+    card.classList.remove("flipped");
+  }
+
+  function getPlayer(index){ return state.game?.players.find(p=>p.id===Number(index)); }
+  function handleCardPointer(ev, card){
+    if(ev.button!==undefined && ev.pointerType==="mouse" && ev.button!==0) return;
+    ev.preventDefault(); try{ card.setPointerCapture(ev.pointerId); }catch(e){} flipCard(card);
+  }
+  function flipCard(card){
+    if(!state.game) return;
+    const p=getPlayer(card.dataset.player);
+    if(!p||p.done||p.lock) return;
+    if(card.classList.contains("flipped") || card.classList.contains("matched") || card.classList.contains("removed")) return;
+    if(p.showingAnswers || state.game.players.some(x=>x.showingAnswers)){ hideAnswers(); return; }
+
+    card.classList.remove("tap-soft");
+    openCard(card);
+    beep(520,45);
+
+    if(!p.first){
+      p.first=card;
+      return;
+    }
+
+    // La segunda tarjeta debe terminar su giro antes de evaluar el resultado.
+    // Esto evita que el mensaje de correcto/incorrecto aparezca antes de ver la carta.
+    p.second=card;
+    p.moves++;
+    p.lock=true;
+    updatePlayerHud(p);
+
+    const firstCard=p.first;
+    const secondCard=p.second;
+    setTimeout(()=>{
+      if(!state.game || p.done || p.showingAnswers) return;
+      if(p.first!==firstCard || p.second!==secondCard) return;
+      checkMatch(p);
+    }, FLIP_OPEN_MS + 80);
+  }
+  function checkMatch(p){
+    const ok=p.first.dataset.pairId===p.second.dataset.pairId;
+    if(ok) handleMatch(p); else handleNoMatch(p);
+  }
+  function handleMatch(p){
+    p.lock=true; p.pairsFound++; beep(880,90); vibrate(14);
+    const a=p.first,b=p.second;
+    a.classList.add("flipped","matched","match-pop");
+    b.classList.add("flipped","matched","match-pop");
+    const pairId=a.dataset.pairId; p.ui.host.querySelectorAll(`.mem-word[data-pair-id="${cssEscape(pairId)}"]`).forEach(x=>x.classList.add("found"));
+    showToast(p,"✨ ¡Pareja encontrada!", p.cards[Number(a.dataset.index)].word);
+    setTimeout(()=>{ a.classList.add("removed"); b.classList.add("removed"); resetTurn(p); updatePlayerHud(p); updateGlobalHud(); updateDrawerInfo(); if(p.pairsFound===p.totalPairs) showWinner(p); },1260);
+  }
+  function handleNoMatch(p){
+    p.lock=true; beep(130,100); vibrate([30,18,30]);
+    const a=p.first,b=p.second, grid=p.ui.host.querySelector(".memory-grid");
+    a.classList.add("wrong"); b.classList.add("wrong");
+    if(grid) grid.classList.add("wrong-pulse");
+    showWrongMarks(a,b);
+    const cardA=p.cards[Number(a.dataset.index)];
+    const cardB=p.cards[Number(b.dataset.index)];
+    showToast(p,"❌ ¡No coinciden!",`${cardA.text} ≠ ${cardB.text}`,true);
+    setTimeout(()=>{
+      a.classList.remove("wrong");
+      b.classList.remove("wrong");
+      closeCard(a);
+      closeCard(b);
+      if(grid) grid.classList.remove("wrong-pulse");
+      setTimeout(()=>{ resetTurn(p); updatePlayerHud(p); updateDrawerInfo(); }, FLIP_CLOSE_MS);
+    },760);
+  }
+  function showWrongMarks(...cards){
+    cards.forEach(card=>{
+      card.querySelectorAll(".memory-wrong-x").forEach(x=>x.remove());
+      const x=document.createElement("span");
+      x.className="memory-wrong-x";
+      x.setAttribute("aria-hidden","true");
+      card.appendChild(x);
+      setTimeout(()=>x.remove(),700);
+    });
+  }
+  function resetTurn(p){ p.first=null; p.second=null; p.lock=false; }
+  function updatePlayerHud(p){ p.ui.progress.textContent=`${p.pairsFound}/${p.totalPairs}`; p.ui.timer.textContent=`⏱ ${formatTime(Date.now()-state.startTime)}`; p.ui.moves.textContent=`Intentos: ${p.moves}`; }
+  function updateGlobalHud(){ const box=UI.arenaRoot.querySelector("#globalHud"); if(!box||!state.game) return; box.innerHTML=state.game.players.map(p=>`<span class="pill">${escapeHtml(p.name)} · ${p.pairsFound}/${p.totalPairs} · Intentos ${p.moves}</span>`).join(""); }
+  function updateDrawerInfo(){ if(!state.game){ UI.drawerProgress.textContent="Sin juego activo"; UI.drawerLives.textContent="Tiempo: —"; UI.drawerScore.textContent="Puntaje: —"; return; } const elapsed=formatTime(Date.now()-state.startTime); UI.drawerProgress.textContent=state.game.mode==="2"?"Modo 2 jugadores · tableros independientes":"Modo 1 jugador"; UI.drawerLives.textContent=`Tiempo: ${elapsed}`; UI.drawerScore.textContent=state.game.players.map(p=>`${p.name}: ${p.pairsFound}/${p.totalPairs} · Intentos ${p.moves}`).join(" · "); }
+  function startTimer(){ clearInterval(state.timer); state.timer=setInterval(()=>{ if(!state.game) return; state.game.players.forEach(updatePlayerHud); updateDrawerInfo(); },1000); }
+  function showToast(p,label,word,bad=false){ const host=p.ui.host; host.querySelectorAll(".memory-toast").forEach(x=>x.remove()); const t=document.createElement("div"); t.className="memory-toast"+(bad?" bad":""); t.innerHTML=`<span>${escapeHtml(label)}</span>${word?`<b>${escapeHtml(word)}</b>`:""}`; host.appendChild(t); setTimeout(()=>t.remove(),1250); }
+  function showWinner(p){
+    if(!state.game||p.done) return; p.done=true; state.game.players.forEach(x=>x.lock=true); clearInterval(state.timer);
+    const final=document.createElement("div"); final.className="final-card banner-pop"; const elapsed=formatTime(Date.now()-state.startTime);
+    final.innerHTML=`<div><h2>🏆 ${state.game.mode==="2"?`Ganó ${escapeHtml(p.name)}`:"¡Completado!"}</h2><p>${escapeHtml(p.name)} encontró ${p.pairsFound}/${p.totalPairs} parejas · Tiempo ${elapsed}</p><div class="final-actions"><button class="btn green" data-action="new-config" type="button">Nueva configuración</button><button class="btn" data-action="restart-game" type="button">Jugar otra vez</button></div></div>`;
+    UI.arenaRoot.appendChild(final); launchConfetti(); updateDrawerInfo(); beep(980,150);
+  }
+  function launchConfetti(){ const pieces=["🎉","⭐","✨","🎊","🏆"]; for(let i=0;i<28;i++){ const s=document.createElement("span"); s.textContent=pieces[rand(pieces.length)]; s.style.cssText=`position:fixed;top:-24px;left:${rand(100)}vw;z-index:130;font-size:${18+rand(22)}px;pointer-events:none;animation:fall${i} 2.8s linear forwards`; const style=document.createElement("style"); style.textContent=`@keyframes fall${i}{to{transform:translateY(110vh) rotate(720deg);opacity:0}}`; document.head.appendChild(style); document.body.appendChild(s); setTimeout(()=>{s.remove();style.remove();},3200); } }
+  function revealAnswers(){
+    if(!state.game) return;
+    const show=!state.game.players.some(p=>p.showingAnswers);
+    if(!show){ hideAnswers(); setStatus("Respuestas ocultas."); return; }
+    state.game.players.forEach(p=>{
+      p.showingAnswers=true;
+      p.lock=true;
+      p.first=null; p.second=null;
+      p.ui.host.querySelectorAll(".memory-card:not(.matched):not(.removed)").forEach(card=>openCard(card));
+    });
+    setStatus("👀 Respuestas visibles.");
+  }
+  function hideAnswers(){
+    if(!state.game) return;
+    state.game.players.forEach(p=>{
+      p.showingAnswers=false;
+      p.lock=true;
+      resetTurn(p);
+      p.ui.host.querySelectorAll(".memory-card:not(.matched):not(.removed)").forEach(card=>closeCard(card));
+      setTimeout(()=>{ if(!p.showingAnswers && !p.done) p.lock=false; }, FLIP_CLOSE_MS);
+    });
+  }
+  function clearSelection(){ hideAnswers(); setStatus("Selección limpiada."); }
+  function restartGame(){ if(!state.game){ openSetup(); return; } startGame(); }
+
+  function renderEmpty(){ UI.arenaRoot.classList.remove("hide-game-title","hide-player-bars"); UI.arenaRoot.innerHTML=`<div class="empty-state"><div><h1>🧠 ${escapeHtml(ACTIVITY_CONFIG.title)}</h1><p>Selecciona categorías, palabras o custom words y presiona <b>Iniciar juego</b>.</p></div></div>`; updateDrawerInfo(); }
+  function openSetup(){ UI.setupOverlay.classList.add("show"); UI.setupOverlay.setAttribute("aria-hidden","false"); toggleDrawer(false); renderLevels(); updateSummary(); }
+  function closeSetup(){ if(!state.game){ setStatus("⚠️ Primero inicia un juego para cerrar la configuración."); return; } closeSetupAfterStart(); }
+  function closeSetupAfterStart(){ UI.setupOverlay.classList.remove("show"); UI.setupOverlay.setAttribute("aria-hidden","true"); }
+  function toggleDrawer(force){ const open=force??!UI.drawer.classList.contains("open"); UI.drawer.classList.toggle("open",open); UI.drawer.setAttribute("aria-hidden",open?"false":"true"); }
+  function setStatus(msg){ UI.setupStatus.textContent=msg||""; if(msg) setTimeout(()=>{ if(UI.setupStatus.textContent===msg) UI.setupStatus.textContent=""; },4000); }
+  function syncSoundSetting(){ state.sound=UI.soundEnabled.checked; UI.soundBtn.textContent=state.sound?"Sonido: ON":"Sonido: OFF"; }
+  function toggleFullScreen(){ const doc=document; if(!doc.fullscreenElement){ (document.documentElement.requestFullscreen||(()=>{})).call(document.documentElement); } else { (doc.exitFullscreen||(()=>{})).call(doc); } }
+  function beep(freq=440,dur=70){ if(!state.sound) return; try{ const ctx=state.audioCtx||(state.audioCtx=new (window.AudioContext||window.webkitAudioContext)()); const osc=ctx.createOscillator(); const gain=ctx.createGain(); osc.frequency.value=freq; gain.gain.value=.035; osc.connect(gain); gain.connect(ctx.destination); osc.start(); setTimeout(()=>{ osc.stop(); osc.disconnect(); gain.disconnect(); },dur); }catch(e){} }
+  function vibrate(pattern){ try{ if(navigator&&typeof navigator.vibrate==="function") navigator.vibrate(pattern); }catch(e){} }
+
+  function wireEvents(){
+    window.addEventListener("resize", ()=>{ updateViewport(); requestAnimationFrame(fitAllGrids); }, {passive:true});
+    document.addEventListener("fullscreenchange", ()=>requestAnimationFrame(fitAllGrids));
+    UI.menuBtn.addEventListener("click",()=>toggleDrawer()); UI.drawerClose.addEventListener("click",()=>toggleDrawer(false)); UI.openConfigBtn.addEventListener("click",openSetup); UI.closeSetupBtn.addEventListener("click",closeSetup);
+    UI.restartBtn.addEventListener("click",restartGame); UI.clearSelectionBtn.addEventListener("click",clearSelection); UI.revealBtn.addEventListener("click",revealAnswers); UI.fullscreenBtn.addEventListener("click",toggleFullScreen); UI.soundBtn.addEventListener("click",()=>{ UI.soundEnabled.checked=!UI.soundEnabled.checked; syncSoundSetting(); });
+    UI.selectAllBtn.addEventListener("click",()=>selectAll(true)); UI.clearAllBtn.addEventListener("click",()=>selectAll(false)); UI.collapseBtn.addEventListener("click",collapseAll); UI.editModeBtn.addEventListener("click",toggleEditor); UI.downloadWordBankBtn.addEventListener("click",downloadFullWordBank); UI.startGameBtn.addEventListener("click",startGame);
+    ["wordMode","playerMode","pairMode","showNumbers","customWords"].forEach(id=>UI[id].addEventListener("input",updateSummary)); UI.soundEnabled.addEventListener("input",syncSoundSetting);
+    UI.levelList.addEventListener("click",handleLevelClick); UI.levelList.addEventListener("change",handleLevelChange); UI.editorGrid.addEventListener("click",handleEditorClick);
+    UI.arenaRoot.addEventListener("click",ev=>{ const a=ev.target.closest("button[data-action]"); if(a?.dataset.action==="new-config") openSetup(); if(a?.dataset.action==="restart-game") restartGame(); });
+    UI.homeBtn.addEventListener("click",()=>{ try{ sessionStorage.setItem("ESL_LAST_ACTIVITY_URL", window.location.href); sessionStorage.setItem("ESL_LAST_ACTIVITY_TITLE", ACTIVITY_CONFIG.title); sessionStorage.setItem("ESL_HOME_FROM_ACTIVITY","1"); }catch(e){} });
+    document.addEventListener("keydown",ev=>{ if(ev.key==="Escape"){ toggleDrawer(false); if(state.game) closeSetupAfterStart(); } });
+  }
+  async function init(){ cacheDom(); updateViewport(); document.title=ACTIVITY_CONFIG.title; if(UI.drawerTitle) UI.drawerTitle.textContent="🧠 "+ACTIVITY_CONFIG.title; if(UI.setupTitle) UI.setupTitle.textContent="⚙️ Configuración · "+ACTIVITY_CONFIG.title; wireEvents(); await loadExternalOrLocalBank(); renderLevels(); renderEditor(); updateSummary(); syncSoundSetting(); renderEmpty(); }
+  init();
+})();
+</script>
+</body>
+</html>
