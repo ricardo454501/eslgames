@@ -1,7 +1,7 @@
 {
   "app": "ESL English",
   "schema": "esl-word-bank-v3",
-  "updatedAt": "2026-05-11T05:18:11.815Z",
+  "updatedAt": "2026-05-14T17:02:27.834Z",
   "levels": [
     "Inglés I",
     "Inglés II",
@@ -16411,6 +16411,1093 @@
             "In my free time I like"
           ]
         }
+      }
+    },
+    "pasa-palabra": {
+      "title": "Pasa Palabra ESL",
+      "file": "Pasa Palabra.html",
+      "bankType": "pairs",
+      "usesTranslation": true,
+      "entryFormat": "word_def_es_def_en",
+      "levels": {
+        "Inglés I": {
+          "General": [
+            "Listo, aquí tienes el banco en el formato:",
+            "```txt"
+          ],
+          "Different things": [
+            {
+              "word": "APPLE",
+              "translation": "fruta redonda que puede ser roja, verde o amarilla",
+              "englishDefinition": "a round fruit that can be red, green, or yellow"
+            },
+            {
+              "word": "BOOK",
+              "translation": "objeto con páginas para leer",
+              "englishDefinition": "an object with pages to read"
+            },
+            {
+              "word": "COFFEE",
+              "translation": "bebida caliente hecha con granos de café",
+              "englishDefinition": "a hot drink made from coffee beans"
+            },
+            {
+              "word": "GUITAR",
+              "translation": "instrumento musical con cuerdas",
+              "englishDefinition": "a musical instrument with strings"
+            },
+            {
+              "word": "PEN",
+              "translation": "objeto para escribir con tinta",
+              "englishDefinition": "an object used to write with ink"
+            },
+            {
+              "word": "TAXI",
+              "translation": "carro que lleva personas por dinero",
+              "englishDefinition": "a car that takes people places for money"
+            },
+            {
+              "word": "ZEBRA",
+              "translation": "animal parecido a un caballo con rayas blancas y negras",
+              "englishDefinition": "an animal like a horse with black and white stripes"
+            }
+          ],
+          "Colors": [
+            {
+              "word": "BLACK",
+              "translation": "color oscuro como la noche",
+              "englishDefinition": "a dark color like the night"
+            },
+            {
+              "word": "BLUE",
+              "translation": "color del cielo despejado",
+              "englishDefinition": "the color of a clear sky"
+            },
+            {
+              "word": "BROWN",
+              "translation": "color como el chocolate o la tierra",
+              "englishDefinition": "the color of chocolate or soil"
+            },
+            {
+              "word": "GREEN",
+              "translation": "color de muchas plantas",
+              "englishDefinition": "the color of many plants"
+            },
+            {
+              "word": "ORANGE",
+              "translation": "color entre rojo y amarillo",
+              "englishDefinition": "a color between red and yellow"
+            },
+            {
+              "word": "RED",
+              "translation": "color de una manzana o una rosa",
+              "englishDefinition": "the color of an apple or a rose"
+            },
+            {
+              "word": "WHITE",
+              "translation": "color de la leche o la nieve",
+              "englishDefinition": "the color of milk or snow"
+            },
+            {
+              "word": "YELLOW",
+              "translation": "color del sol o de un limón",
+              "englishDefinition": "the color of the sun or a lemon"
+            }
+          ],
+          "Days of the week": [
+            {
+              "word": "MONDAY",
+              "translation": "primer día de clases o trabajo de la semana",
+              "englishDefinition": "the first school or work day of the week"
+            },
+            {
+              "word": "TUESDAY",
+              "translation": "día después del lunes",
+              "englishDefinition": "the day after Monday"
+            },
+            {
+              "word": "WEDNESDAY",
+              "translation": "día en la mitad de la semana",
+              "englishDefinition": "the day in the middle of the week"
+            },
+            {
+              "word": "THURSDAY",
+              "translation": "día después del miércoles",
+              "englishDefinition": "the day after Wednesday"
+            },
+            {
+              "word": "FRIDAY",
+              "translation": "día antes del fin de semana",
+              "englishDefinition": "the day before the weekend"
+            },
+            {
+              "word": "SATURDAY",
+              "translation": "día del fin de semana",
+              "englishDefinition": "day of the weekend"
+            },
+            {
+              "word": "SUNDAY",
+              "translation": "último día de la semana",
+              "englishDefinition": "the last day of the week"
+            }
+          ],
+          "Numbers 0-10": [
+            {
+              "word": "ZERO",
+              "translation": "número que representa nada",
+              "englishDefinition": "the number that means nothing"
+            },
+            {
+              "word": "ONE",
+              "translation": "número después de cero",
+              "englishDefinition": "the number after zero"
+            },
+            {
+              "word": "TWO",
+              "translation": "número después de uno",
+              "englishDefinition": "the number after one"
+            },
+            {
+              "word": "THREE",
+              "translation": "número después de dos",
+              "englishDefinition": "the number after two"
+            },
+            {
+              "word": "FOUR",
+              "translation": "número después de tres",
+              "englishDefinition": "the number after three"
+            },
+            {
+              "word": "FIVE",
+              "translation": "número después de cuatro",
+              "englishDefinition": "the number after four"
+            },
+            {
+              "word": "SIX",
+              "translation": "número después de cinco",
+              "englishDefinition": "the number after five"
+            },
+            {
+              "word": "SEVEN",
+              "translation": "número después de seis",
+              "englishDefinition": "the number after six"
+            },
+            {
+              "word": "EIGHT",
+              "translation": "número después de siete",
+              "englishDefinition": "the number after seven"
+            },
+            {
+              "word": "NINE",
+              "translation": "número después de ocho",
+              "englishDefinition": "the number after eight"
+            },
+            {
+              "word": "TEN",
+              "translation": "número después de nueve",
+              "englishDefinition": "the number after nine"
+            }
+          ],
+          "Personal information 1": [
+            {
+              "word": "EMAIL ADDRESS",
+              "translation": "dirección usada para enviar mensajes por internet",
+              "englishDefinition": "an address used to send messages online"
+            },
+            {
+              "word": "FIRST NAME",
+              "translation": "nombre de una persona sin apellido",
+              "englishDefinition": "a person’s name without the last name"
+            },
+            {
+              "word": "LAST NAME",
+              "translation": "apellido de una persona",
+              "englishDefinition": "a person’s family name"
+            },
+            {
+              "word": "PHONE NUMBER",
+              "translation": "números usados para llamar a alguien",
+              "englishDefinition": "numbers used to call someone"
+            }
+          ],
+          "Countries": [
+            {
+              "word": "BRAZIL",
+              "translation": "país grande de América del Sur",
+              "englishDefinition": "a large country in South America"
+            },
+            {
+              "word": "CHILE",
+              "translation": "país largo y delgado de América del Sur",
+              "englishDefinition": "a long, narrow country in South America"
+            },
+            {
+              "word": "EGYPT",
+              "translation": "país famoso por las pirámides",
+              "englishDefinition": "a country famous for pyramids"
+            },
+            {
+              "word": "ENGLAND",
+              "translation": "país que forma parte del Reino Unido",
+              "englishDefinition": "a country that is part of the United Kingdom"
+            },
+            {
+              "word": "ITALY",
+              "translation": "país famoso por la pizza y la pasta",
+              "englishDefinition": "a country famous for pizza and pasta"
+            },
+            {
+              "word": "RUSSIA",
+              "translation": "país muy grande entre Europa y Asia",
+              "englishDefinition": "a very large country in Europe and Asia"
+            },
+            {
+              "word": "TURKEY",
+              "translation": "país entre Europa y Asia",
+              "englishDefinition": "a country between Europe and Asia"
+            },
+            {
+              "word": "THE UNITED STATES",
+              "translation": "país de América del Norte",
+              "englishDefinition": "a country in North America"
+            }
+          ],
+          "Numbers 11-100": [
+            {
+              "word": "ELEVEN",
+              "translation": "número después de diez",
+              "englishDefinition": "the number after ten"
+            },
+            {
+              "word": "TWELVE",
+              "translation": "número después de once",
+              "englishDefinition": "the number after eleven"
+            },
+            {
+              "word": "THIRTEEN",
+              "translation": "número después de doce",
+              "englishDefinition": "the number after twelve"
+            },
+            {
+              "word": "FOURTEEN",
+              "translation": "número después de trece",
+              "englishDefinition": "the number after thirteen"
+            },
+            {
+              "word": "FIFTEEN",
+              "translation": "número después de catorce",
+              "englishDefinition": "the number after fourteen"
+            },
+            {
+              "word": "SIXTEEN",
+              "translation": "número después de quince",
+              "englishDefinition": "the number after fifteen"
+            },
+            {
+              "word": "SEVENTEEN",
+              "translation": "número después de dieciséis",
+              "englishDefinition": "the number after sixteen"
+            },
+            {
+              "word": "EIGHTEEN",
+              "translation": "número después de diecisiete",
+              "englishDefinition": "the number after seventeen"
+            },
+            {
+              "word": "NINETEEN",
+              "translation": "número después de dieciocho",
+              "englishDefinition": "the number after eighteen"
+            },
+            {
+              "word": "TWENTY",
+              "translation": "número después de diecinueve",
+              "englishDefinition": "the number after nineteen"
+            },
+            {
+              "word": "TWENTY-ONE",
+              "translation": "número después de veinte",
+              "englishDefinition": "the number after twenty"
+            },
+            {
+              "word": "TWENTY-TWO",
+              "translation": "número después de veintiuno",
+              "englishDefinition": "the number after twenty-one"
+            },
+            {
+              "word": "TWENTY-THREE",
+              "translation": "número después de veintidós",
+              "englishDefinition": "the number after twenty-two"
+            },
+            {
+              "word": "TWENTY-FOUR",
+              "translation": "número después de veintitrés",
+              "englishDefinition": "the number after twenty-three"
+            },
+            {
+              "word": "TWENTY-FIVE",
+              "translation": "número después de veinticuatro",
+              "englishDefinition": "the number after twenty-four"
+            },
+            {
+              "word": "TWENTY-SIX",
+              "translation": "número después de veinticinco",
+              "englishDefinition": "the number after twenty-five"
+            },
+            {
+              "word": "TWENTY-SEVEN",
+              "translation": "número después de veintiséis",
+              "englishDefinition": "the number after twenty-six"
+            },
+            {
+              "word": "TWENTY-EIGHT",
+              "translation": "número después de veintisiete",
+              "englishDefinition": "the number after twenty-seven"
+            },
+            {
+              "word": "TWENTY-NINE",
+              "translation": "número después de veintiocho",
+              "englishDefinition": "the number after twenty-eight"
+            },
+            {
+              "word": "THIRTY",
+              "translation": "número después de veintinueve",
+              "englishDefinition": "the number after twenty-nine"
+            },
+            {
+              "word": "FORTY",
+              "translation": "número después de treinta y nueve",
+              "englishDefinition": "the number after thirty-nine"
+            },
+            {
+              "word": "FIFTY",
+              "translation": "número después de cuarenta y nueve",
+              "englishDefinition": "the number after forty-nine"
+            },
+            {
+              "word": "SIXTY",
+              "translation": "número después de cincuenta y nueve",
+              "englishDefinition": "the number after fifty-nine"
+            },
+            {
+              "word": "SEVENTY",
+              "translation": "número después de sesenta y nueve",
+              "englishDefinition": "the number after sixty-nine"
+            },
+            {
+              "word": "EIGHTY",
+              "translation": "número después de setenta y nueve",
+              "englishDefinition": "the number after seventy-nine"
+            },
+            {
+              "word": "NINETY",
+              "translation": "número después de ochenta y nueve",
+              "englishDefinition": "the number after eighty-nine"
+            },
+            {
+              "word": "ONE HUNDRED",
+              "translation": "número después de noventa y nueve",
+              "englishDefinition": "the number after ninety-nine"
+            }
+          ],
+          "Personal information 2": [
+            {
+              "word": "ADDRESS",
+              "translation": "lugar donde vive una persona",
+              "englishDefinition": "the place where a person lives"
+            },
+            {
+              "word": "CITY",
+              "translation": "ciudad donde vive o está una persona",
+              "englishDefinition": "a place where many people live"
+            },
+            {
+              "word": "COUNTRY",
+              "translation": "país donde vive una persona",
+              "englishDefinition": "a nation where a person lives"
+            },
+            {
+              "word": "NAME",
+              "translation": "palabra usada para identificar a una persona",
+              "englishDefinition": "a word used to identify a person"
+            },
+            {
+              "word": "TITLE",
+              "translation": "palabra como Mr., Mrs. o Miss",
+              "englishDefinition": "a word like Mr., Mrs., or Miss"
+            },
+            {
+              "word": "TOWN",
+              "translation": "lugar más pequeño que una ciudad",
+              "englishDefinition": "a place smaller than a city"
+            },
+            {
+              "word": "ZIP CODE",
+              "translation": "código postal de una dirección",
+              "englishDefinition": "the postal code of an address"
+            }
+          ],
+          "Technology": [
+            {
+              "word": "ALARM CLOCK",
+              "translation": "reloj que suena para despertar",
+              "englishDefinition": "a clock that rings to wake you up"
+            },
+            {
+              "word": "CAMERA",
+              "translation": "objeto para tomar fotos",
+              "englishDefinition": "an object used to take photos"
+            },
+            {
+              "word": "COMPUTER",
+              "translation": "máquina electrónica para trabajar o estudiar",
+              "englishDefinition": "an electronic machine used to work or study"
+            },
+            {
+              "word": "GAMES CONSOLE",
+              "translation": "aparato para jugar videojuegos",
+              "englishDefinition": "a device used to play video games"
+            },
+            {
+              "word": "PHONE",
+              "translation": "aparato para llamar o enviar mensajes",
+              "englishDefinition": "a device used to call or send messages"
+            },
+            {
+              "word": "RADIO",
+              "translation": "aparato para escuchar música o noticias",
+              "englishDefinition": "a device used to listen to music or news"
+            },
+            {
+              "word": "TABLET",
+              "translation": "dispositivo con pantalla táctil",
+              "englishDefinition": "a device with a touch screen"
+            },
+            {
+              "word": "TV",
+              "translation": "aparato para ver programas y películas",
+              "englishDefinition": "a device used to watch shows and movies"
+            },
+            {
+              "word": "VIDEO GAMES",
+              "translation": "juegos que se juegan en una pantalla",
+              "englishDefinition": "games played on a screen"
+            },
+            {
+              "word": "WATCH",
+              "translation": "reloj que se usa en la muñeca",
+              "englishDefinition": "a clock worn on the wrist"
+            }
+          ],
+          "Months": [
+            {
+              "word": "JANUARY",
+              "translation": "primer mes del año",
+              "englishDefinition": "the first month of the year"
+            },
+            {
+              "word": "FEBRUARY",
+              "translation": "segundo mes del año",
+              "englishDefinition": "the second month of the year"
+            },
+            {
+              "word": "MARCH",
+              "translation": "tercer mes del año",
+              "englishDefinition": "the third month of the year"
+            },
+            {
+              "word": "APRIL",
+              "translation": "cuarto mes del año",
+              "englishDefinition": "the fourth month of the year"
+            },
+            {
+              "word": "MAY",
+              "translation": "quinto mes del año",
+              "englishDefinition": "the fifth month of the year"
+            },
+            {
+              "word": "JUNE",
+              "translation": "sexto mes del año",
+              "englishDefinition": "the sixth month of the year"
+            },
+            {
+              "word": "JULY",
+              "translation": "séptimo mes del año",
+              "englishDefinition": "the seventh month of the year"
+            },
+            {
+              "word": "AUGUST",
+              "translation": "octavo mes del año",
+              "englishDefinition": "the eighth month of the year"
+            },
+            {
+              "word": "SEPTEMBER",
+              "translation": "noveno mes del año",
+              "englishDefinition": "the ninth month of the year"
+            },
+            {
+              "word": "OCTOBER",
+              "translation": "décimo mes del año",
+              "englishDefinition": "the tenth month of the year"
+            },
+            {
+              "word": "NOVEMBER",
+              "translation": "mes antes de diciembre",
+              "englishDefinition": "the month before December"
+            },
+            {
+              "word": "DECEMBER",
+              "translation": "último mes del año",
+              "englishDefinition": "the last month of the year"
+            }
+          ],
+          "Ordinal numbers": [
+            {
+              "word": "FIRST",
+              "translation": "posición número uno",
+              "englishDefinition": "position number one"
+            },
+            {
+              "word": "SECOND",
+              "translation": "posición número dos",
+              "englishDefinition": "position number two"
+            },
+            {
+              "word": "THIRD",
+              "translation": "posición número tres",
+              "englishDefinition": "position number three"
+            },
+            {
+              "word": "FOURTH",
+              "translation": "posición número cuatro",
+              "englishDefinition": "position number four"
+            },
+            {
+              "word": "FIFTH",
+              "translation": "posición número cinco",
+              "englishDefinition": "position number five"
+            },
+            {
+              "word": "SIXTH",
+              "translation": "posición número seis",
+              "englishDefinition": "position number six"
+            },
+            {
+              "word": "SEVENTH",
+              "translation": "posición número siete",
+              "englishDefinition": "position number seven"
+            },
+            {
+              "word": "EIGHTH",
+              "translation": "posición número ocho",
+              "englishDefinition": "position number eight"
+            },
+            {
+              "word": "NINTH",
+              "translation": "posición número nueve",
+              "englishDefinition": "position number nine"
+            },
+            {
+              "word": "TENTH",
+              "translation": "posición número diez",
+              "englishDefinition": "position number ten"
+            },
+            {
+              "word": "ELEVENTH",
+              "translation": "posición número once",
+              "englishDefinition": "position number eleven"
+            },
+            {
+              "word": "TWELFTH",
+              "translation": "posición número doce",
+              "englishDefinition": "position number twelve"
+            },
+            {
+              "word": "THIRTEENTH",
+              "translation": "posición número trece",
+              "englishDefinition": "position number thirteen"
+            },
+            {
+              "word": "FOURTEENTH",
+              "translation": "posición número catorce",
+              "englishDefinition": "position number fourteen"
+            },
+            {
+              "word": "FIFTEENTH",
+              "translation": "posición número quince",
+              "englishDefinition": "position number fifteen"
+            },
+            {
+              "word": "SIXTEENTH",
+              "translation": "posición número dieciséis",
+              "englishDefinition": "position number sixteen"
+            },
+            {
+              "word": "SEVENTEENTH",
+              "translation": "posición número diecisiete",
+              "englishDefinition": "position number seventeen"
+            },
+            {
+              "word": "EIGHTEENTH",
+              "translation": "posición número dieciocho",
+              "englishDefinition": "position number eighteen"
+            },
+            {
+              "word": "NINETEENTH",
+              "translation": "posición número diecinueve",
+              "englishDefinition": "position number nineteen"
+            },
+            {
+              "word": "TWENTIETH",
+              "translation": "posición número veinte",
+              "englishDefinition": "position number twenty"
+            },
+            {
+              "word": "TWENTY-FIRST",
+              "translation": "posición número veintiuno",
+              "englishDefinition": "position number twenty-one"
+            },
+            {
+              "word": "TWENTY-SECOND",
+              "translation": "posición número veintidós",
+              "englishDefinition": "position number twenty-two"
+            },
+            {
+              "word": "TWENTY-THIRD",
+              "translation": "posición número veintitrés",
+              "englishDefinition": "position number twenty-three"
+            },
+            {
+              "word": "TWENTY-FOURTH",
+              "translation": "posición número veinticuatro",
+              "englishDefinition": "position number twenty-four"
+            },
+            {
+              "word": "TWENTY-FIFTH",
+              "translation": "posición número veinticinco",
+              "englishDefinition": "position number twenty-five"
+            },
+            {
+              "word": "TWENTY-SIXTH",
+              "translation": "posición número veintiséis",
+              "englishDefinition": "position number twenty-six"
+            },
+            {
+              "word": "TWENTY-SEVENTH",
+              "translation": "posición número veintisiete",
+              "englishDefinition": "position number twenty-seven"
+            },
+            {
+              "word": "TWENTY-EIGHTH",
+              "translation": "posición número veintiocho",
+              "englishDefinition": "position number twenty-eight"
+            },
+            {
+              "word": "TWENTY-NINTH",
+              "translation": "posición número veintinueve",
+              "englishDefinition": "position number twenty-nine"
+            },
+            {
+              "word": "THIRTIETH",
+              "translation": "posición número treinta",
+              "englishDefinition": "position number thirty"
+            },
+            {
+              "word": "THIRTY-FIRST",
+              "translation": "posición número treinta y uno",
+              "englishDefinition": "position number thirty-one"
+            }
+          ],
+          "Snacks and drinks": [
+            {
+              "word": "BLACK COFFEE",
+              "translation": "café sin leche",
+              "englishDefinition": "coffee without milk"
+            },
+            {
+              "word": "CHIPS",
+              "translation": "papas fritas en funda",
+              "englishDefinition": "thin fried potatoes in a bag"
+            },
+            {
+              "word": "CHOCOLATE BARS",
+              "translation": "barras dulces de chocolate",
+              "englishDefinition": "sweet bars made of chocolate"
+            },
+            {
+              "word": "COFFEE WITH MILK",
+              "translation": "café mezclado con leche",
+              "englishDefinition": "coffee mixed with milk"
+            },
+            {
+              "word": "COOKIES",
+              "translation": "dulces pequeños horneados",
+              "englishDefinition": "small sweet baked snacks"
+            },
+            {
+              "word": "HOT CHOCOLATE",
+              "translation": "bebida caliente de chocolate",
+              "englishDefinition": "a hot chocolate drink"
+            },
+            {
+              "word": "MILK",
+              "translation": "bebida blanca que viene de la vaca",
+              "englishDefinition": "a white drink that comes from cows"
+            },
+            {
+              "word": "ORANGE JUICE",
+              "translation": "jugo hecho de naranja",
+              "englishDefinition": "juice made from oranges"
+            },
+            {
+              "word": "SANDWICHES",
+              "translation": "pan con comida en medio",
+              "englishDefinition": "bread with food inside"
+            },
+            {
+              "word": "SODA",
+              "translation": "bebida dulce con gas",
+              "englishDefinition": "a sweet fizzy drink"
+            },
+            {
+              "word": "TEA",
+              "translation": "bebida caliente hecha con hojas",
+              "englishDefinition": "a hot drink made with leaves"
+            },
+            {
+              "word": "WATER",
+              "translation": "bebida transparente necesaria para vivir",
+              "englishDefinition": "a clear drink needed to live"
+            }
+          ],
+          "Rooms": [
+            {
+              "word": "BATHROOM",
+              "translation": "cuarto donde está el baño",
+              "englishDefinition": "a room with a toilet or shower"
+            },
+            {
+              "word": "BEDROOM",
+              "translation": "cuarto donde se duerme",
+              "englishDefinition": "a room where people sleep"
+            },
+            {
+              "word": "KITCHEN",
+              "translation": "cuarto donde se cocina",
+              "englishDefinition": "a room where people cook"
+            },
+            {
+              "word": "LIVING ROOM",
+              "translation": "cuarto para descansar o ver televisión",
+              "englishDefinition": "a room to relax or watch TV"
+            }
+          ],
+          "Furniture": [
+            {
+              "word": "BED",
+              "translation": "mueble para dormir",
+              "englishDefinition": "a piece of furniture used to sleep"
+            },
+            {
+              "word": "CHAIR",
+              "translation": "mueble para sentarse",
+              "englishDefinition": "a piece of furniture used to sit"
+            },
+            {
+              "word": "COUCH",
+              "translation": "mueble grande para sentarse",
+              "englishDefinition": "a large piece of furniture used to sit"
+            },
+            {
+              "word": "SHOWER",
+              "translation": "lugar donde una persona se baña",
+              "englishDefinition": "a place where a person washes"
+            },
+            {
+              "word": "TABLE",
+              "translation": "mueble para poner cosas encima",
+              "englishDefinition": "a piece of furniture used to put things on"
+            },
+            {
+              "word": "WINDOW",
+              "translation": "parte de la pared para ver afuera",
+              "englishDefinition": "a part of a wall used to see outside"
+            }
+          ],
+          "Family": [
+            {
+              "word": "BROTHER",
+              "translation": "hijo varón de los mismos padres",
+              "englishDefinition": "a male child of the same parents"
+            },
+            {
+              "word": "DAD",
+              "translation": "forma familiar de decir padre",
+              "englishDefinition": "an informal word for father"
+            },
+            {
+              "word": "DAUGHTER",
+              "translation": "hija de una madre o un padre",
+              "englishDefinition": "a female child of a parent"
+            },
+            {
+              "word": "FATHER",
+              "translation": "papá de una persona",
+              "englishDefinition": "a person’s male parent"
+            },
+            {
+              "word": "FRIEND",
+              "translation": "persona que aprecias y conoces bien",
+              "englishDefinition": "a person you like and know well"
+            },
+            {
+              "word": "MOM",
+              "translation": "forma familiar de decir madre",
+              "englishDefinition": "an informal word for mother"
+            },
+            {
+              "word": "MOTHER",
+              "translation": "mamá de una persona",
+              "englishDefinition": "a person’s female parent"
+            },
+            {
+              "word": "PARENTS",
+              "translation": "madre y padre de una persona",
+              "englishDefinition": "a person’s mother and father"
+            },
+            {
+              "word": "PET",
+              "translation": "animal que vive con una familia",
+              "englishDefinition": "an animal that lives with a family"
+            },
+            {
+              "word": "SISTER",
+              "translation": "hija mujer de los mismos padres",
+              "englishDefinition": "a female child of the same parents"
+            },
+            {
+              "word": "SON",
+              "translation": "hijo varón de una madre o un padre",
+              "englishDefinition": "a male child of a parent"
+            }
+          ],
+          "Daily routines": [
+            {
+              "word": "FINISH CLASS",
+              "translation": "terminar la clase",
+              "englishDefinition": "to end class"
+            },
+            {
+              "word": "FINISH WORK",
+              "translation": "terminar el trabajo",
+              "englishDefinition": "to end work"
+            },
+            {
+              "word": "GET HOME",
+              "translation": "llegar a casa",
+              "englishDefinition": "to arrive home"
+            },
+            {
+              "word": "GET UP",
+              "translation": "levantarse de la cama",
+              "englishDefinition": "to leave the bed"
+            },
+            {
+              "word": "GO TO BED",
+              "translation": "irse a dormir",
+              "englishDefinition": "to go to sleep"
+            },
+            {
+              "word": "GO TO CLASS",
+              "translation": "ir a clase",
+              "englishDefinition": "to go to class"
+            },
+            {
+              "word": "GO TO WORK",
+              "translation": "ir al trabajo",
+              "englishDefinition": "to go to work"
+            },
+            {
+              "word": "HAVE A SHOWER",
+              "translation": "bañarse en la ducha",
+              "englishDefinition": "to wash your body in the shower"
+            },
+            {
+              "word": "HAVE BREAKFAST",
+              "translation": "comer en la mañana",
+              "englishDefinition": "to eat in the morning"
+            },
+            {
+              "word": "HAVE DINNER",
+              "translation": "comer en la noche",
+              "englishDefinition": "to eat in the evening or at night"
+            },
+            {
+              "word": "HAVE LUNCH",
+              "translation": "comer al mediodía",
+              "englishDefinition": "to eat at midday"
+            },
+            {
+              "word": "LEAVE HOME",
+              "translation": "salir de casa",
+              "englishDefinition": "to go out of the house"
+            },
+            {
+              "word": "START CLASS",
+              "translation": "empezar la clase",
+              "englishDefinition": "to begin class"
+            },
+            {
+              "word": "START WORK",
+              "translation": "empezar el trabajo",
+              "englishDefinition": "to begin work"
+            },
+            {
+              "word": "WAKE UP",
+              "translation": "despertarse",
+              "englishDefinition": "to stop sleeping"
+            }
+          ],
+          "Sports and exercise": [
+            {
+              "word": "EXERCISE",
+              "translation": "hacer actividad física",
+              "englishDefinition": "to do physical activity"
+            },
+            {
+              "word": "PLAY BASKETBALL",
+              "translation": "jugar baloncesto",
+              "englishDefinition": "to play basketball"
+            },
+            {
+              "word": "PLAY SOCCER",
+              "translation": "jugar fútbol",
+              "englishDefinition": "to play soccer"
+            },
+            {
+              "word": "PLAY TENNIS",
+              "translation": "jugar tenis",
+              "englishDefinition": "to play tennis"
+            },
+            {
+              "word": "RIDE A BIKE",
+              "translation": "andar en bicicleta",
+              "englishDefinition": "to use a bicycle"
+            },
+            {
+              "word": "RUN",
+              "translation": "correr",
+              "englishDefinition": "to move fast with your legs"
+            },
+            {
+              "word": "SWIM",
+              "translation": "nadar",
+              "englishDefinition": "to move in water"
+            },
+            {
+              "word": "WALK",
+              "translation": "caminar",
+              "englishDefinition": "to move on foot"
+            },
+            {
+              "word": "WALK YOUR DOG",
+              "translation": "pasear a tu perro",
+              "englishDefinition": "to take your dog for a walk"
+            }
+          ],
+          "Verbs and prepositions": [
+            {
+              "word": "COME FROM",
+              "translation": "ser de un lugar",
+              "englishDefinition": "to be from a place"
+            },
+            {
+              "word": "LISTEN TO",
+              "translation": "escuchar algo o a alguien",
+              "englishDefinition": "to hear something or someone carefully"
+            },
+            {
+              "word": "LIVE IN",
+              "translation": "vivir en un lugar",
+              "englishDefinition": "to have your home in a place"
+            },
+            {
+              "word": "LOVE",
+              "translation": "amar o querer mucho",
+              "englishDefinition": "to like or care for very much"
+            },
+            {
+              "word": "TALK ABOUT",
+              "translation": "hablar sobre un tema",
+              "englishDefinition": "to speak about a topic"
+            },
+            {
+              "word": "WORK FOR",
+              "translation": "trabajar para una persona o empresa",
+              "englishDefinition": "to work for a person or company"
+            },
+            {
+              "word": "WORK IN",
+              "translation": "trabajar en un lugar o área",
+              "englishDefinition": "to work in a place or area"
+            }
+          ],
+          "Adjectives": [
+            {
+              "word": "BORING",
+              "translation": "que no es interesante",
+              "englishDefinition": "not interesting"
+            },
+            {
+              "word": "DIFFICULT",
+              "translation": "que no es fácil",
+              "englishDefinition": "not easy"
+            },
+            {
+              "word": "EASY",
+              "translation": "que no es difícil",
+              "englishDefinition": "not difficult"
+            },
+            {
+              "word": "HAPPY",
+              "translation": "sentirse bien y contento",
+              "englishDefinition": "feeling good and pleased"
+            },
+            {
+              "word": "HORRIBLE",
+              "translation": "muy malo o desagradable",
+              "englishDefinition": "very bad or unpleasant"
+            },
+            {
+              "word": "INTERESTING",
+              "translation": "que llama la atención",
+              "englishDefinition": "that gets your attention"
+            },
+            {
+              "word": "NICE",
+              "translation": "agradable o bueno",
+              "englishDefinition": "pleasant or good"
+            },
+            {
+              "word": "RIGHT",
+              "translation": "correcto",
+              "englishDefinition": "correct"
+            },
+            {
+              "word": "SAD",
+              "translation": "sentirse triste",
+              "englishDefinition": "feeling unhappy"
+            },
+            {
+              "word": "WRONG",
+              "translation": "incorrecto",
+              "englishDefinition": "incorrect"
+            },
+            "```"
+          ]
+        },
+        "Inglés II": {},
+        "Inglés III": {},
+        "Inglés IV": {}
       }
     }
   },
