@@ -67,6 +67,14 @@
   "bankType": "pairs",
   "usesTranslation": true,
   "enabled": true
+},
+      {
+  "id": "atrapa-burbujas",
+  "title": "Atrapa Burbujas",
+  "file": "Atrapa Burbujas.html",
+  "bankType": "pairs",
+  "usesTranslation": true,
+  "enabled": true
 }
   ]
 }
