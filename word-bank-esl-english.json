@@ -1,7 +1,7 @@
 {
   "app": "ESL English",
   "schema": "esl-word-bank-v3",
-  "updatedAt": "2026-05-19T20:04:25.579Z",
+  "updatedAt": "2026-05-19T20:33:25.484Z",
   "levels": [
     "Inglés I",
     "Inglés II",
@@ -210,7 +210,6 @@
             }
           ],
           "NUMBERS 11-100": [
-            "Claro, aquí tienes **todos los números del 11 al 100** en inglés y español:",
             {
               "word": "eleven",
               "translation": "Once"
