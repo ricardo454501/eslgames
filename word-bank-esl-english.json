@@ -1,7 +1,7 @@
 {
   "app": "ESL English",
   "schema": "esl-word-bank-v3",
-  "updatedAt": "2026-05-18T05:30:15.967Z",
+  "updatedAt": "2026-05-19T20:04:25.579Z",
   "levels": [
     "Inglés I",
     "Inglés II",
@@ -12,7 +12,7 @@
     "anagrama": {
       "title": "Anagrama",
       "file": "Anagrama.html",
-      "bankType": "words",
+      "bankType": "pairs",
       "usesTranslation": true,
       "entryFormat": "word=translation",
       "levels": {
@@ -210,6 +210,7 @@
             }
           ],
           "NUMBERS 11-100": [
+            "Claro, aquí tienes **todos los números del 11 al 100** en inglés y español:",
             {
               "word": "eleven",
               "translation": "Once"
@@ -291,28 +292,280 @@
               "translation": "Treinta"
             },
             {
+              "word": "thirty-one",
+              "translation": "Treinta y uno"
+            },
+            {
+              "word": "thirty-two",
+              "translation": "Treinta y dos"
+            },
+            {
+              "word": "thirty-three",
+              "translation": "Treinta y tres"
+            },
+            {
+              "word": "thirty-four",
+              "translation": "Treinta y cuatro"
+            },
+            {
+              "word": "thirty-five",
+              "translation": "Treinta y cinco"
+            },
+            {
+              "word": "thirty-six",
+              "translation": "Treinta y seis"
+            },
+            {
+              "word": "thirty-seven",
+              "translation": "Treinta y siete"
+            },
+            {
+              "word": "thirty-eight",
+              "translation": "Treinta y ocho"
+            },
+            {
+              "word": "thirty-nine",
+              "translation": "Treinta y nueve"
+            },
+            {
               "word": "forty",
               "translation": "Cuarenta"
+            },
+            {
+              "word": "forty-one",
+              "translation": "Cuarenta y uno"
+            },
+            {
+              "word": "forty-two",
+              "translation": "Cuarenta y dos"
+            },
+            {
+              "word": "forty-three",
+              "translation": "Cuarenta y tres"
+            },
+            {
+              "word": "forty-four",
+              "translation": "Cuarenta y cuatro"
+            },
+            {
+              "word": "forty-five",
+              "translation": "Cuarenta y cinco"
+            },
+            {
+              "word": "forty-six",
+              "translation": "Cuarenta y seis"
+            },
+            {
+              "word": "forty-seven",
+              "translation": "Cuarenta y siete"
+            },
+            {
+              "word": "forty-eight",
+              "translation": "Cuarenta y ocho"
+            },
+            {
+              "word": "forty-nine",
+              "translation": "Cuarenta y nueve"
             },
             {
               "word": "fifty",
               "translation": "Cincuenta"
             },
             {
+              "word": "fifty-one",
+              "translation": "Cincuenta y uno"
+            },
+            {
+              "word": "fifty-two",
+              "translation": "Cincuenta y dos"
+            },
+            {
+              "word": "fifty-three",
+              "translation": "Cincuenta y tres"
+            },
+            {
+              "word": "fifty-four",
+              "translation": "Cincuenta y cuatro"
+            },
+            {
+              "word": "fifty-five",
+              "translation": "Cincuenta y cinco"
+            },
+            {
+              "word": "fifty-six",
+              "translation": "Cincuenta y seis"
+            },
+            {
+              "word": "fifty-seven",
+              "translation": "Cincuenta y siete"
+            },
+            {
+              "word": "fifty-eight",
+              "translation": "Cincuenta y ocho"
+            },
+            {
+              "word": "fifty-nine",
+              "translation": "Cincuenta y nueve"
+            },
+            {
               "word": "sixty",
               "translation": "Sesenta"
+            },
+            {
+              "word": "sixty-one",
+              "translation": "Sesenta y uno"
+            },
+            {
+              "word": "sixty-two",
+              "translation": "Sesenta y dos"
+            },
+            {
+              "word": "sixty-three",
+              "translation": "Sesenta y tres"
+            },
+            {
+              "word": "sixty-four",
+              "translation": "Sesenta y cuatro"
+            },
+            {
+              "word": "sixty-five",
+              "translation": "Sesenta y cinco"
+            },
+            {
+              "word": "sixty-six",
+              "translation": "Sesenta y seis"
+            },
+            {
+              "word": "sixty-seven",
+              "translation": "Sesenta y siete"
+            },
+            {
+              "word": "sixty-eight",
+              "translation": "Sesenta y ocho"
+            },
+            {
+              "word": "sixty-nine",
+              "translation": "Sesenta y nueve"
             },
             {
               "word": "seventy",
               "translation": "Setenta"
             },
             {
+              "word": "seventy-one",
+              "translation": "Setenta y uno"
+            },
+            {
+              "word": "seventy-two",
+              "translation": "Setenta y dos"
+            },
+            {
+              "word": "seventy-three",
+              "translation": "Setenta y tres"
+            },
+            {
+              "word": "seventy-four",
+              "translation": "Setenta y cuatro"
+            },
+            {
+              "word": "seventy-five",
+              "translation": "Setenta y cinco"
+            },
+            {
+              "word": "seventy-six",
+              "translation": "Setenta y seis"
+            },
+            {
+              "word": "seventy-seven",
+              "translation": "Setenta y siete"
+            },
+            {
+              "word": "seventy-eight",
+              "translation": "Setenta y ocho"
+            },
+            {
+              "word": "seventy-nine",
+              "translation": "Setenta y nueve"
+            },
+            {
               "word": "eighty",
               "translation": "Ochenta"
             },
             {
+              "word": "eighty-one",
+              "translation": "Ochenta y uno"
+            },
+            {
+              "word": "eighty-two",
+              "translation": "Ochenta y dos"
+            },
+            {
+              "word": "eighty-three",
+              "translation": "Ochenta y tres"
+            },
+            {
+              "word": "eighty-four",
+              "translation": "Ochenta y cuatro"
+            },
+            {
+              "word": "eighty-five",
+              "translation": "Ochenta y cinco"
+            },
+            {
+              "word": "eighty-six",
+              "translation": "Ochenta y seis"
+            },
+            {
+              "word": "eighty-seven",
+              "translation": "Ochenta y siete"
+            },
+            {
+              "word": "eighty-eight",
+              "translation": "Ochenta y ocho"
+            },
+            {
+              "word": "eighty-nine",
+              "translation": "Ochenta y nueve"
+            },
+            {
               "word": "ninety",
               "translation": "Noventa"
+            },
+            {
+              "word": "ninety-one",
+              "translation": "Noventa y uno"
+            },
+            {
+              "word": "ninety-two",
+              "translation": "Noventa y dos"
+            },
+            {
+              "word": "ninety-three",
+              "translation": "Noventa y tres"
+            },
+            {
+              "word": "ninety-four",
+              "translation": "Noventa y cuatro"
+            },
+            {
+              "word": "ninety-five",
+              "translation": "Noventa y cinco"
+            },
+            {
+              "word": "ninety-six",
+              "translation": "Noventa y seis"
+            },
+            {
+              "word": "ninety-seven",
+              "translation": "Noventa y siete"
+            },
+            {
+              "word": "ninety-eight",
+              "translation": "Noventa y ocho"
+            },
+            {
+              "word": "ninety-nine",
+              "translation": "Noventa y nueve"
             },
             {
               "word": "one hundred",
