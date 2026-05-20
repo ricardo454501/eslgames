@@ -313,44 +313,48 @@
         } catch (error) {}
       };
 
+      const SYNC_DONE_THIS_TAB_KEY = "ESL_GITHUB_SYNC_DONE_THIS_TAB";
+
+      const hasSyncedThisTab = () => {
+        try {
+          return sessionStorage.getItem(SYNC_DONE_THIS_TAB_KEY) === "1";
+        } catch (error) {
+          return false;
+        }
+      };
+
+      const markSyncedThisTab = () => {
+        try {
+          sessionStorage.setItem(SYNC_DONE_THIS_TAB_KEY, "1");
+        } catch (error) {}
+      };
+
+      const resetSyncedThisTab = () => {
+        try {
+          sessionStorage.removeItem(SYNC_DONE_THIS_TAB_KEY);
+        } catch (error) {}
+      };
+
       const render = (extraText = "") => {
         const enabled = getEnabled();
         button.classList.toggle("off", !enabled);
         button.setAttribute("aria-pressed", enabled ? "true" : "false");
         button.textContent = extraText || `Sincronizar banco: ${enabled ? "ON" : "OFF"}`;
         button.title = enabled
-          ? "ON: al abrir, carga primero el WordBank actualizado de GitHub."
-          : "OFF: al abrir, usa primero el WordBank local guardado en este navegador.";
+          ? "ON: al abrir una pestaña nueva, carga una sola vez el WordBank actualizado de GitHub. Al volver desde un juego, mantiene el banco local de la sesión."
+          : "OFF: usa primero el WordBank local guardado en este navegador.";
       };
 
-      button.addEventListener("click", async () => {
-        const nextEnabled = !getEnabled();
-        setEnabled(nextEnabled);
-        render();
+      async function syncFromGitHubOnceThisTab(force = false) {
+        if (!getEnabled()) return;
+        if (!force && hasSyncedThisTab()) return;
+        if (!window.ESLBank || typeof window.ESLBank.loadFullBank !== "function") return;
 
-        if (nextEnabled && window.ESLBank && typeof window.ESLBank.loadFullBank === "function") {
-          button.disabled = true;
-          render("Sincronizando banco...");
-          try {
-            await window.ESLBank.loadFullBank({ priority: "github", forceRefresh: true });
-            render("Banco sincronizado: ON");
-            setTimeout(() => render(), 1200);
-          } catch (error) {
-            render("No se pudo sincronizar");
-            setTimeout(() => render(), 1600);
-          } finally {
-            button.disabled = false;
-          }
-        }
-      });
-
-      render();
-
-      if (getEnabled() && window.ESLBank && typeof window.ESLBank.loadFullBank === "function") {
         button.disabled = true;
         render("Sincronizando banco...");
         try {
           await window.ESLBank.loadFullBank({ priority: "github", forceRefresh: true });
+          markSyncedThisTab();
           render("Banco sincronizado: ON");
           setTimeout(() => render(), 1200);
         } catch (error) {
@@ -360,6 +364,19 @@
           button.disabled = false;
         }
       }
+
+      button.addEventListener("click", async () => {
+        const nextEnabled = !getEnabled();
+        setEnabled(nextEnabled);
+        if (!nextEnabled) resetSyncedThisTab();
+        render();
+
+        // Al encenderlo manualmente, sincroniza una vez en esta pestaña.
+        if (nextEnabled) await syncFromGitHubOnceThisTab(true);
+      });
+
+      render();
+      await syncFromGitHubOnceThisTab(false);
     }
 
     setupReturnButton();
