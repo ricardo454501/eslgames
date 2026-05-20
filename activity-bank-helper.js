@@ -49,6 +49,18 @@
   // Clave antigua del helper, se mantiene como respaldo por compatibilidad.
   const LEGACY_STORAGE_KEY = "ESL_ENGLISH_WORD_BANK";
 
+  // Claves usadas por las actividades antiguas/nuevas para guardar snapshots por actividad.
+  // Si estas claves quedan viejas, ganan sobre el banco central y por eso en navegador normal
+  // se ven datos antiguos aunque index.html haya sincronizado GitHub.
+  const PLATFORM_SNAPSHOT_KEY = "ESL_WORD_BANK_PLATFORM_SNAPSHOT";
+  const PLATFORM_FULL_KEY = "ESL_WORD_BANK_FULL";
+  const ACTIVITY_STORAGE_PREFIX = "ESL_ACTIVITY_BANK_";
+
+  // Claves privadas antiguas de actividades que también deben actualizarse al sincronizar.
+  const ACTIVITY_PRIVATE_STORAGE_KEYS = {
+    hangman: "hangman_arena_75_bank_v2"
+  };
+
   // Copia rápida mientras la pestaña esté abierta.
   const SESSION_STORAGE_KEY = "ESL_SESSION_WORD_BANK";
   const SESSION_VERSION_KEY = "ESL_BANK_SESSION_VERSION";
@@ -73,15 +85,18 @@
     }
   }
 
-  function cacheBustedUrl(path) {
+  function cacheBustedUrl(path, forceRefresh = false) {
     const separator = path.includes("?") ? "&" : "?";
-    return `${path}${separator}v=${encodeURIComponent(getSessionVersion())}`;
+    const version = forceRefresh
+      ? `${Date.now()}-${Math.random().toString(36).slice(2)}`
+      : getSessionVersion();
+    return `${path}${separator}v=${encodeURIComponent(version)}`;
   }
 
-  async function fetchJson(path) {
-    const response = await fetch(cacheBustedUrl(path), {
+  async function fetchJson(path, options = {}) {
+    const response = await fetch(cacheBustedUrl(path, !!options.forceRefresh), {
       cache: "no-store",
-      headers: { "Cache-Control": "no-cache" }
+      headers: { "Cache-Control": "no-cache, no-store, must-revalidate", "Pragma": "no-cache" }
     });
     if (!response.ok) throw new Error(`No se pudo cargar ${path}`);
     return response.json();
@@ -128,6 +143,64 @@
     } catch (error) {}
   }
 
+  function listActivitySnapshotKeys() {
+    const keys = [];
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith(ACTIVITY_STORAGE_PREFIX)) keys.push(key);
+      }
+    } catch (error) {}
+    return keys;
+  }
+
+  function mirrorPlatformStorage(bank) {
+    if (!isValidBank(bank)) return;
+    const full = clone(bank);
+    const activities = full.activities || {};
+
+    // 1) Borra snapshots por actividad que pudieron quedar viejos en el navegador normal.
+    listActivitySnapshotKeys().forEach(key => {
+      try { localStorage.removeItem(key); } catch (error) {}
+    });
+
+    // 2) Reescribe los snapshots por actividad con la misma versión sincronizada desde GitHub.
+    Object.entries(activities).forEach(([id, activity]) => {
+      try { localStorage.setItem(ACTIVITY_STORAGE_PREFIX + id, JSON.stringify(activity)); } catch (error) {}
+    });
+
+    // 3) Actualiza las claves heredadas que varias actividades todavía consultan.
+    try { localStorage.setItem(PLATFORM_SNAPSHOT_KEY, JSON.stringify(full)); } catch (error) {}
+    try { localStorage.setItem(PLATFORM_FULL_KEY, JSON.stringify(full)); } catch (error) {}
+
+    // 4) Actualiza claves privadas antiguas. Hangman lee esta clave antes de reconstruir el banco.
+    Object.entries(ACTIVITY_PRIVATE_STORAGE_KEYS).forEach(([id, key]) => {
+      try {
+        const activity = activities[id];
+        if (activity && activity.levels) localStorage.setItem(key, JSON.stringify(activity.levels));
+      } catch (error) {}
+    });
+
+    // 5) Limpia la copia en memoria para que no mantenga snapshots anteriores.
+    try {
+      const memory = { activities: clone(activities) };
+      Object.entries(activities).forEach(([id, activity]) => { memory[id] = clone(activity); });
+      window.ESL_ACTIVITY_BANKS = memory;
+    } catch (error) {}
+  }
+
+  function clearPlatformStorageSnapshots() {
+    listActivitySnapshotKeys().forEach(key => {
+      try { localStorage.removeItem(key); } catch (error) {}
+    });
+    try { localStorage.removeItem(PLATFORM_SNAPSHOT_KEY); } catch (error) {}
+    try { localStorage.removeItem(PLATFORM_FULL_KEY); } catch (error) {}
+    Object.values(ACTIVITY_PRIVATE_STORAGE_KEYS).forEach(key => {
+      try { localStorage.removeItem(key); } catch (error) {}
+    });
+    try { window.ESL_ACTIVITY_BANKS = { activities: {} }; } catch (error) {}
+  }
+
   function writeLocalBank(bank, options = {}) {
     if (!isValidBank(bank)) throw new Error("El Word Bank no tiene un formato válido.");
     const next = clone(bank);
@@ -136,6 +209,7 @@
     }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     try { localStorage.removeItem(LEGACY_STORAGE_KEY); } catch (error) {}
+    mirrorPlatformStorage(next);
     writeSessionBank(next);
     return next;
   }
@@ -146,7 +220,7 @@
       if (sessionBank) return clone(sessionBank);
     }
 
-    const external = await fetchJson(BANK_FILE);
+    const external = await fetchJson(BANK_FILE, { forceRefresh: !!options.forceRefresh });
     if (!isValidBank(external)) throw new Error("El Word Bank externo no tiene un formato válido.");
     return writeLocalBank(external, { preserveUpdatedAt: true });
   }
@@ -272,6 +346,9 @@
     USE_SESSION_CACHE,
     STORAGE_KEY,
     SESSION_STORAGE_KEY,
+    PLATFORM_SNAPSHOT_KEY,
+    PLATFORM_FULL_KEY,
+    ACTIVITY_STORAGE_PREFIX,
     BANK_FILE,
     loadFullBank,
     getFullWordBank: loadFullBank,
@@ -285,6 +362,8 @@
     readLocalBank,
     writeLocalBank,
     readSessionBank,
-    clearSessionBank
+    clearSessionBank,
+    mirrorPlatformStorage,
+    clearPlatformStorageSnapshots
   };
 })();
