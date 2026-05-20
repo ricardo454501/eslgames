@@ -5,13 +5,39 @@
    ESLBank.downloadFullBank();
 
    PRIORIDAD DEL BANCO:
-   - "github": primero carga word-bank-esl-english.json desde GitHub/servidor.
-   - "localStorage": primero carga el banco guardado en el navegador.
+   - "github": solo se usa cuando index.html sincroniza explícitamente con GitHub/servidor.
+   - "localStorage": las actividades leen el banco guardado en el navegador.
 
-   Para cambiar el comportamiento en el futuro, cambia solo esta línea:
+   El modo de sincronización se controla desde el menú inicial:
+  - ON  = index.html descarga GitHub al abrir la página inicial y actualiza el banco local.
+  - OFF = index.html no sincroniza; las actividades usan el banco local existente.
 */
 (function () {
-  const BANK_PRIORITY = "localStorage"; // opciones: "github" o "localStorage"
+  const SYNC_SETTING_KEY = "ESL_SYNC_BANK_ON";
+
+  function isGitHubSyncEnabled() {
+    try {
+      return localStorage.getItem(SYNC_SETTING_KEY) !== "0"; // por defecto ON
+    } catch (error) {
+      return true;
+    }
+  }
+
+  function setGitHubSyncEnabled(enabled) {
+    try {
+      localStorage.setItem(SYNC_SETTING_KEY, enabled ? "1" : "0");
+    } catch (error) {}
+    clearSessionBank();
+    return isGitHubSyncEnabled();
+  }
+
+  function getBankPriority() {
+    // Las actividades no deben consultar GitHub cada vez que se abren.
+    // GitHub se usa únicamente cuando index.html llama loadFullBank({ priority:"github" }).
+    return "localStorage";
+  }
+
+  const BANK_PRIORITY = getBankPriority(); // compatibilidad: valor al cargar el helper
 
   // Si está activo, el banco se descarga una sola vez por pestaña/sesión.
   // Al cerrar la pestaña y abrir de nuevo, se vuelve a consultar GitHub.
@@ -126,7 +152,7 @@
   }
 
   async function loadFullBank(options = {}) {
-    const priority = options.priority || BANK_PRIORITY;
+    const priority = options.priority || "localStorage";
     const preferLocal = priority === "localStorage";
 
     if (!preferLocal) {
@@ -238,7 +264,11 @@
   }
 
   window.ESLBank = {
-    BANK_PRIORITY,
+    get BANK_PRIORITY() { return getBankPriority(); },
+    getBankPriority,
+    SYNC_SETTING_KEY,
+    isGitHubSyncEnabled,
+    setGitHubSyncEnabled,
     USE_SESSION_CACHE,
     STORAGE_KEY,
     SESSION_STORAGE_KEY,
