@@ -1,7 +1,7 @@
 {
   "app": "ESL English",
   "schema": "esl-word-bank-v3",
-  "updatedAt": "2026-05-20T15:18:05.611Z",
+  "updatedAt": "2026-05-20T16:08:25.334Z",
   "levels": [
     "Inglés I",
     "Inglés II",
@@ -17,7 +17,7 @@
       "entryFormat": "word=translation",
       "levels": {
         "Inglés I": {
-          "DIFFERENT THINGS": [
+          "Different things": [
             {
               "word": "apple",
               "translation": "manzana"
@@ -47,7 +47,7 @@
               "translation": "Cebra"
             }
           ],
-          "COLORS": [
+          "Colors": [
             {
               "word": "black",
               "translation": "Negro"
@@ -81,7 +81,7 @@
               "translation": "Amarillo"
             }
           ],
-          "DAYS OF THE WEEK": [
+          "Days of the week": [
             {
               "word": "Monday",
               "translation": "Lunes"
@@ -111,7 +111,7 @@
               "translation": "Domingo"
             }
           ],
-          "NUMBERS 0-10": [
+          "Numbers 0-10": [
             {
               "word": "zero",
               "translation": "Cero"
@@ -157,7 +157,7 @@
               "translation": "Diez"
             }
           ],
-          "PERSONAL INFORMATION 1": [
+          "Perfonal information 1": [
             {
               "word": "email address",
               "translation": "Correo electrónico"
@@ -175,7 +175,7 @@
               "translation": "Primer Nombre"
             }
           ],
-          "COUNTRIES": [
+          "Countries": [
             {
               "word": "Brazil",
               "translation": "Brasil"
@@ -209,7 +209,7 @@
               "translation": "Estados Unidos"
             }
           ],
-          "NUMBERS 11-100": [
+          "Numbers 11-100": [
             {
               "word": "eleven",
               "translation": "Once"
@@ -571,7 +571,7 @@
               "translation": "Cien"
             }
           ],
-          "PERSONAL INFORMATION 2": [
+          "Personal information 2": [
             {
               "word": "address",
               "translation": "Dirección"
@@ -601,7 +601,7 @@
               "translation": "Código postal"
             }
           ],
-          "TECHNOLOGY": [
+          "Technology": [
             {
               "word": "alarm clock",
               "translation": "Reloj despertador"
@@ -643,7 +643,7 @@
               "translation": "Reloj"
             }
           ],
-          "MONTHS": [
+          "Months": [
             {
               "word": "January",
               "translation": "Enero"
@@ -693,7 +693,7 @@
               "translation": "Diciembre"
             }
           ],
-          "ORDINAL NUMBERS": [
+          "Ordinal Numbers": [
             {
               "word": "first",
               "translation": "Primero"
@@ -819,7 +819,7 @@
               "translation": "Trigésimo primero"
             }
           ],
-          "SNACKS AND DRINKS": [
+          "Snacks and Drinks": [
             {
               "word": "black coffee",
               "translation": "Café negro"
@@ -869,7 +869,7 @@
               "translation": "Agua"
             }
           ],
-          "ROOMS": [
+          "Rooms": [
             {
               "word": "bathroom",
               "translation": "Baño"
@@ -887,7 +887,7 @@
               "translation": "Sala"
             }
           ],
-          "FURNITURE": [
+          "Furniture": [
             {
               "word": "bed",
               "translation": "Cama"
@@ -913,7 +913,7 @@
               "translation": "Ventana"
             }
           ],
-          "FAMILY": [
+          "Family": [
             {
               "word": "brother",
               "translation": "Hermano"
@@ -959,7 +959,7 @@
               "translation": "Hijo"
             }
           ],
-          "DAILY ROUTINES": [
+          "Daily Routines": [
             {
               "word": "finish class",
               "translation": "Terminar clase"
@@ -1021,7 +1021,7 @@
               "translation": "Despertarse"
             }
           ],
-          "SPORTS AND EXERCISE": [
+          "Sports and Exercise": [
             {
               "word": "exercise",
               "translation": "Ejercicio"
@@ -1059,7 +1059,7 @@
               "translation": "Pasear a tu perro"
             }
           ],
-          "VERBS AND PREPOSITIONS": [
+          "Verbs and prepositions": [
             {
               "word": "come from",
               "translation": "Venir de"
@@ -1089,7 +1089,7 @@
               "translation": "Trabajar en"
             }
           ],
-          "ADJECTIVES": [
+          "Adjectives": [
             {
               "word": "boring",
               "translation": "Aburrido"
@@ -1131,7 +1131,7 @@
               "translation": "Incorrecto"
             }
           ],
-          "FAMILY MEMBERS 2": [
+          "Family members 2": [
             {
               "word": "mother-in-law",
               "translation": "suegra"
@@ -1181,7 +1181,7 @@
               "translation": "hermanastra"
             }
           ],
-          "POSESSIVE ADJECTIVES": [
+          "Possessive Adjectives": [
             {
               "word": "My",
               "translation": "Mi"
@@ -1211,7 +1211,7 @@
               "translation": "Su (ellos)"
             }
           ],
-          "PERSONAL PRONOUNS": [
+          "Personal Pronouns": [
             {
               "word": "I",
               "translation": "Yo"
