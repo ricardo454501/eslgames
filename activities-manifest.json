@@ -75,6 +75,14 @@
       "bankType": "pairs",
       "usesTranslation": true,
       "enabled": true
+    },
+     {
+      "id": "vocabulary-competition",
+      "title": "Vocabulary Competition",
+      "file": "Vocabulary Competition.html",
+      "bankType": "pairs",
+      "usesTranslation": true,
+      "enabled": true
     }
   ]
 }
