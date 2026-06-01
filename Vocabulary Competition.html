@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f2a5f" />
+  <script src="activity-bank-helper.js?v=20260520-syncfix"></script>
+  <title>Vocabulary Competition</title>
+  <style>
+    :root{
+      --vh:100dvh; --ink:#0b1736; --muted:#61708d; --white:#fff;
+      --blue:#2563eb; --blue2:#1d4ed8; --cyan:#06b6d4; --green:#16a34a;
+      --orange:#f59e0b; --red:#ef4444; --violet:#7c3aed;
+      --card:#ffffff; --soft:#eff6ff; --line:#bfdbfe; --shadow:0 8px 20px rgba(15,23,42,.13);
+      --r:24px; --touch:58px;
+    }
+    *{box-sizing:border-box}
+    html,body{width:100%;height:100%;margin:0;overflow:hidden;color:var(--ink);font-family:Arial,"Arial Rounded MT Bold",Helvetica,sans-serif;touch-action:manipulation;-webkit-text-size-adjust:100%}
+    body{height:var(--vh);background:#0f2a5f}
+    button,input,textarea,select{font:inherit}
+    button{border:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+    .hidden,[hidden]{display:none!important}.app{width:100vw;height:var(--vh);display:grid;grid-template-rows:1fr;overflow:hidden;padding:12px}
+    .btn{min-height:var(--touch);border-radius:18px;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;font-weight:1000;padding:10px 14px;border:2px solid rgba(255,255,255,.2);transition:transform .12s ease,opacity .12s ease;box-shadow:none}.btn:active,.btn.press{transform:scale(.96)}.btn.small{min-height:44px;padding:7px 11px;font-size:.92rem}.btn.green{background:linear-gradient(135deg,#22c55e,#15803d)}.btn.red{background:linear-gradient(135deg,#ef4444,#b91c1c)}.btn.dark{background:linear-gradient(135deg,#334155,#0f172a)}.btn.yellow{background:linear-gradient(135deg,#f59e0b,#b45309)}.btn.purple{background:linear-gradient(135deg,#8b5cf6,#5b21b6)}.btn.white{background:#fff;color:#1e40af;border-color:#bfdbfe}.btn:disabled{opacity:.5;cursor:not-allowed}
+    .menu-fab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:45;width:62px;min-height:126px;border-radius:0 24px 24px 0;background:linear-gradient(180deg,#2563eb,#0f2a5f);color:#fff;border:2px solid rgba(255,255,255,.5);border-left:0;font-weight:1000;box-shadow:none}
+    .home-fab{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:120;width:62px;height:62px;border-radius:22px;background:linear-gradient(135deg,#f59e0b,#ef4444);display:grid;place-items:center;color:#fff;text-decoration:none;border:2px solid rgba(255,255,255,.75);box-shadow:var(--shadow)}.home-fab svg{width:34px;height:34px;fill:currentColor}.home-fab:active{transform:scale(.96)}.home-fab:hover{filter:brightness(1.05)}
+    .drawer{position:fixed;z-index:60;left:0;top:0;bottom:0;width:min(430px,94vw);background:#f8fbff;border-right:3px solid #93c5fd;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:auto;transform:translateX(-106%);transition:transform .22s ease;box-shadow:none}.drawer.open{transform:translateX(0)}
+    .drawer-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:2px dashed #bfdbfe;padding-bottom:10px}.drawer h2{margin:0;color:#1e40af;font-size:1.45rem}.close-btn{width:48px;height:48px;border-radius:999px;background:#0f2a5f;color:white;font-size:1.5rem;font-weight:1000}.drawer-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.drawer-info,.notice{border:2px solid #bfdbfe;border-radius:18px;background:#eff6ff;color:#1e3a8a;padding:10px;font-weight:900;line-height:1.3}
+    .arena-root{height:100%;min-height:0;display:grid;grid-template-rows:minmax(0,1fr);border:2px solid rgba(255,255,255,.42);border-radius:30px;background:linear-gradient(135deg,rgba(14,165,233,.34),rgba(124,58,237,.28) 48%,rgba(245,158,11,.22));padding:12px;overflow:hidden}.hud{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.pill{min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:8px 13px;border-radius:999px;background:#fff;color:#0f3e99;border:2px solid rgba(14,165,233,.45);font-weight:1000;white-space:nowrap;font-size:clamp(.82rem,1.22vmin,1.08rem)}
+    .empty-state{height:100%;display:grid;place-items:center;text-align:center;color:#fff;padding:30px;border-radius:28px;background:linear-gradient(135deg,rgba(29,78,216,.88),rgba(8,145,178,.75),rgba(124,58,237,.74));border:2px solid rgba(255,255,255,.55)}.empty-state h1{font-size:clamp(2rem,4vmin,4.5rem);line-height:.98;margin:0 0 10px}.empty-state p{font-size:clamp(1rem,1.8vmin,1.7rem);font-weight:900;max-width:980px;margin:0 auto;color:#f8fafc}
+    .players{min-height:0;min-width:0;display:grid;gap:12px;overflow:hidden}.players.one{grid-template-columns:minmax(0,1fr)}.players.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.player-card{min-height:0;min-width:0;background:#ffffff;border:3px solid rgba(255,255,255,.95);border-radius:28px;padding:12px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:10px;overflow:hidden;position:relative;box-shadow:none}.player-card.p1{outline:3px solid rgba(37,99,235,.8)}.player-card.p2{outline:3px solid rgba(22,163,74,.78)}.player-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border-radius:20px;background:linear-gradient(135deg,#1d4ed8,#0891b2);border:2px solid rgba(255,255,255,.48);color:#fff}.p2 .player-head{background:linear-gradient(135deg,#15803d,#0d9488)}.player-head h2{margin:0;font-size:clamp(1.2rem,2vmin,2rem)}.player-head small{display:block;margin-top:2px;color:#e0f2fe;font-weight:900;font-size:clamp(.8rem,1.15vmin,1.05rem);max-width:60ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.game-host{min-height:0;overflow:auto;border-radius:24px;background:#dbeafe;border:3px solid rgba(37,99,235,.72);padding:12px;display:grid;align-content:center;justify-items:center;text-align:center;gap:14px}.game-host h3{font-size:clamp(1.8rem,4vmin,4rem);margin:0;color:#0f172a}.game-host p{font-size:clamp(1rem,1.6vmin,1.35rem);font-weight:900;margin:0;color:#334155}.engine-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.option-grid{width:min(780px,100%);display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}.option-btn{min-height:70px;border-radius:18px;background:#fff;border:3px solid #93c5fd;color:#0f172a;font-weight:1000;font-size:clamp(1rem,1.8vmin,1.35rem)}.option-btn.good{background:#16a34a;color:#fff;border-color:#86efac}.option-btn.bad{background:#e11d48;color:#fff;border-color:#fecdd3}.answer-input{width:min(560px,100%);min-height:64px;border:3px solid #93c5fd;border-radius:18px;padding:12px 16px;font-size:1.2rem;font-weight:900;text-align:center}.round-message{position:absolute;inset:0;z-index:24;display:none;align-items:center;justify-content:center;padding:18px;border-radius:26px;background:rgba(15,23,42,.33);font-weight:1000}.round-message.show{display:flex}.round-dialog{width:min(510px,92%);min-height:160px;display:grid;place-items:center;gap:15px;padding:24px 18px;border-radius:24px;border:3px solid rgba(255,255,255,.8);text-align:center;color:#052e16;background:linear-gradient(135deg,#dcfce7,#86efac);box-shadow:0 16px 38px rgba(15,23,42,.25)}.round-message.bad .round-dialog{color:#fff;background:linear-gradient(135deg,#ef4444,#f97316)}.round-message .msg-text{display:block;font-size:clamp(1.18rem,2.4vmin,1.7rem);line-height:1.25}.round-message .next-btn{min-width:min(280px,100%)}.life-toast{position:absolute;inset:0;z-index:23;display:none;align-items:center;justify-content:center;pointer-events:none}.life-toast.show{display:flex}.life-toast-card{display:flex;align-items:center;gap:12px;min-width:min(320px,86%);justify-content:center;padding:18px 20px;border-radius:24px;background:linear-gradient(135deg,#fff1f2,#fecdd3);border:3px solid #fb7185;color:#9f1239;box-shadow:0 14px 34px rgba(15,23,42,.2);font-size:clamp(1.2rem,2.7vmin,1.9rem);font-weight:1000}.life-toast-heart{font-size:clamp(2rem,4vmin,2.8rem)}.final-card{position:absolute;inset:12px;z-index:25;display:grid;place-items:center;text-align:center;border-radius:26px;background:linear-gradient(135deg,rgba(15,42,95,.95),rgba(37,99,235,.9),rgba(245,158,11,.86));color:#fff;border:2px solid rgba(255,255,255,.65);padding:24px}.final-card h2{font-size:clamp(2rem,5vmin,5.4rem);margin:0 0 8px}.final-card p{font-size:clamp(1rem,1.8vmin,1.7rem);font-weight:900;margin:0 0 18px;color:#f8fafc}.final-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    .setup-overlay{position:fixed;z-index:80;inset:0;background:linear-gradient(135deg,#e0f2fe,#eff6ff 52%,#eef2ff);display:none;overflow:auto;-webkit-overflow-scrolling:touch;padding:12px;overscroll-behavior:contain}.setup-overlay.show{display:grid;place-items:start center}.setup-card{width:min(1660px,calc(100vw - 24px));min-height:calc(var(--vh) - 24px);background:#fff;border:3px solid #93c5fd;border-radius:30px;padding:14px;display:grid;grid-template-rows:auto minmax(0,1fr);gap:12px;box-shadow:none}.setup-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;border-radius:24px;background:linear-gradient(135deg,#1d4ed8,#0f2a5f);color:#fff}.setup-top h1{margin:0;font-size:clamp(1.55rem,2.75vmin,3rem);line-height:1}.setup-top p{margin:4px 0 0;color:#dbeafe;font-weight:900;font-size:clamp(.82rem,1.15vmin,1.1rem)}.setup-grid{min-height:0;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(360px,.55fr);gap:12px;align-items:start}.setup-panel{min-height:0;background:#f8fafc;border:2px solid #dbeafe;border-radius:24px;padding:12px;display:grid;gap:10px;align-content:start;overflow:hidden}.setup-panel h3{margin:0;color:#1e40af;font-size:clamp(1.08rem,1.55vmin,1.45rem)}.action-row{display:flex;gap:8px;flex-wrap:wrap}.level-list{min-height:0;overflow:auto;display:grid;gap:8px;padding-right:2px}.level-card,.category-card{border:2px solid #bfdbfe;border-radius:20px;background:#fff;overflow:hidden}.level-head,.cat-head{width:100%;min-height:62px;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;text-align:left;padding:10px 12px;background:linear-gradient(135deg,#dbeafe,#eef2ff);color:#1e40af;font-weight:1000}.cat-head{background:#fff;color:#0f172a;border-bottom:1px solid #dbeafe}.arrow{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;background:#fff;border:2px solid #bfdbfe;font-size:1.25rem}.level-card.open>.level-head .arrow,.category-card.open>.cat-head .arrow{transform:rotate(90deg)}.level-title,.cat-title{display:grid;gap:2px;min-width:0}.level-title strong,.cat-title strong{font-size:clamp(1rem,1.35vmin,1.28rem);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.level-title small,.cat-title small{font-size:.82rem;color:#64748b;font-weight:900}.select-box{display:flex;align-items:center;gap:8px;font-size:.86rem;color:#1e3a8a;background:#eff6ff;border:2px solid #bfdbfe;border-radius:999px;padding:8px 10px;white-space:nowrap}.select-box input,.word-chip input{width:22px;height:22px}.cat-list{display:grid;gap:8px;padding:8px;background:#f8fafc}.word-panel{padding:8px;background:#fff;display:grid;gap:8px}.word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:7px}.word-chip{min-height:47px;display:flex;align-items:center;gap:8px;border:2px solid #dbeafe;background:#f8fafc;border-radius:999px;padding:8px 10px;font-weight:1000;color:#0f172a;overflow:hidden}.word-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.word-chip.on{background:#dcfce7;border-color:#86efac;color:#166534}.config-grid{display:grid;gap:10px;align-content:start}.field{display:grid;gap:6px;color:#1e40af;font-weight:1000}.field input,.field select,.field textarea,.editor-textarea{width:100%;min-height:var(--touch);border:2px solid #bfdbfe;border-radius:17px;background:#fff;color:#0f172a;padding:10px;font-weight:900;outline:0}.field textarea{min-height:126px;resize:vertical}.check{display:flex;align-items:center;gap:10px;min-height:var(--touch);padding:10px;border:2px solid #bfdbfe;border-radius:17px;background:#fff;color:#0f172a;font-weight:1000}.check input{width:22px;height:22px}.summary{border:2px solid #bfdbfe;border-radius:17px;background:#eff6ff;color:#1e3a8a;padding:10px;font-weight:1000;line-height:1.25}.status{border:2px solid #fde68a;background:#fef9c3;color:#713f12;border-radius:16px;padding:9px;font-weight:1000;min-height:42px}.status:empty{display:none}.editor-panel{display:none;border:2px solid #ddd6fe;background:#faf5ff;border-radius:22px;padding:10px;gap:10px}.editor-panel.show{display:grid}.editor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.editor-card{background:#fff;border:2px solid #ddd6fe;border-radius:18px;padding:10px;display:grid;gap:8px}.editor-card h4{margin:0;color:#5b21b6}.editor-textarea{min-height:210px;font-family:Consolas,Monaco,monospace;font-size:.9rem;line-height:1.35;resize:vertical;text-align:left;white-space:pre;overflow:auto}
+    /* ===== Motor: Vocabulary Competition · Drag and Drop optimizado ===== */
+    .game-host.vc-host{align-content:stretch;justify-items:stretch;text-align:left;padding:10px;overflow:hidden;background:linear-gradient(180deg,#dbeafe,#eef6ff);contain:layout paint}
+    .vc-round{width:100%;height:100%;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px}
+    .vc-instruction{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:7px 10px;border:2px solid #bfdbfe;border-radius:16px;background:#fff;color:#1e3a8a;font-size:clamp(.8rem,1.18vmin,1rem);font-weight:1000}
+    .vc-instruction strong{font-size:clamp(.9rem,1.35vmin,1.08rem);color:#0f2a5f}
+    .vc-counter{display:inline-flex;align-items:center;min-height:32px;border-radius:999px;background:#eff6ff;border:2px solid #93c5fd;padding:4px 10px;white-space:nowrap}
+    /* CSS estático: no se mide la pantalla durante el juego. */
+    .vc-board{--vc-card-min:clamp(102px,13vw,126px);--vc-card-width:clamp(150px,22vw,218px);--vc-row-gap:clamp(6px,1.05vmin,12px);--vc-round-size:10;position:relative;height:100%;min-height:0;display:grid;grid-template-columns:minmax(var(--vc-card-width),1fr) minmax(var(--vc-card-width),1fr);align-items:stretch;padding:4px 0;column-gap:clamp(36px,8vw,108px);overflow:hidden;contain:layout paint;isolation:isolate;touch-action:none}
+    .vc-column{height:100%;min-height:0;display:grid;grid-template-rows:repeat(var(--vc-round-size),minmax(0,1fr));gap:var(--vc-row-gap);position:relative;z-index:2;align-content:stretch}
+    /* Con 5 palabras las tarjetas conservan una altura limitada y el espacio libre se distribuye entre filas. */
+    .vc-board.vc-size-5 .vc-column{grid-template-rows:repeat(5,clamp(62px,10.5vh,100px));align-content:space-evenly}
+    .vc-node{height:100%;min-height:0;display:flex;align-items:stretch;position:relative}
+    .vc-node-left{justify-content:flex-end}.vc-node-right{justify-content:flex-start}
+    .vc-item{position:relative;height:100%;min-height:0;width:fit-content;min-width:var(--vc-card-min);max-width:var(--vc-card-width);padding:clamp(6px,1vh,13px) 12px;border:2px solid #93c5fd;border-radius:14px;background:#fff;color:#0f172a;font-weight:1000;font-size:clamp(.78rem,1.22vmin,1.02rem);display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;text-align:center;line-height:1.14;white-space:normal;word-break:normal;overflow:hidden;overflow-wrap:break-word;touch-action:none;-webkit-user-select:none;user-select:none;z-index:3;box-shadow:0 1px 0 rgba(255,255,255,.75) inset}
+    .vc-text{display:-webkit-box;max-width:100%;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden;white-space:normal;overflow-wrap:break-word;word-break:normal}
+    .vc-left-item{cursor:grab}.vc-left-item:active{cursor:grabbing}
+    .vc-right-item.hover{background:#bfdbfe;border-color:#2563eb;color:#1e3a8a;outline:2px solid #2563eb;box-shadow:none}
+    .vc-item.matched{background:#dcfce7;border-color:#22c55e;color:#166534}
+    .vc-item.revealed{background:#fef3c7;border-color:#f59e0b;color:#92400e}
+    .vc-item.wrong{background:#fee2e2;border-color:#ef4444;color:#991b1b}
+    /* La tarjeta real cruza por encima; no se crea clon ni sombra móvil. */
+    .vc-column.en.drag-front{z-index:8}
+    .vc-left-item.dragging{z-index:20;will-change:transform;transition:none;background:#2563eb;border-color:#1d4ed8;color:#fff;outline:0;box-shadow:none;cursor:grabbing}
+    .vc-feedback{position:absolute;left:50%;top:50%;z-index:5;transform:translate(-50%,-50%) scale(.98);padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.96);border:2px solid #bfdbfe;color:#1e40af;font-weight:1000;font-size:.85rem;opacity:0;pointer-events:none;transition:opacity .12s ease,transform .12s ease;box-shadow:0 5px 12px rgba(15,23,42,.10)}
+    .vc-feedback.show{opacity:1;transform:translate(-50%,-50%) scale(1)}.vc-feedback.error{background:rgba(254,242,242,.98);border-color:#fca5a5;color:#991b1b}.vc-feedback.ok{background:rgba(240,253,244,.98);border-color:#86efac;color:#166534}
+    @media (max-width:1180px){.vc-board{--vc-card-min:clamp(96px,19vw,116px);--vc-card-width:clamp(132px,30vw,194px);column-gap:clamp(28px,8vw,62px)}.vc-item{padding:6px 8px}}
+    @media (max-height:760px){.vc-round{gap:5px}.vc-instruction{padding:5px 8px}.vc-board{--vc-row-gap:4px}.vc-board.vc-size-5 .vc-column{grid-template-rows:repeat(5,clamp(52px,9.5vh,76px))}.vc-item{padding:4px 8px;border-radius:10px;font-size:clamp(.72rem,1.05vmin,.92rem)}}
+
+    .pop{animation:pop .18s ease-out both}.shake{animation:shake .24s ease both}.banner-pop{animation:pop .18s ease-out both}@keyframes pop{0%{transform:scale(.93);opacity:.7}100%{transform:scale(1);opacity:1}}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+    @media (max-width:1180px){.app{padding:8px}.setup-grid{grid-template-columns:1fr}.setup-card{height:auto;overflow:visible}.setup-panel{overflow:visible}.level-list{max-height:none}.players.two{grid-template-columns:1fr}.player-card{min-height:520px}.editor-grid{grid-template-columns:1fr}}
+    @media (max-height:680px){:root{--touch:48px}.app{padding:8px}.arena-root{padding:8px;border-radius:22px}.setup-top p{display:none}.player-card{padding:8px;border-radius:20px}.player-head{padding:7px 9px}.drawer{width:min(360px,94vw)}.level-head,.cat-head{min-height:50px;padding:7px 9px}.word-chip{min-height:42px}.setup-card{border-radius:20px;padding:8px}}
+  </style>
+</head>
+<body>
+  <button class="menu-fab" id="menuBtn" type="button" aria-label="Abrir menú">☰<br>Menú</button>
+  <a class="home-fab" id="homeBtn" href="index.html" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2v8.3a1.5 1.5 0 0 1-1.5 1.5h-4.5v-6h-5v6H5a1.5 1.5 0 0 1-1.5-1.5z"/></svg></a>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head"><h2 id="drawerTitle">🎮 Juego ESL</h2><button class="close-btn" id="drawerClose" type="button">×</button></div>
+    <div class="drawer-info" id="drawerProgress">Sin juego activo</div>
+    <div class="drawer-info" id="drawerLives">Vidas: —</div>
+    <div class="drawer-info" id="drawerScore">Puntaje: —</div>
+    <div class="drawer-grid">
+      <button class="btn green" id="openConfigBtn" type="button">Configurar</button>
+      <button class="btn" id="restartBtn" type="button">Reiniciar</button>
+      <button class="btn dark" id="repeatBtn" type="button">Repetir ronda</button>
+      <button class="btn red" id="revealBtn" type="button">Revelar</button>
+      <button class="btn" id="fullscreenBtn" type="button">Pantalla completa</button>
+      <button class="btn dark" id="soundBtn" type="button">Sonido: ON</button>
+    </div>
+    <div class="notice">Vocabulary Competition: arrastra cada tarjeta en inglés sobre su traducción en español.</div>
+  </aside>
+
+  <main class="app">
+    <section class="arena-root" id="arenaRoot"></section>
+  </main>
+
+  <section class="setup-overlay show" id="setupOverlay" aria-hidden="false">
+    <div class="setup-card">
+      <div class="setup-top">
+        <div><h1 id="setupTitle">⚙️ Configuración del juego</h1><p>Banco de pares, competencia individual o por equipos para pantalla interactiva Android.</p></div>
+        <button class="close-btn" id="closeSetupBtn" type="button">×</button>
+      </div>
+      <div class="setup-grid">
+        <section class="setup-panel">
+          <h3>1. Banco de palabras por nivel</h3>
+          <div class="action-row">
+            <button class="btn small" id="selectAllBtn" type="button">Seleccionar todo</button>
+            <button class="btn small dark" id="clearAllBtn" type="button">Limpiar</button>
+            <button class="btn small yellow" id="collapseBtn" type="button">Contraer todo</button>
+            <button class="btn small purple" id="editModeBtn" type="button">✏️ Editor</button>
+          </div>
+          <div class="editor-panel" id="editorPanel">
+            <div class="notice">Formato: <b>Categoría: Pets</b> y debajo <b>dog = perro</b>. En el editor se muestra limpio, sin códigos internos.</div>
+            <div class="editor-grid" id="editorGrid"></div>
+            <div class="action-row"><button class="btn green" id="downloadWordBankBtn" type="button">Descargar WordBank completo</button></div>
+          </div>
+          <div class="level-list" id="levelList"></div>
+        </section>
+        <aside class="setup-panel">
+          <h3>2. Opciones</h3>
+          <div class="config-grid">
+            <label class="field">Número de palabras por ronda
+              <select id="roundSizeSelect"><option value="5">5 palabras</option><option value="10" selected>10 palabras</option></select>
+            </label>
+            <label class="field">Número de rondas
+              <select id="roundCountSelect"><option value="5">5 rondas</option><option value="10" selected>10 rondas</option><option value="infinite">Infinito</option></select>
+            </label>
+            <label class="field">Modo de jugadores
+              <select id="playerMode"><option value="1">1 jugador</option><option value="2">2 jugadores · misma lista</option><option value="2-different">2 jugadores · lista diferente</option></select>
+            </label>
+            <label class="field hidden" id="twoPlayerWinModeField">Criterio de victoria para 2 jugadores
+              <select id="twoPlayerWinMode"><option value="first" selected>Primero en alcanzar el objetivo</option><option value="rounds">Ganadores por rondas</option></select>
+            </label>
+            <label class="field">Vidas del juego
+              <select id="livesSelect"><option value="1">1 vida</option><option value="2">2 vidas</option><option value="3" selected>3 vidas</option><option value="4">4 vidas</option><option value="5">5 vidas</option></select>
+            </label>
+            <label class="field">Errores permitidos antes de perder una vida
+              <select id="allowedErrorsSelect"><option value="0">0 errores</option><option value="1">1 error</option><option value="2">2 errores</option><option value="3" selected>3 errores</option><option value="4">4 errores</option><option value="5">5 errores</option></select>
+            </label>
+            <label class="field">Cuenta atrás por tablero
+              <select id="countdownSelect"><option value="60" selected>1 minuto</option><option value="120">2 minutos</option><option value="180">3 minutos</option><option value="0">Sin tiempo</option></select>
+            </label>
+            <label class="check"><input type="checkbox" id="soundEnabled" checked> Activar sonido</label>
+            <label class="field">Pares personalizados
+              <textarea id="customWords" placeholder="Un par por línea:&#10;apple = manzana&#10;dog = perro&#10;school = escuela"></textarea>
+            </label>
+            <div class="summary" id="setupSummary">Seleccionadas: 0 · Personalizadas: 0 · Se jugarán: 0 pares</div>
+            <div class="summary" id="splitSummary">Cada jugador: 0 pares · Tableros: 0</div>
+            <div class="status" id="setupStatus"></div>
+            <button class="btn green" id="startGameBtn" type="button">Iniciar juego</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+<script>
+(() => {
+  "use strict";
+
+  /* =========================================================
+     CAMBIAR AQUÍ PARA CADA HTML NUEVO
+     El id debe coincidir con activities-manifest.json y word-bank-esl-english.json > activities.
+     ========================================================= */
+  const ACTIVITY_CONFIG = {
+    id: "vocabulary-competition",
+    title: "Vocabulary Competition",
+    file: "Vocabulary Competition.html",
+    bankType: "pairs",
+    usesTranslation: true,
+    entryFormat: "word=translation"
+  };
+
+  /* =========================================================
+     MOTOR DEL JUEGO: REEMPLAZA SOLO ESTE BLOQUE EN CADA JUEGO
+     La plataforma entrega player.current = { word, translation, level, category, raw }.
+     Usa api.finish(player, true|false), api.next(player), api.beep(), api.vibrate().
+     ========================================================= */
+  const GAME_ENGINE = {
+    renderRound(player, host, api) {
+      const entries = api.getRoundEntries(player);
+      host.classList.add("vc-host");
+      if (!entries.length) {
+        host.innerHTML = "<h3>No hay pares disponibles</h3><p>Agrega pares con el formato apple = manzana.</p>";
+        return;
+      }
+
+      const ids = entries.map((_, i) => String(i));
+      if (!Array.isArray(player.boardRightOrder) || player.boardRightOrder.length !== ids.length) {
+        player.boardRightOrder = shuffle(ids);
+        if (ids.length > 1 && player.boardRightOrder.every((id, i) => id === ids[i])) {
+          player.boardRightOrder.push(player.boardRightOrder.shift());
+        }
+      }
+      player.boardMatched = player.boardMatched || new Set();
+      player.boardRightMatched = player.boardRightMatched || new Set();
+      player.boardRevealed = player.boardRevealed || new Set();
+      player.boardRightRevealed = player.boardRightRevealed || new Set();
+
+      host.innerHTML = `
+        <section class="vc-round">
+          <div class="vc-instruction">
+            <strong>🖐️ DRAG AND DROP</strong>
+            <span>Arrastra la tarjeta en inglés sobre la tarjeta en español.</span>
+            <span class="vc-counter">✅ <b class="vc-done">${player.boardMatched.size}</b> / ${entries.length}</span>
+          </div>
+          <div class="vc-board ${entries.length === 5 ? "vc-size-5" : ""}">
+            <div class="vc-column en"></div>
+            <div class="vc-column es"></div>
+            <div class="vc-feedback" aria-live="polite"></div>
+          </div>
+        </section>`;
+
+      const board = host.querySelector(".vc-board");
+      board.style.setProperty("--vc-round-size", String(entries.length));
+      const leftColumn = board.querySelector(".vc-column.en");
+      const rightColumn = board.querySelector(".vc-column.es");
+      const doneLabel = host.querySelector(".vc-done");
+      const feedback = board.querySelector(".vc-feedback");
+      const leftMap = new Map();
+      const rightMap = new Map();
+      let feedbackTimer = null;
+
+      function isLeftMatched(id) { return player.boardMatched.has(String(id)); }
+      function isRightMatched(id) { return player.boardRightMatched.has(String(id)); }
+      function isLeftRevealed(id) { return player.boardRevealed.has(String(id)); }
+      function isRightRevealed(id) { return player.boardRightRevealed.has(String(id)); }
+      function pairFits(leftId, rightId) {
+        return entriesShareMeaning(entries[Number(leftId)], entries[Number(rightId)]);
+      }
+      function createItemButton(cls, id, text) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `vc-item ${cls}`;
+        btn.dataset.id = id;
+        const label = document.createElement("span");
+        label.className = "vc-text";
+        label.textContent = text;
+        btn.appendChild(label);
+        return btn;
+      }
+      function appendColumnRow(column, side, id, text) {
+        const wrap = document.createElement("div");
+        wrap.className = `vc-node vc-node-${side}`;
+        const btn = createItemButton(`vc-${side}-item`, id, text);
+        wrap.appendChild(btn);
+        column.appendChild(wrap);
+        (side === "left" ? leftMap : rightMap).set(id, btn);
+      }
+
+      ids.forEach(id => appendColumnRow(leftColumn, "left", id, entries[Number(id)].word));
+      player.boardRightOrder.forEach(id => appendColumnRow(rightColumn, "right", id, entries[Number(id)].translation));
+
+      function notify(text, kind) {
+        clearTimeout(feedbackTimer);
+        feedback.textContent = text;
+        feedback.className = `vc-feedback show ${kind || ""}`;
+        feedbackTimer = setTimeout(() => feedback.className = "vc-feedback", 700);
+      }
+      function repaint() {
+        ids.forEach(id => {
+          const left = leftMap.get(id), right = rightMap.get(id);
+          const leftGood = isLeftMatched(id), rightGood = isRightMatched(id);
+          const leftShown = isLeftRevealed(id) && !leftGood, rightShown = isRightRevealed(id) && !rightGood;
+          left.classList.toggle("matched", leftGood);
+          right.classList.toggle("matched", rightGood);
+          left.classList.toggle("revealed", leftShown);
+          right.classList.toggle("revealed", rightShown);
+          left.disabled = leftGood || leftShown || player.roundDone;
+          right.disabled = rightGood || rightShown || player.roundDone;
+        });
+        doneLabel.textContent = String(player.boardMatched.size);
+      }
+      function wrongFlash(leftId, rightId) {
+        const targets = [leftMap.get(leftId), rightMap.get(rightId)];
+        targets.forEach(el => el && el.classList.add("wrong"));
+        setTimeout(() => targets.forEach(el => el && el.classList.remove("wrong")), 300);
+      }
+      function tryMatch(leftId, rightId) {
+        if (player.roundDone || !leftId || !rightId || isLeftMatched(leftId) || isRightMatched(rightId) || isRightRevealed(rightId)) return;
+        if (pairFits(leftId, rightId)) {
+          player.boardMatched.add(leftId);
+          player.boardRightMatched.add(rightId);
+          api.correctPair(player);
+          repaint();
+          notify("¡Correcto!", "ok");
+          if (player.boardMatched.size === entries.length) api.completeBoard(player);
+        } else {
+          wrongFlash(leftId, rightId);
+          repaint();
+          const result = api.wrongAttempt(player);
+          if (result && result.notice && !result.roundEnded) notify(result.notice, "error");
+        }
+      }
+
+      /* Un tablero = un puntero activo y un RAF; en dos jugadores los tableros trabajan de forma independiente. */
+      let pointerId = -1;
+      let sourceId = "";
+      let startX = 0, startY = 0;
+      let sourceEl = null;
+      let activeHover = null;
+      let targetZones = [];
+      let frame = 0;
+      let moved = false;
+      let pendingX = 0, pendingY = 0, pendingDX = 0, pendingDY = 0;
+      let hasPendingMove = false;
+
+      function refreshTargetZones() {
+        const zones = [];
+        rightMap.forEach((el, id) => {
+          if (isRightMatched(id) || isRightRevealed(id) || player.roundDone) return;
+          const r = el.getBoundingClientRect();
+          zones.push({ id, el, left:r.left, right:r.right, top:r.top, bottom:r.bottom });
+        });
+        targetZones = zones;
+      }
+      function targetAt(x, y) {
+        for (let i = 0; i < targetZones.length; i++) {
+          const zone = targetZones[i];
+          if (x >= zone.left && x <= zone.right && y >= zone.top && y <= zone.bottom) return zone;
+        }
+        return null;
+      }
+      function setHover(zone) {
+        const next = zone ? zone.el : null;
+        if (next === activeHover) return;
+        if (activeHover) activeHover.classList.remove("hover");
+        activeHover = next;
+        if (activeHover) activeHover.classList.add("hover");
+      }
+      function clearDragVisuals() {
+        if (frame) cancelAnimationFrame(frame);
+        frame = 0;
+        hasPendingMove = false;
+        leftColumn.classList.remove("drag-front");
+        if (sourceEl) {
+          sourceEl.classList.remove("dragging");
+          sourceEl.style.transform = "";
+        }
+        sourceEl = null;
+        setHover(null);
+      }
+      function paintDragFrame() {
+        frame = 0;
+        if (pointerId < 0 || !sourceEl || !hasPendingMove) return;
+        hasPendingMove = false;
+        sourceEl.style.transform = `translate3d(${pendingDX}px,${pendingDY}px,0)`;
+        setHover(targetAt(pendingX, pendingY));
+      }
+      function dragPointerDown(ev) {
+        if (pointerId >= 0 || player.roundDone || (ev.pointerType === "mouse" && ev.button !== 0)) return;
+        const left = ev.target.closest && ev.target.closest(".vc-left-item");
+        if (!left || !board.contains(left) || left.disabled) return;
+        ev.preventDefault();
+        const id = left.dataset.id;
+        if (isLeftMatched(id) || isLeftRevealed(id)) return;
+        pointerId = ev.pointerId;
+        sourceId = id;
+        startX = ev.clientX;
+        startY = ev.clientY;
+        moved = false;
+        sourceEl = left;
+        refreshTargetZones();
+        if (board.setPointerCapture) { try { board.setPointerCapture(pointerId); } catch (e) {} }
+      }
+      function dragMove(ev) {
+        if (pointerId !== ev.pointerId) return;
+        const dx = Math.round(ev.clientX - startX);
+        const dy = Math.round(ev.clientY - startY);
+        if (!moved && Math.abs(dx) + Math.abs(dy) <= 8) return;
+        if (!moved) {
+          moved = true;
+          leftColumn.classList.add("drag-front");
+          sourceEl.classList.add("dragging");
+        }
+        pendingX = ev.clientX; pendingY = ev.clientY; pendingDX = dx; pendingDY = dy;
+        hasPendingMove = true;
+        if (!frame) frame = requestAnimationFrame(paintDragFrame);
+      }
+      function dragEnd(ev) {
+        if (pointerId !== ev.pointerId) return;
+        const id = sourceId;
+        const captured = pointerId;
+        const zone = moved ? targetAt(ev.clientX, ev.clientY) : null;
+        pointerId = -1;
+        sourceId = "";
+        if (board.releasePointerCapture) { try { board.releasePointerCapture(captured); } catch (e) {} }
+        clearDragVisuals();
+        if (zone) {
+          tryMatch(id, zone.id);
+          refreshTargetZones();
+        }
+      }
+
+      refreshTargetZones();
+      board.addEventListener("pointerdown", dragPointerDown);
+      board.addEventListener("pointermove", dragMove, {passive:true});
+      board.addEventListener("pointerup", dragEnd);
+      board.addEventListener("pointercancel", dragEnd);
+      host.__vcRedraw = refreshTargetZones;
+      repaint();
+    },
+    reveal(player, api) {
+      const remaining = api.getRoundEntries(player).filter((_, i) => !player.boardMatched.has(String(i)));
+      return remaining.map(entry => `${entry.word} = ${entry.translation}`).join(" · ");
+    },
+    revealRound(player, api) { api.revealBoard(player); },
+    timeout(player, api) { api.timeoutBoard(player); },
+    resetRound(player, api) { api.renderPlayer(player); }
+  };
+
+  const LEVELS = ["Inglés I", "Inglés II", "Inglés III", "Inglés IV"];
+  const STORAGE_FULL_BANK = "ESL_WORD_BANK_PLATFORM_SNAPSHOT";
+  const STORAGE_ACTIVITY_PREFIX = "ESL_ACTIVITY_BANK_";
+  const EMBEDDED_BANK = {
+    "Inglés I": { "Example": [
+      {word:"apple", translation:"manzana"}, {word:"book", translation:"libro"},
+      {word:"dog", translation:"perro"}, {word:"cat", translation:"gato"},
+      {word:"house", translation:"casa"}, {word:"school", translation:"escuela"},
+      {word:"water", translation:"agua"}, {word:"red", translation:"rojo"},
+      {word:"mother", translation:"madre"}, {word:"friend", translation:"amigo"}
+    ] },
+    "Inglés II": {}, "Inglés III": {}, "Inglés IV": {}
+  };
+
+  const UI = {};
+  const state = {
+    bank: normalizeBank(EMBEDDED_BANK), selected:new Set(), expandedLevels:new Set(), expandedCategories:new Set(), editMode:false,
+    game:null, timer:null, sound:true, audioCtx:null, lastPlaylist:[]
+  };
+
+  const ids = ["menuBtn","drawer","drawerClose","drawerProgress","drawerLives","drawerScore","openConfigBtn","restartBtn","repeatBtn","revealBtn","fullscreenBtn","soundBtn","arenaRoot","setupOverlay","closeSetupBtn","selectAllBtn","clearAllBtn","collapseBtn","editModeBtn","editorPanel","editorGrid","downloadWordBankBtn","levelList","roundSizeSelect","roundCountSelect","playerMode","twoPlayerWinModeField","twoPlayerWinMode","livesSelect","allowedErrorsSelect","countdownSelect","soundEnabled","customWords","setupSummary","splitSummary","setupStatus","homeBtn","drawerTitle","setupTitle","startGameBtn"];
+  function $(id){ return document.getElementById(id); }
+  function cacheDom(){ ids.forEach(id=>UI[id]=$(id)); }
+  function updateViewport(){ const h=Math.round((window.visualViewport&&window.visualViewport.height)||window.innerHeight||720); document.documentElement.style.setProperty("--vh", h+"px"); }
+  function escapeHtml(v){ return String(v??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch])); }
+  function normalizeText(v){ return String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim().toLowerCase().replace(/\s+/g," "); }
+  function cleanCategoryName(v){ const text=String(v||"").trim().replace(/\s+/g," " ); const marker="__WB_LEVEL__"; const i=text.indexOf(marker); if(i>0) return text.slice(i+marker.length).trim()||"General"; return text.replace(/^\s*(?:English|Ingl[eé]s)\s*(?:I|II|III|IV|[1-4])\s*[:\-–—|]\s*/i,"") || "General"; }
+  function toSpanishLevel(level){ const s=String(level||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); if(/iv|4/.test(s)) return "Inglés IV"; if(/iii|3/.test(s)) return "Inglés III"; if(/ii|2/.test(s)) return "Inglés II"; return "Inglés I"; }
+  function getWord(entry){ if(typeof entry==="string"){ const m=entry.match(/^(.+?)\s*=\s*(.+)$/); return (m?m[1]:entry).trim(); } if(entry&&typeof entry==="object") return String(entry.word||entry.en||entry.english||entry.term||entry.text||"").trim(); return String(entry||"").trim(); }
+  function getTranslation(entry){ if(entry&&typeof entry==="object") return String(entry.translation||entry.es||entry.spanish||entry.meaning||"").trim(); const m=String(entry||"").match(/^(.+?)\s*=\s*(.+)$/); return m ? m[2].trim() : ""; }
+  function normalizeEntry(entry){ const word=getWord(entry); if(!word) return null; const translation=getTranslation(entry); return translation ? { word, translation } : word; }
+  function entryToObject(entry, level, category){ return { word:getWord(entry), translation:getTranslation(entry), level, category, raw:entry }; }
+  function normalizeBank(raw){ const out={}; LEVELS.forEach(l=>out[l]={}); Object.entries(raw||{}).forEach(([level,cats])=>{ const lv=toSpanishLevel(level); if(!out[lv]) out[lv]={}; Object.entries(cats||{}).forEach(([cat,entries])=>{ const arr=(Array.isArray(entries)?entries:[]).map(normalizeEntry).filter(Boolean); if(arr.length) out[lv][cleanCategoryName(cat)] = uniqueEntries(arr); }); }); return out; }
+  function uniqueEntries(arr){ const seen=new Set(), out=[]; arr.forEach(e=>{ const key=normalizeText(getWord(e)); if(key&&!seen.has(key)){ seen.add(key); out.push(e); } }); return out; }
+  function wordKey(level,cat,index){ return level+"||"+cat+"||"+index; }
+  function catKey(level,cat){ return level+"||"+cat; }
+  function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function formatTime(sec){ sec=Math.max(0,sec|0); return String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0"); }
+
+  function snapshotToBank(snapshot){
+    if(!snapshot) return null;
+    if(snapshot.activities && snapshot.activities[ACTIVITY_CONFIG.id]) snapshot=snapshot.activities[ACTIVITY_CONFIG.id];
+    if(snapshot.levels) return normalizeBank(snapshot.levels);
+    if(LEVELS.some(l=>snapshot[l])) return normalizeBank(snapshot);
+    return null;
+  }
+  function currentActivityToSnapshot(){
+    return { title:ACTIVITY_CONFIG.title, file:ACTIVITY_CONFIG.file, bankType:ACTIVITY_CONFIG.bankType, usesTranslation:ACTIVITY_CONFIG.usesTranslation, entryFormat:ACTIVITY_CONFIG.entryFormat, levels:state.bank };
+  }
+  function defaultFullBank(){ return { app:"ESL English", schema:"esl-word-bank-v3", updatedAt:new Date().toISOString(), levels:LEVELS.slice(), activities:{}, notes:"Cada actividad tiene su propio banco independiente." }; }
+  function activityStorageIds(){
+    const ids=[ACTIVITY_CONFIG.id].concat(Array.isArray(ACTIVITY_CONFIG.aliases)?ACTIVITY_CONFIG.aliases:[]);
+    return [...new Set(ids.filter(Boolean))];
+  }
+  function readJsonFromStorage(key){
+    try{
+      const raw=localStorage.getItem(key);
+      if(!raw) return null;
+      const json=JSON.parse(raw);
+      return json && typeof json === "object" ? json : null;
+    }catch(e){ return null; }
+  }
+  function cloneFullBank(value){
+    try{ return JSON.parse(JSON.stringify(value || defaultFullBank())); }catch(e){ return defaultFullBank(); }
+  }
+  function applyActivitySnapshotToFull(full,id,snapshot){
+    if(Array.isArray(ACTIVITY_CONFIG.aliases) && ACTIVITY_CONFIG.aliases.includes(id)) id=ACTIVITY_CONFIG.id;
+    if(!id || !snapshot || typeof snapshot !== "object") return;
+    if(!snapshot.levels && !snapshot.bank && !snapshot.wordBank) return;
+    full.activities = full.activities || {};
+    full.activities[id] = snapshot;
+  }
+  function mergeStoredActivitySnapshots(full){
+    const next=cloneFullBank(full);
+    next.activities = next.activities || {};
+    const mergeFull=(bank)=>{
+      if(bank && bank.activities && typeof bank.activities === "object"){
+        Object.entries(bank.activities).forEach(([id,snapshot])=>applyActivitySnapshotToFull(next,id,snapshot));
+      }
+    };
+    try{ if(window.ESLBank && typeof window.ESLBank.readLocalBank === "function") mergeFull(window.ESLBank.readLocalBank()); }catch(e){}
+    ["ESL_ENGLISH_WORD_BANKS_V1", STORAGE_FULL_BANK, "ESL_WORD_BANK_FULL", "ESL_ENGLISH_WORD_BANK"].forEach(key=>mergeFull(readJsonFromStorage(key)));
+    try{
+      for(let i=0;i<localStorage.length;i++){
+        const key=localStorage.key(i);
+        if(key && key.startsWith(STORAGE_ACTIVITY_PREFIX)){
+          const id=key.slice(STORAGE_ACTIVITY_PREFIX.length);
+          applyActivitySnapshotToFull(next,id,readJsonFromStorage(key));
+        }
+      }
+    }catch(e){}
+    try{
+      if(window.ESL_ACTIVITY_BANKS){
+        if(window.ESL_ACTIVITY_BANKS.activities) Object.entries(window.ESL_ACTIVITY_BANKS.activities).forEach(([id,snapshot])=>applyActivitySnapshotToFull(next,id,snapshot));
+        Object.entries(window.ESL_ACTIVITY_BANKS).forEach(([id,snapshot])=>{ if(id!=="activities") applyActivitySnapshotToFull(next,id,snapshot); });
+      }
+    }catch(e){}
+    next.updatedAt = new Date().toISOString();
+    next.levels = Array.isArray(next.levels) && next.levels.length ? next.levels : LEVELS.slice();
+    next.schema = next.schema || "esl-word-bank-v3";
+    next.app = next.app || "ESL English";
+    return next;
+  }
+  function readLocalActivitySnapshot(ids=activityStorageIds()){
+    for(const id of ids){
+      const snapshot=readJsonFromStorage(STORAGE_ACTIVITY_PREFIX+id);
+      if(snapshot) return snapshot;
+    }
+    return null;
+  }
+  function readWindowActivitySnapshot(ids=activityStorageIds()){
+    try{
+      if(window.ESL_ACTIVITY_BANKS){
+        for(const id of ids){
+          if(window.ESL_ACTIVITY_BANKS[id]) return window.ESL_ACTIVITY_BANKS[id];
+          if(window.ESL_ACTIVITY_BANKS.activities && window.ESL_ACTIVITY_BANKS.activities[id]) return window.ESL_ACTIVITY_BANKS.activities[id];
+        }
+      }
+    }catch(e){}
+    return null;
+  }
+  async function readFullWordBank(){
+    let full=null;
+    try { const res = await fetch("word-bank-esl-english.json", { cache:"no-store" }); if(res.ok){ const json=await res.json(); if(json && json.activities) full=json; } } catch(e) {}
+    if(!full){ try { if(window.ESLBank && typeof window.ESLBank.readLocalBank === "function") full=window.ESLBank.readLocalBank(); } catch(e) {} }
+    if(!full) full=readJsonFromStorage(STORAGE_FULL_BANK) || readJsonFromStorage("ESL_WORD_BANK_FULL") || readJsonFromStorage("ESL_ENGLISH_WORD_BANKS_V1") || readJsonFromStorage("ESL_ENGLISH_WORD_BANK");
+    return mergeStoredActivitySnapshots(full || defaultFullBank());
+  }
+  async function loadExternalOrLocalBank(){
+    let snapshot=null;
+    const ids=activityStorageIds();
+    snapshot=readLocalActivitySnapshot(ids) || readWindowActivitySnapshot(ids);
+    if(!snapshot){
+      for(const id of ids){
+        try { if(window.ESLBank && typeof window.ESLBank.getActivityBank === "function") snapshot = await window.ESLBank.getActivityBank(id,{priority:"localStorage"}); } catch(e) {}
+        if(snapshot) break;
+      }
+    }
+    if(!snapshot){
+      try { const full = await readFullWordBank(); for(const id of ids){ if(full.activities && full.activities[id]){ snapshot=full.activities[id]; break; } } } catch(e) {}
+    }
+    const bank = snapshotToBank(snapshot);
+    if(bank){ state.bank=bank; saveActivityLocal(); return true; }
+    saveActivityLocal();
+    return false;
+  }
+  function saveActivityLocal(){
+    const snapshot=currentActivityToSnapshot();
+    try { localStorage.setItem(STORAGE_ACTIVITY_PREFIX+ACTIVITY_CONFIG.id, JSON.stringify(snapshot)); } catch(e) {}
+    try { window.ESL_ACTIVITY_BANKS = Object.assign(window.ESL_ACTIVITY_BANKS||{}, { [ACTIVITY_CONFIG.id]: snapshot }); } catch(e) {}
+    try {
+      if(window.ESLBank){
+        ["setActivityBank","saveActivityBank","updateActivityBank"].forEach(name=>{ try{ if(typeof window.ESLBank[name]==="function") window.ESLBank[name](ACTIVITY_CONFIG.id, snapshot); }catch(e){} });
+      }
+    } catch(e) {}
+    return snapshot;
+  }
+  async function downloadFullWordBank(){
+    syncEditorsToBank();
+    const snapshot=saveActivityLocal();
+    const full=await readFullWordBank();
+    full.schema = full.schema || "esl-word-bank-v3";
+    full.app = full.app || "ESL English";
+    full.levels = full.levels || LEVELS.slice();
+    full.updatedAt = new Date().toISOString();
+    full.activities = full.activities || {};
+    full.activities[ACTIVITY_CONFIG.id] = snapshot;
+    try { localStorage.setItem(STORAGE_FULL_BANK, JSON.stringify(full)); } catch(e) {}
+    const blob=new Blob([JSON.stringify(full,null,2)],{type:"application/json;charset=utf-8"});
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);
+    a.download="word-bank-esl-english.json";
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+    renderEditor(); renderLevels(); updateSummary(); setStatus("✅ WordBank completo descargado. Reemplaza ese JSON en GitHub.");
+  }
+
+  function bankCounts(level,cat){ const cats=state.bank[level]||{}; if(cat){ const words=cats[cat]||[]; let selected=0; words.forEach((_,i)=>{ if(state.selected.has(wordKey(level,cat,i))) selected++; }); return {total:words.length,selected}; } let total=0,selected=0; Object.entries(cats).forEach(([c,words])=>{ total+=words.length; words.forEach((_,i)=>{ if(state.selected.has(wordKey(level,c,i))) selected++; }); }); return {total,selected}; }
+  function renderLevels(){
+    UI.levelList.textContent="";
+    LEVELS.forEach(level=>{
+      const counts=bankCounts(level), open=state.expandedLevels.has(level);
+      const card=document.createElement("article"); card.className="level-card"+(open?" open":""); card.dataset.level=level;
+      card.innerHTML=`<button class="level-head" type="button" data-action="toggle-level" data-level="${escapeHtml(level)}"><span class="arrow">›</span><span class="level-title"><strong>${escapeHtml(level)}</strong><small>${counts.selected}/${counts.total} palabras seleccionadas</small></span><label class="select-box"><input type="checkbox" class="level-check" data-level="${escapeHtml(level)}"> Nivel</label></button>`;
+      const cb=card.querySelector(".level-check"); cb.checked=counts.total>0&&counts.selected===counts.total; cb.indeterminate=counts.selected>0&&counts.selected<counts.total;
+      if(open){ const list=document.createElement("div"); list.className="cat-list"; Object.entries(state.bank[level]||{}).forEach(([cat,words])=>list.appendChild(renderCategory(level,cat,words))); card.appendChild(list); }
+      UI.levelList.appendChild(card);
+    });
+  }
+  function renderCategory(level,cat,words){
+    const counts=bankCounts(level,cat), open=state.expandedCategories.has(catKey(level,cat));
+    const card=document.createElement("article"); card.className="category-card"+(open?" open":""); card.dataset.level=level; card.dataset.cat=cat;
+    card.innerHTML=`<button class="cat-head" type="button" data-action="toggle-cat" data-level="${escapeHtml(level)}" data-cat="${escapeHtml(cat)}"><span class="arrow">›</span><span class="cat-title"><strong>${escapeHtml(cat)}</strong><small>${counts.selected}/${counts.total} seleccionadas</small></span><label class="select-box"><input type="checkbox" class="cat-check" data-level="${escapeHtml(level)}" data-cat="${escapeHtml(cat)}"> Categoría</label></button>`;
+    const cb=card.querySelector(".cat-check"); cb.checked=counts.total>0&&counts.selected===counts.total; cb.indeterminate=counts.selected>0&&counts.selected<counts.total;
+    if(open){ const panel=document.createElement("div"); panel.className="word-panel"; const grid=document.createElement("div"); grid.className="word-grid"; words.forEach((entry,i)=>{ const key=wordKey(level,cat,i); const chip=document.createElement("label"); chip.className="word-chip"+(state.selected.has(key)?" on":""); chip.innerHTML=`<input type="checkbox" class="word-check" data-key="${escapeHtml(key)}" ${state.selected.has(key)?"checked":""}><span>${escapeHtml(getWord(entry))}</span>`; grid.appendChild(chip); }); panel.appendChild(grid); card.appendChild(panel); }
+    return card;
+  }
+  function cleanSelections(){ const valid=new Set(); LEVELS.forEach(level=>Object.entries(state.bank[level]||{}).forEach(([cat,words])=>words.forEach((_,i)=>valid.add(wordKey(level,cat,i))))); state.selected.forEach(k=>{ if(!valid.has(k)) state.selected.delete(k); }); }
+  function handleLevelClick(ev){ const btn=ev.target.closest("button[data-action]"); if(!btn) return; if(ev.target.closest("input")) return; const {action,level,cat}=btn.dataset; if(action==="toggle-level"){ state.expandedLevels.has(level)?state.expandedLevels.delete(level):state.expandedLevels.add(level); renderLevels(); } if(action==="toggle-cat"){ const k=catKey(level,cat); state.expandedCategories.has(k)?state.expandedCategories.delete(k):state.expandedCategories.add(k); renderLevels(); } }
+  function handleLevelChange(ev){ const t=ev.target; if(t.classList.contains("level-check")){ setLevelSelected(t.dataset.level,t.checked); } if(t.classList.contains("cat-check")){ setCategorySelected(t.dataset.level,t.dataset.cat,t.checked); } if(t.classList.contains("word-check")){ t.checked?state.selected.add(t.dataset.key):state.selected.delete(t.dataset.key); } renderLevels(); updateSummary(); }
+  function setLevelSelected(level,on){ Object.entries(state.bank[level]||{}).forEach(([cat,words])=>words.forEach((_,i)=>on?state.selected.add(wordKey(level,cat,i)):state.selected.delete(wordKey(level,cat,i)))); }
+  function setCategorySelected(level,cat,on){ (state.bank[level]?.[cat]||[]).forEach((_,i)=>on?state.selected.add(wordKey(level,cat,i)):state.selected.delete(wordKey(level,cat,i))); }
+  function selectAll(on){ LEVELS.forEach(l=>setLevelSelected(l,on)); renderLevels(); updateSummary(); }
+  function collapseAll(){ state.expandedLevels.clear(); state.expandedCategories.clear(); renderLevels(); }
+
+  function formatLevelText(level){ const lines=[]; Object.entries(state.bank[level]||{}).forEach(([cat,entries])=>{ lines.push(`Categoría: ${cat}`); entries.forEach(e=>{ const w=getWord(e), tr=getTranslation(e); lines.push(tr?`${w} = ${tr}`:w); }); lines.push(""); }); return lines.join("\n").trim(); }
+  function parseLevelText(text){ const out={}; let current="General"; String(text||"").split(/\r?\n/).forEach(line=>{ const raw=line.trim(); if(!raw) return; const cat=raw.match(/^Categor[ií]a\s*:\s*(.+)$/i); if(cat){ current=cleanCategoryName(cat[1]); out[current]=out[current]||[]; return; } out[current]=out[current]||[]; out[current].push(normalizeEntry(raw)); }); Object.keys(out).forEach(cat=>{ out[cat]=uniqueEntries(out[cat].filter(Boolean)); if(!out[cat].length) delete out[cat]; }); return out; }
+  function renderEditor(){ UI.editorGrid.textContent=""; LEVELS.forEach(level=>{ const card=document.createElement("div"); card.className="editor-card"; card.innerHTML=`<h4>${escapeHtml(level)}</h4><textarea class="editor-textarea" data-level="${escapeHtml(level)}" spellcheck="false">${escapeHtml(formatLevelText(level))}</textarea><button class="btn green small" type="button" data-action="apply-editor" data-level="${escapeHtml(level)}">Aplicar ${escapeHtml(level)}</button>`; UI.editorGrid.appendChild(card); }); }
+  function syncEditorsToBank(){ UI.editorGrid.querySelectorAll("textarea[data-level]").forEach(area=>{ state.bank[area.dataset.level]=parseLevelText(area.value); }); cleanSelections(); saveActivityLocal(); }
+  function toggleEditor(){ state.editMode=!state.editMode; UI.editorPanel.classList.toggle("show",state.editMode); UI.editModeBtn.textContent=state.editMode?"✅ Cerrar editor":"✏️ Editor"; if(state.editMode) renderEditor(); }
+  function handleEditorClick(ev){ const btn=ev.target.closest("button[data-action='apply-editor']"); if(!btn) return; const area=UI.editorGrid.querySelector(`textarea[data-level="${CSS.escape(btn.dataset.level)}"]`); if(!area) return; state.bank[btn.dataset.level]=parseLevelText(area.value); cleanSelections(); saveActivityLocal(); renderLevels(); updateSummary(); setStatus(`✅ ${btn.dataset.level} aplicado.`); }
+
+  function customEntries(){ return String(UI.customWords.value||"").split(/[\n,]+/).map(s=>s.trim()).filter(Boolean).map(raw=>entryToObject(normalizeEntry(raw),"Custom","Custom")); }
+  function allBankEntries(){ const out=[]; LEVELS.forEach(level=>Object.entries(state.bank[level]||{}).forEach(([cat,entries])=>entries.forEach(e=>out.push(entryToObject(e,level,cat))))); return out; }
+  function selectedEntries(){ const out=[]; LEVELS.forEach(level=>Object.entries(state.bank[level]||{}).forEach(([cat,entries])=>entries.forEach((e,i)=>{ if(state.selected.has(wordKey(level,cat,i))) out.push(entryToObject(e,level,cat)); }))); return out; }
+  function buildPlaylist(){
+    return uniquePlayablePairs(selectedEntries().concat(customEntries()).filter(entry=>entry.word && entry.translation));
+  }
+  function roundCountLabel(){ return UI.roundCountSelect.value === "infinite" ? "∞" : UI.roundCountSelect.value; }
+  function isTwoPlayerModeValue(mode){ return mode === "2" || mode === "2-different"; }
+  function isTwoPlayerGame(){ return isTwoPlayerModeValue(state.game?.mode); }
+  function usesDifferentLists(){ return state.game?.mode === "2-different"; }
+  function updateTwoPlayerOptions(){
+    const twoPlayers=isTwoPlayerModeValue(UI.playerMode.value);
+    UI.twoPlayerWinModeField.classList.toggle("hidden", !twoPlayers);
+  }
+  function updateSummary(){
+    const selected=selectedEntries().filter(e=>e.translation).length, custom=customEntries().filter(e=>e.translation).length, play=buildPlaylist().length;
+    const size=Number(UI.roundSizeSelect.value || 10);
+    const listInfo=UI.playerMode.value === "2-different" ? " · listas diferentes" : (UI.playerMode.value === "2" ? " · misma lista en orden diferente" : "");
+    UI.setupSummary.textContent=`Seleccionadas: ${selected} · Personalizadas: ${custom} · Banco activo: ${play} pares`;
+    const allowedErrors=Number(UI.allowedErrorsSelect.value || 3);
+    UI.splitSummary.textContent=`Rondas: ${roundCountLabel()} · ${size} palabras por ronda · ${allowedErrors} errores permitidos por vida · Reciclado y mezcla automática${listInfo}`;
+    UI.splitSummary.style.display="block";
+    updateTwoPlayerOptions();
+  }
+  function splitDifferentPlayerLists(list){
+    const pools=[[],[]];
+    shuffle(list).forEach((entry,index)=>pools[index % 2].push(entry));
+    return pools;
+  }
+
+  function pairEntryKey(entry){ return `${normalizeText(entry.word)}||${normalizeText(entry.translation)}`; }
+  function meaningOptions(entry){
+    return String(entry?.translation || "")
+      .split(/\s*(?:\/|\||;)\s*/)
+      .map(option=>normalizeText(option))
+      .filter(Boolean);
+  }
+  function entriesShareMeaning(left, right){
+    if(!left || !right) return false;
+    const accepted = new Set(meaningOptions(left));
+    return meaningOptions(right).some(option=>accepted.has(option));
+  }
+  function uniquePlayablePairs(words){
+    const seen=new Set();
+    return words.filter(entry=>{
+      const key=pairEntryKey(entry);
+      if(!entry.word || !entry.translation || seen.has(key)) return false;
+      seen.add(key); return true;
+    });
+  }
+  function hasRoundLimit(){ return Number.isFinite(state.game?.settings?.maxRounds); }
+  function isRoundsVictoryMode(){ return isTwoPlayerGame() && state.game?.settings?.twoPlayerWinMode === "rounds"; }
+  function refillWordDeck(drawState){
+    let deck=shuffle(drawState.sourceWords);
+    if(deck.length>1 && drawState.lastDrawnKey && pairEntryKey(deck[0])===drawState.lastDrawnKey){
+      const different=deck.findIndex(entry=>pairEntryKey(entry)!==drawState.lastDrawnKey);
+      if(different>0) [deck[0],deck[different]]=[deck[different],deck[0]];
+    }
+    drawState.wordDeck.push(...deck);
+  }
+  function createRoundEntries(drawState){
+    const round=[], used=new Set(), size=state.game.settings.roundSize;
+    while(round.length<size){
+      if(!drawState.wordDeck.length) refillWordDeck(drawState);
+      if(!drawState.wordDeck.length) break;
+      let take=0;
+      if(drawState.sourceWords.length>=size){
+        take=drawState.wordDeck.findIndex(entry=>!used.has(pairEntryKey(entry)));
+        if(take<0){ refillWordDeck(drawState); take=drawState.wordDeck.findIndex(entry=>!used.has(pairEntryKey(entry))); }
+      } else if(round.length && drawState.sourceWords.length>1){
+        const previous=pairEntryKey(round[round.length-1]);
+        const different=drawState.wordDeck.findIndex(entry=>pairEntryKey(entry)!==previous);
+        if(different>=0) take=different;
+      }
+      const entry=drawState.wordDeck.splice(Math.max(0,take),1)[0];
+      round.push(entry);
+      used.add(pairEntryKey(entry));
+      drawState.lastDrawnKey=pairEntryKey(entry);
+    }
+    const signature=round.map(pairEntryKey).join("|");
+    if(round.length>1 && signature===drawState.lastRoundSignature) round.push(round.shift());
+    drawState.lastRoundSignature=round.map(pairEntryKey).join("|");
+    return round;
+  }
+  function getSharedRoundTemplate(roundNumber){
+    if(!state.game.roundTemplates.has(roundNumber)) state.game.roundTemplates.set(roundNumber, createRoundEntries(state.game));
+    return state.game.roundTemplates.get(roundNumber).slice();
+  }
+  function getDifferentRoundTemplate(player,roundNumber){
+    if(!player.roundTemplates.has(roundNumber)) player.roundTemplates.set(roundNumber, createRoundEntries(player));
+    return player.roundTemplates.get(roundNumber).slice();
+  }
+  function orderedRoundForPlayer(player, roundNumber){
+    const base=usesDifferentLists() ? getDifferentRoundTemplate(player,roundNumber) : getSharedRoundTemplate(roundNumber);
+    if(!isTwoPlayerGame()) return base;
+    const arranged=shuffle(base);
+    const rival=state.game.players.find(other=>other.id!==player.id && other.roundNumber===roundNumber && Array.isArray(other.roundEntries) && other.roundEntries.length);
+    if(rival && arranged.length>1 && arranged.map(pairEntryKey).join("|")===rival.roundEntries.map(pairEntryKey).join("|")) arranged.push(arranged.shift());
+    return arranged;
+  }
+  function createPlayer(id,words){
+    const lives=Number(UI.livesSelect.value), seconds=Number(UI.countdownSelect.value);
+    return {id,name:`Jugador ${id}`,words:words.slice(),sourceWords:words.slice(),wordDeck:[],lastDrawnKey:"",lastRoundSignature:"",roundTemplates:new Map(),roundNumber:0,scheduledRoundsStarted:0,roundsCompleted:0,retryRounds:[],isRetryRound:false,roundWins:0,current:null,lives,maxLives:lives,lifeErrors:0,seconds,timeLeft:seconds,correct:0,failed:0,done:false,roundDone:false,message:"",ui:null,roundEntries:[],roundSize:state.game?.settings?.roundSize||Number(UI.roundSizeSelect.value),boardMatched:new Set(),boardRightMatched:new Set(),boardRevealed:new Set(),boardRightRevealed:new Set(),boardRightOrder:[]};
+  }
+  function startGame(){
+    const playlist=buildPlaylist();
+    if(!playlist.length){ setStatus("⚠️ Selecciona pares del banco o agrega pares personalizados con el formato: apple = manzana."); return; }
+    const mode=UI.playerMode.value;
+    if(isTwoPlayerModeValue(mode) && playlist.length<2){ setStatus("⚠️ Para jugar con 2 jugadores selecciona al menos 2 pares diferentes."); return; }
+    clearInterval(state.timer);
+    const list=shuffle(playlist);
+    const pools=mode==="2-different" ? splitDifferentPlayerLists(list) : [list.slice(),list.slice()];
+    const maxRounds=UI.roundCountSelect.value === "infinite" ? Infinity : Number(UI.roundCountSelect.value);
+    state.game={mode,finished:false,roundSettled:false,currentRound:0,sharedBaseRoundsStarted:0,sharedRetryRounds:[],currentRoundRetryQueued:false,endAfterRound:false,endAfterRoundReason:"",sourceWords:list.slice(),wordDeck:[],lastDrawnKey:"",lastRoundSignature:"",roundTemplates:new Map(),settings:{roundSize:Number(UI.roundSizeSelect.value),maxRounds,twoPlayerWinMode:UI.twoPlayerWinMode.value,allowedErrors:Number(UI.allowedErrorsSelect.value)},players:[]};
+    state.game.players=isTwoPlayerModeValue(mode)?[createPlayer(1,pools[0]),createPlayer(2,pools[1])]:[createPlayer(1,list)];
+    state.lastPlaylist=list.slice();
+    mountGame();
+    if(isRoundsVictoryMode()) loadNextSharedRound(); else state.game.players.forEach(p=>loadNextObjectiveRound(p));
+    closeSetupAfterStart();
+    startTimer();
+    beep(660,70);
+  }
+  function mountGame(){
+    const mode=state.game.mode, byRounds=isRoundsVictoryMode();
+    UI.arenaRoot.innerHTML=`<div class="players ${isTwoPlayerGame()?"two":"one"}" id="playersRoot"></div>`;
+    const root=UI.arenaRoot.querySelector("#playersRoot");
+    state.game.players.forEach(p=>{
+      const sec=document.createElement("section");
+      sec.className=`player-card p${p.id}`;
+      sec.dataset.player=p.id;
+      sec.innerHTML=`<div class="player-head"><div><h2>${escapeHtml(p.name)}</h2><small class="hint">Preparando...</small></div><div class="hud"><span class="pill progress">Ronda 1</span>${byRounds?'<span class="pill rounds-won">🏆 0</span>':''}<span class="pill lives">❤️ ${p.lives}/${p.maxLives}</span><span class="pill errors">⚠️ 0/${state.game.settings.allowedErrors}</span><span class="pill timer">⏱ ${formatTime(p.seconds)}</span><span class="pill score">✅ 0 · ❌ 0</span></div></div><div class="game-host"></div><div class="life-toast" aria-live="assertive"><div class="life-toast-card"><span class="life-toast-heart">💔</span><strong class="life-toast-text"></strong></div></div><div class="round-message" role="dialog" aria-modal="true" aria-live="polite"><div class="round-dialog"><strong class="msg-text"></strong><button class="btn green next-btn" data-player="${p.id}" type="button">Siguiente ronda</button></div></div>`;
+      root.appendChild(sec);
+      p.ui={panel:sec,hint:sec.querySelector(".hint"),progress:sec.querySelector(".progress"),roundWins:sec.querySelector(".rounds-won"),lives:sec.querySelector(".lives"),errors:sec.querySelector(".errors"),timer:sec.querySelector(".timer"),score:sec.querySelector(".score"),host:sec.querySelector(".game-host"),message:sec.querySelector(".round-message"),msgText:sec.querySelector(".msg-text"),lifeToast:sec.querySelector(".life-toast"),lifeToastText:sec.querySelector(".life-toast-text")};
+    });
+  }
+  function beginPlayerRound(p, entries, displayRound, isRetry){
+    if(!entries || !entries.length || p.lives<=0){
+      p.done=true; p.current=null; p.roundEntries=[]; p.message=p.lives<=0?"Sin vidas disponibles":"No hay pares disponibles"; renderPlayer(p); checkGameOver(); return;
+    }
+    p.done=false; p.roundDone=false; p.timeLeft=p.seconds; p.message=""; p.roundNumber=displayRound; p.isRetryRound=!!isRetry;
+    p.roundEntries=entries.slice();
+    p.roundSize=p.roundEntries.length;
+    p.current=p.roundEntries[0];
+    p.boardMatched=new Set();
+    p.boardRightMatched=new Set();
+    p.boardRevealed=new Set();
+    p.boardRightRevealed=new Set();
+    p.boardRightOrder=[];
+    renderPlayer(p);
+  }
+  function loadNextObjectiveRound(p){
+    if(!p || p.done || p.lives<=0) return;
+    let entries=null, retry=false;
+    const pendingAtEnd=hasRoundLimit() && p.scheduledRoundsStarted>=state.game.settings.maxRounds;
+    if(p.retryRounds.length && (pendingAtEnd || !hasRoundLimit())){
+      entries=shuffle(p.retryRounds.shift());
+      retry=true;
+    } else if(!hasRoundLimit() || p.scheduledRoundsStarted<state.game.settings.maxRounds){
+      p.scheduledRoundsStarted++;
+      entries=orderedRoundForPlayer(p,p.scheduledRoundsStarted);
+    } else if(p.retryRounds.length){
+      entries=shuffle(p.retryRounds.shift());
+      retry=true;
+    }
+    if(!entries){ p.done=true; p.current=null; p.message="Completado"; renderPlayer(p); checkGameOver(); return; }
+    beginPlayerRound(p,entries,p.scheduledRoundsStarted, retry);
+  }
+  function hasNextSharedRound(){
+    if(!state.game || !isRoundsVictoryMode()) return false;
+    if(!hasRoundLimit()) return true;
+    return state.game.sharedBaseRoundsStarted<state.game.settings.maxRounds || state.game.sharedRetryRounds.length>0;
+  }
+  function loadNextSharedRound(){
+    if(!state.game || state.game.finished) return;
+    clearRoundResultCard();
+    let sets=null, retry=false;
+    const baseFinished=hasRoundLimit() && state.game.sharedBaseRoundsStarted>=state.game.settings.maxRounds;
+    if(state.game.sharedRetryRounds.length && (baseFinished || !hasRoundLimit())){
+      sets=state.game.sharedRetryRounds.shift().map(list=>shuffle(list));
+      retry=true;
+    } else {
+      state.game.sharedBaseRoundsStarted++;
+      const base=state.game.sharedBaseRoundsStarted;
+      sets=state.game.players.map(p=>orderedRoundForPlayer(p,base));
+      if(!usesDifferentLists() && sets.length===2 && sets[0].length>1 && sets[0].map(pairEntryKey).join("|")===sets[1].map(pairEntryKey).join("|")) sets[1].push(sets[1].shift());
+    }
+    state.game.currentRound++;
+    state.game.roundSettled=false;
+    state.game.currentRoundRetryQueued=false;
+    state.game.endAfterRound=false;
+    state.game.endAfterRoundReason="";
+    state.game.players.forEach((p,index)=>beginPlayerRound(p,sets[index],state.game.currentRound,retry));
+  }
+  function queueObjectiveRetry(p){
+    if(!p || !Array.isArray(p.roundEntries) || !p.roundEntries.length) return;
+    p.retryRounds.push(p.roundEntries.slice());
+  }
+  function queueSharedRetryRound(){
+    if(!state.game || state.game.currentRoundRetryQueued) return;
+    state.game.sharedRetryRounds.push(state.game.players.map(p=>p.roundEntries.slice()));
+    state.game.currentRoundRetryQueued=true;
+  }
+  function showLifeLoss(p){
+    if(!p.ui || !p.ui.lifeToast || p.lives<=0) return;
+    clearTimeout(p.lifeToastTimer);
+    p.ui.lifeToastText.textContent=`−1 vida · ❤️ ${p.lives} · Errores reiniciados`;
+    p.ui.lifeToast.classList.add("show","banner-pop");
+    p.lifeToastTimer=setTimeout(()=>{
+      if(!p.ui || !p.ui.lifeToast) return;
+      p.ui.lifeToast.classList.remove("show","banner-pop");
+    },950);
+  }
+  function showRoundBanner(p, kind){
+    if(!p.ui || !p.message) return;
+    p.ui.msgText.textContent=p.message;
+    p.ui.message.classList.remove("ok","bad");
+    p.ui.message.classList.add(kind==="ok" ? "ok" : "bad");
+    const canAdvance = p.roundDone && !p.done && p.lives > 0;
+    const nextButton = p.ui.message.querySelector(".next-btn");
+    if(nextButton) nextButton.classList.toggle("hidden", !canAdvance);
+    p.ui.message.classList.add("show","banner-pop");
+    setTimeout(()=>p.ui && p.ui.message.classList.remove("banner-pop"),420);
+  }
+  function renderPlayer(p){
+    const ui=p.ui;
+    const total=hasRoundLimit()?`/${state.game.settings.maxRounds}`:"";
+    ui.progress.textContent=p.isRetryRound?`↻ Ronda pendiente${total}`:`📚 Ronda ${Math.max(1,p.roundNumber)}${total}`;
+    if(ui.roundWins) ui.roundWins.textContent=`🏆 ${p.roundWins}`;
+    ui.lives.textContent=`❤️ ${p.lives}/${p.maxLives}`;
+    ui.errors.textContent=`⚠️ ${p.lifeErrors}/${state.game.settings.allowedErrors}`;
+    ui.timer.textContent=p.seconds?`⏱ ${formatTime(p.timeLeft)}`:"Sin tiempo";
+    ui.score.textContent=`✅ ${p.correct} · ❌ ${p.failed}`;
+    ui.message.classList.remove("show");
+    ui.msgText.textContent="";
+    if(!p.current){
+      ui.hint.textContent=p.message||"Terminado";
+      ui.host.className="game-host";
+      ui.host.innerHTML=`<h3>${escapeHtml(p.message||"Terminado")}</h3>`;
+      if(p.done && p.lives<=0 && !state.game.finished) showRoundBanner(p,"bad");
+      updateDrawerInfo(); return;
+    }
+    ui.hint.textContent=p.isRetryRound?`Ronda repetida · ${p.roundSize} pares`:`Tablero de ${p.roundSize} pares`;
+    const api=engineApi();
+    GAME_ENGINE.renderRound(p, ui.host, api);
+    if(p.roundDone && !state.game.finished && !isRoundsVictoryMode()) showRoundBanner(p, p.boardMatched.size===p.roundSize?"ok":"bad");
+    updateDrawerInfo();
+  }
+  function finishRound(p,ok,revealed=false,timeout=false){ if(!p.current||p.roundDone) return; p.roundDone=true; if(ok){ p.correct++; p.message="✅ Correcto"; beep(930,105); vibrate(12); } else { p.failed++; if(!revealed) p.lives--; p.message=revealed?`👀 ${GAME_ENGINE.reveal(p, engineApi())}`:(timeout?"⏱ Tiempo agotado":"❌ Incorrecto"); beep(120,120); vibrate([35,25,35]); } showRoundBanner(p,ok?"ok":"bad"); updateSmallHud(p); }
+  function nextRound(id){
+    if(!state.game || state.game.finished) return;
+    if(isRoundsVictoryMode()){ advanceSharedRound(); return; }
+    const p=getPlayer(id);
+    if(!p || !p.roundDone || p.done) return;
+    loadNextObjectiveRound(p);
+  }
+  function restartCurrentRound(){ if(!state.game){ openSetup(); return; } state.game.players.forEach(p=>{ if(p.current&&!p.done){ p.roundDone=false; p.timeLeft=p.seconds; GAME_ENGINE.resetRound(p, engineApi()); } }); beep(500,60); }
+  function revealCurrentRound(){ if(!state.game) return; state.game.players.forEach(p=>{ if(p.current&&!p.roundDone){ if(typeof GAME_ENGINE.revealRound==="function") GAME_ENGINE.revealRound(p,engineApi()); else finishRound(p,false,true); } }); settleRoundTie(); }
+  function restartGame(){ if(!state.game){ openSetup(); return; } clearRoundResultCard(); startGame(); }
+  function getPlayer(id){ return state.game?.players.find(p=>p.id===Number(id)); }
+  function updateSmallHud(p){
+    p.ui.lives.textContent=`❤️ ${p.lives}/${p.maxLives}`;
+    p.ui.errors.textContent=`⚠️ ${p.lifeErrors}/${state.game.settings.allowedErrors}`;
+    p.ui.score.textContent=`✅ ${p.correct} · ❌ ${p.failed}`;
+    if(p.ui.roundWins) p.ui.roundWins.textContent=`🏆 ${p.roundWins}`;
+    updateDrawerInfo();
+  }
+  function endRoundByExceededErrors(p){
+    if(!p.current || p.roundDone) return;
+    p.roundDone=true;
+    p.lives=Math.max(0,p.lives-1);
+    p.lifeErrors=0;
+    p.message=`💔 Límite de errores superado · −1 vida · Ronda pendiente para repetir`;
+    if(isRoundsVictoryMode()){
+      queueSharedRetryRound();
+      updateSmallHud(p);
+      const rival=state.game.players.find(other=>other.id!==p.id);
+      if(!rival) return;
+      const reason=`${p.name} superó los errores permitidos y perdió 1 vida. Esta ronda se repetirá al final.`;
+      if(p.lives<=0){ state.game.endAfterRound=true; state.game.endAfterRoundReason=`${p.name} se quedó sin vidas.`; }
+      settleRoundWinner(rival,reason,p.lives<=0);
+      return;
+    }
+    queueObjectiveRetry(p);
+    updateSmallHud(p);
+    if(handleNoLives(p)) return;
+    showRoundBanner(p,"bad");
+  }
+  function updateGlobalHud(){}
+  function clearRoundResultCard(){
+    const card=UI.arenaRoot.querySelector(".round-result-card");
+    if(card) card.remove();
+  }
+  function showRoundResultCard(title, text, isLastRound){
+    clearRoundResultCard();
+    const card=document.createElement("div");
+    card.className="final-card round-result-card banner-pop";
+    const action=isLastRound?"finish-round-match":"next-shared-round";
+    const label=isLastRound?"Ver resultado final":"Siguiente ronda";
+    card.innerHTML=`<div><h2>${escapeHtml(title)}</h2><p>${escapeHtml(text)}</p><div class="final-actions"><button class="btn green" data-action="${action}" type="button">${label}</button></div></div>`;
+    UI.arenaRoot.appendChild(card);
+  }
+  function advanceSharedRound(){
+    if(!state.game || state.game.finished || !isRoundsVictoryMode() || !state.game.roundSettled) return;
+    if(state.game.endAfterRound){
+      clearRoundResultCard();
+      concludeRoundMatch(state.game.endAfterRoundReason);
+      return;
+    }
+    if(!hasNextSharedRound()){
+      clearRoundResultCard();
+      concludeRoundMatch("");
+      return;
+    }
+    loadNextSharedRound();
+  }
+  function renderFinalCard(title, text){
+    if(!state.game || state.game.finished) return;
+    clearRoundResultCard();
+    state.game.finished=true;
+    clearInterval(state.timer);
+    const final=document.createElement("div");
+    final.className="final-card banner-pop";
+    final.innerHTML=`<div><h2>${escapeHtml(title)}</h2><p>${escapeHtml(text)}</p><div class="final-actions"><button class="btn green" data-action="new-config" type="button">Nueva configuración</button><button class="btn" data-action="restart-game" type="button">Jugar otra vez</button></div></div>`;
+    UI.arenaRoot.appendChild(final);
+  }
+  function concludeFirstGoal(winner, reason){
+    const rival=state.game.players.find(p=>p.id!==winner.id);
+    state.game.players.forEach(p=>{p.done=true; p.roundDone=true;});
+    const result=`${winner.name} gana: ${reason}. Pares correctos: ${winner.correct}${rival?` frente a ${rival.correct} de ${rival.name}`:""}.`;
+    renderFinalCard(`🏆 ${winner.name} gana`, result);
+  }
+  function concludeRoundMatch(reason){
+    const [a,b]=state.game.players;
+    const lead=a.roundWins===b.roundWins?null:(a.roundWins>b.roundWins?a:b);
+    const prefix=reason?`${reason} `:"";
+    const result=lead?`${prefix}${lead.name} gana con ${lead.roundWins} rondas frente a ${lead===a?b.roundWins:a.roundWins}.`:`${prefix}Empate: ambos ganaron ${a.roundWins} rondas.`;
+    renderFinalCard(lead?`🏆 ${lead.name} gana`:`🤝 Empate`, result);
+  }
+  function settleRoundWinner(winner, reason, forceFinal){
+    if(state.game.finished || state.game.roundSettled) return;
+    state.game.roundSettled=true;
+    winner.roundWins++;
+    state.game.players.forEach(p=>{
+      p.roundDone=true;
+      p.message=p.id===winner.id?`🏆 Ganaste la ronda ${state.game.currentRound}`:`🏁 Ronda ${state.game.currentRound}: ganó ${winner.name}`;
+      renderPlayer(p);
+    });
+    const [a,b]=state.game.players;
+    const marcador=`Marcador de rondas: ${a.name} ${a.roundWins} - ${b.roundWins} ${b.name}`;
+    const note=reason?`${reason} `:"";
+    const last=!!forceFinal || !hasNextSharedRound();
+    showRoundResultCard(`🏆 ${winner.name} gana la ronda`, `${note}${marcador}.`, last);
+  }
+  function settleRoundTie(){
+    if(!isRoundsVictoryMode() || state.game.finished || state.game.roundSettled) return;
+    if(!state.game.players.every(p=>p.roundDone)) return;
+    state.game.roundSettled=true;
+    state.game.players.forEach(p=>{ p.message=`🤝 Ronda ${state.game.currentRound} sin ganador`; renderPlayer(p); });
+    const [a,b]=state.game.players;
+    const marcador=`Marcador de rondas: ${a.name} ${a.roundWins} - ${b.roundWins} ${b.name}`;
+    showRoundResultCard("🤝 Ronda sin ganador", `La ronda ${state.game.currentRound} terminó en empate. ${marcador}.`, !hasNextSharedRound());
+  }
+  function handleNoLives(p){
+    if(p.lives>0) return false;
+    p.done=true; p.roundDone=true; p.current=null; p.message="💔 Sin vidas disponibles";
+    renderPlayer(p);
+    if(isTwoPlayerGame()){
+      const rival=state.game.players.find(other=>other.id!==p.id);
+      if(isRoundsVictoryMode()) concludeRoundMatch(`${p.name} se quedó sin vidas.`);
+      else if(rival) concludeFirstGoal(rival,`${p.name} se quedó sin vidas`);
+    } else checkGameOver();
+    return true;
+  }
+  function startTimer(){
+    clearInterval(state.timer);
+    state.timer=setInterval(()=>{
+      if(!state.game) return;
+      state.game.players.forEach(p=>{
+        if(p.current&&!p.roundDone&&p.seconds>0){
+          p.timeLeft--;
+          p.ui.timer.textContent=`⏱ ${formatTime(p.timeLeft)}`;
+          if(p.timeLeft<=0){
+            if(typeof GAME_ENGINE.timeout==="function") GAME_ENGINE.timeout(p,engineApi());
+            else finishRound(p,false,false,true);
+          }
+        }
+      });
+    },1000);
+  }
+  function checkGameOver(){
+    if(!state.game || state.game.finished) return;
+    if(state.game.mode==="1" && state.game.players[0].done){
+      const p=state.game.players[0];
+      const title=p.lives<=0?"💔 Sin vidas disponibles":"🏆 Actividad completada";
+      const text=p.lives<=0?`El juego terminó sin vidas. Pares correctos: ${p.correct} · Intentos fallidos: ${p.failed}.`:`Completaste ${p.roundNumber} rondas con ${p.correct} pares correctos.`;
+      renderFinalCard(title,text);
+    }
+  }
+  function correctPair(p){
+    if(!p.current || p.roundDone) return;
+    p.correct++;
+    updateSmallHud(p);
+    beep(930,90);
+    vibrate(12);
+  }
+  function wrongAttempt(p){
+    if(!p.current || p.roundDone) return null;
+    p.failed++;
+    p.lifeErrors++;
+    beep(120,85);
+    vibrate(18);
+    if(p.lifeErrors>state.game.settings.allowedErrors){
+      endRoundByExceededErrors(p);
+      return {roundEnded:true};
+    }
+    updateSmallHud(p);
+    const max=state.game.settings.allowedErrors;
+    return {roundEnded:false,notice:max?`✖ Error ${p.lifeErrors}/${max}`:"✖ Error"};
+  }
+  function completeBoard(p){
+    if(!p.current || p.roundDone || state.game.finished) return;
+    p.roundDone=true;
+    p.message=`✅ Ronda completada · ${p.roundSize} pares`;
+    updateSmallHud(p);
+    beep(1080,130);
+    if(isRoundsVictoryMode()){ settleRoundWinner(p,"",false); return; }
+    p.roundsCompleted++;
+    const objectiveComplete=hasRoundLimit() && p.roundsCompleted>=state.game.settings.maxRounds && p.scheduledRoundsStarted>=state.game.settings.maxRounds && p.retryRounds.length===0;
+    if(objectiveComplete){
+      p.done=true;
+      if(isTwoPlayerGame()) concludeFirstGoal(p,"alcanzó el objetivo de rondas");
+      else checkGameOver();
+      return;
+    }
+    showRoundBanner(p,"ok");
+  }
+  function revealBoard(p){
+    if(!p.current || p.roundDone) return;
+    const remaining=(p.roundEntries||[]).filter((_,i)=>!p.boardMatched.has(String(i)));
+    (p.roundEntries||[]).forEach((entry,i)=>{
+      const leftId=String(i);
+      if(p.boardMatched.has(leftId)) return;
+      const target=(p.roundEntries||[]).findIndex((candidate,j)=>{
+        const rightId=String(j);
+        return !p.boardRightMatched.has(rightId) && !p.boardRightRevealed.has(rightId) && entriesShareMeaning(entry,candidate);
+      });
+      if(target>=0){
+        const rightId=String(target);
+        p.boardRevealed.add(leftId);
+        p.boardRightRevealed.add(rightId);
+      }
+    });
+    p.failed+=remaining.length;
+    p.roundDone=true;
+    p.message=`👀 Respuestas reveladas · ${remaining.length} pendientes`;
+    renderPlayer(p);
+    updateSmallHud(p);
+    beep(260,90);
+    settleRoundTie();
+  }
+  function timeoutBoard(p){
+    if(!p.current || p.roundDone) return;
+    const remaining=(p.roundEntries||[]).filter((_,i)=>!p.boardMatched.has(String(i)));
+    (p.roundEntries||[]).forEach((entry,i)=>{
+      const leftId=String(i);
+      if(p.boardMatched.has(leftId)) return;
+      const target=(p.roundEntries||[]).findIndex((candidate,j)=>{
+        const rightId=String(j);
+        return !p.boardRightMatched.has(rightId) && !p.boardRightRevealed.has(rightId) && entriesShareMeaning(entry,candidate);
+      });
+      if(target>=0){
+        const rightId=String(target);
+        p.boardRevealed.add(leftId);
+        p.boardRightRevealed.add(rightId);
+      }
+    });
+    p.failed+=remaining.length;
+    p.roundDone=true;
+    p.message=`⏱ Tiempo agotado · ${remaining.length} pendientes`;
+    p.lifeErrors=0;
+    p.lives=Math.max(0,p.lives-1);
+    renderPlayer(p);
+    updateSmallHud(p);
+    if(handleNoLives(p)) return;
+    showLifeLoss(p);
+    beep(120,140);
+    vibrate([40,25,40]);
+    settleRoundTie();
+  }
+  function engineApi(){
+    return {
+      settings: state.game?.settings||{},
+      finish: finishRound,
+      next: p=>nextRound(p.id),
+      renderPlayer,
+      revealCurrentRound,
+      beep,
+      vibrate,
+      same:(a,b)=>normalizeText(a)===normalizeText(b),
+      makeOptions(entry,n){ const all=shuffle(allBankEntries().filter(x=>normalizeText(x.word)!==normalizeText(entry.word))); return shuffle([entry].concat(all.slice(0,Math.max(0,n-1)))); },
+      getRoundEntries:p=>p.roundEntries||[],
+      correctPair,
+      wrongAttempt,
+      completeBoard,
+      revealBoard,
+      timeoutBoard
+    };
+  }
+
+  function renderEmpty(){ UI.arenaRoot.className="arena-root"; UI.arenaRoot.innerHTML=`<div class="empty-state"><div><h1>🎮 ${escapeHtml(ACTIVITY_CONFIG.title)}</h1><p>Selecciona pares del banco o escribe <b>apple = manzana</b>. Después inicia la competencia y arrastra cada palabra sobre su traducción.</p></div></div>`; updateDrawerInfo(); }
+  function openSetup(){ UI.setupOverlay.classList.add("show"); UI.setupOverlay.setAttribute("aria-hidden","false"); toggleDrawer(false); renderLevels(); updateSummary(); }
+  function closeSetup(){ if(!state.game){ setStatus("⚠️ Primero inicia un juego para cerrar la configuración."); return; } closeSetupAfterStart(); }
+  function closeSetupAfterStart(){ UI.setupOverlay.classList.remove("show"); UI.setupOverlay.setAttribute("aria-hidden","true"); }
+  function toggleDrawer(force){ const open=force??!UI.drawer.classList.contains("open"); UI.drawer.classList.toggle("open",open); UI.drawer.setAttribute("aria-hidden",open?"false":"true"); }
+  function setStatus(msg){ UI.setupStatus.textContent=msg||""; if(msg) setTimeout(()=>{ if(UI.setupStatus.textContent===msg) UI.setupStatus.textContent=""; },4000); }
+  function syncSoundSetting(){ state.sound=UI.soundEnabled.checked; UI.soundBtn.textContent=state.sound?"Sonido: ON":"Sonido: OFF"; }
+  function toggleFullScreen(){ const doc=document; if(!doc.fullscreenElement){ (document.documentElement.requestFullscreen||(()=>{})).call(document.documentElement); } else { (doc.exitFullscreen||(()=>{})).call(doc); } }
+  function updateDrawerInfo(){
+    if(!state.game){ UI.drawerProgress.textContent="Sin juego activo"; UI.drawerLives.textContent="Vidas: —"; UI.drawerScore.textContent="Puntaje: —"; return; }
+    const ps=state.game.players, total=hasRoundLimit()?`/${state.game.settings.maxRounds}`:"/∞";
+    UI.drawerProgress.textContent=isTwoPlayerGame()?`2 jugadores · Ronda ${Math.max(...ps.map(p=>p.roundNumber))}${total}`:`${ps[0].isRetryRound?"Repetición pendiente":"Ronda "+ps[0].roundNumber+total} · ${state.game.settings.roundSize} palabras`;
+    UI.drawerLives.textContent=ps.map(p=>`${p.name}: ${p.lives}/${p.maxLives} vidas · ⚠️ ${p.lifeErrors}/${state.game.settings.allowedErrors}`).join(" · ");
+    UI.drawerScore.textContent=isRoundsVictoryMode()?ps.map(p=>`${p.name}: 🏆 ${p.roundWins} rondas`).join(" · "):ps.map(p=>`${p.name}: ✅ ${p.correct} · ❌ ${p.failed}`).join(" · ");
+  }
+  function beep(freq=440,dur=70){ if(!state.sound) return; try{ const ctx=state.audioCtx||(state.audioCtx=new (window.AudioContext||window.webkitAudioContext)()); const osc=ctx.createOscillator(); const gain=ctx.createGain(); osc.frequency.value=freq; gain.gain.value=.035; osc.connect(gain); gain.connect(ctx.destination); osc.start(); setTimeout(()=>{ osc.stop(); osc.disconnect(); gain.disconnect(); },dur); }catch(e){} }
+  function vibrate(pattern){ try{ if(navigator&&typeof navigator.vibrate==="function") navigator.vibrate(pattern); }catch(e){} }
+
+  function wireEvents(){
+    window.addEventListener("resize",()=>{ updateViewport(); if(state.game) state.game.players.forEach(p=>{ if(p.ui && typeof p.ui.host.__vcRedraw === "function") p.ui.host.__vcRedraw(); }); }, {passive:true});
+    UI.menuBtn.addEventListener("click",()=>toggleDrawer()); UI.drawerClose.addEventListener("click",()=>toggleDrawer(false)); UI.openConfigBtn.addEventListener("click",openSetup); UI.closeSetupBtn.addEventListener("click",closeSetup);
+    UI.restartBtn.addEventListener("click",restartGame); UI.repeatBtn.addEventListener("click",restartCurrentRound); UI.revealBtn.addEventListener("click",revealCurrentRound); UI.fullscreenBtn.addEventListener("click",toggleFullScreen); UI.soundBtn.addEventListener("click",()=>{ UI.soundEnabled.checked=!UI.soundEnabled.checked; syncSoundSetting(); });
+    UI.selectAllBtn.addEventListener("click",()=>selectAll(true)); UI.clearAllBtn.addEventListener("click",()=>selectAll(false)); UI.collapseBtn.addEventListener("click",collapseAll); UI.editModeBtn.addEventListener("click",toggleEditor); UI.downloadWordBankBtn.addEventListener("click",downloadFullWordBank); UI.startGameBtn.addEventListener("click",startGame);
+    ["roundSizeSelect","roundCountSelect","playerMode","twoPlayerWinMode","livesSelect","allowedErrorsSelect","countdownSelect","customWords"].forEach(id=>UI[id].addEventListener("input",updateSummary)); UI.soundEnabled.addEventListener("input",syncSoundSetting);
+    UI.levelList.addEventListener("click",handleLevelClick); UI.levelList.addEventListener("change",handleLevelChange); UI.editorGrid.addEventListener("click",handleEditorClick);
+    /* Los controles de avance usan el mismo inicio táctil inmediato que el tablero.
+       El click queda únicamente como respaldo para teclado/accesibilidad. */
+    let arenaActionPointerTime = -Infinity;
+    function handleArenaAction(ev){
+      const next=ev.target.closest && ev.target.closest(".next-btn");
+      const actionButton=ev.target.closest && ev.target.closest("button[data-action]");
+      if(!next && !actionButton) return;
+      if(ev.type==="pointerdown"){
+        if(ev.pointerType==="mouse" && ev.button!==0) return;
+        arenaActionPointerTime=performance.now();
+        ev.preventDefault();
+      } else if(performance.now()-arenaActionPointerTime<450){
+        return;
+      }
+      if(next){ nextRound(next.dataset.player); return; }
+      if(actionButton.dataset.action==="next-shared-round"){ advanceSharedRound(); return; }
+      if(actionButton.dataset.action==="finish-round-match"){ clearRoundResultCard(); concludeRoundMatch(""); return; }
+      if(actionButton.dataset.action==="new-config"){ openSetup(); return; }
+      if(actionButton.dataset.action==="restart-game") restartGame();
+    }
+    UI.arenaRoot.addEventListener("pointerdown",handleArenaAction);
+    UI.arenaRoot.addEventListener("click",handleArenaAction);
+    UI.homeBtn.addEventListener("click",()=>{ try{ sessionStorage.setItem("ESL_LAST_ACTIVITY_URL", window.location.href); sessionStorage.setItem("ESL_LAST_ACTIVITY_TITLE", ACTIVITY_CONFIG.title); sessionStorage.setItem("ESL_HOME_FROM_ACTIVITY","1"); }catch(e){} });
+  }
+  async function init(){ cacheDom(); updateViewport(); document.title=ACTIVITY_CONFIG.title; UI.drawerTitle.textContent="🎮 "+ACTIVITY_CONFIG.title; UI.setupTitle.textContent="⚙️ Configuración · "+ACTIVITY_CONFIG.title; wireEvents(); await loadExternalOrLocalBank(); renderLevels(); renderEditor(); updateSummary(); syncSoundSetting(); renderEmpty(); }
+  init();
+})();
+</script>
+</body>
+</html>
