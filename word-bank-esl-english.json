@@ -1,7 +1,7 @@
 {
   "app": "ESL English",
   "schema": "esl-word-bank-v3",
-  "updatedAt": "2026-06-01T04:31:45.626Z",
+  "updatedAt": "2026-06-10T18:46:29.778Z",
   "levels": [
     "Inglés I",
     "Inglés II",
@@ -957,6 +957,100 @@
             {
               "word": "son",
               "translation": "Hijo"
+            }
+          ],
+          "Family 2": [
+            {
+              "word": "Uncle",
+              "translation": "Tío"
+            },
+            {
+              "word": "Aunt",
+              "translation": "Tía"
+            },
+            {
+              "word": "Grandmother",
+              "translation": "Abuela"
+            },
+            {
+              "word": "Grandfather",
+              "translation": "Abuelo"
+            },
+            {
+              "word": "Grandparents",
+              "translation": "Abuelos"
+            },
+            {
+              "word": "Siblings",
+              "translation": "Hermanos/Hermanas"
+            },
+            {
+              "word": "Mother-in-law",
+              "translation": "Suegra"
+            },
+            {
+              "word": "Father-in-law",
+              "translation": "Suegro"
+            },
+            {
+              "word": "Sister-in-law",
+              "translation": "Cuñada"
+            },
+            {
+              "word": "Brother-in-law",
+              "translation": "Cuñado"
+            },
+            {
+              "word": "Son-in-law",
+              "translation": "Yerno"
+            },
+            {
+              "word": "Daughter-in-law",
+              "translation": "Nuera"
+            },
+            {
+              "word": "Nephew",
+              "translation": "Sobrino"
+            },
+            {
+              "word": "Niece",
+              "translation": "Sobrina"
+            },
+            {
+              "word": "Cousin",
+              "translation": "Primo/Prima"
+            },
+            {
+              "word": "Grandpa",
+              "translation": "Abuelito"
+            },
+            {
+              "word": "Grandma",
+              "translation": "Abuelita"
+            },
+            {
+              "word": "Step father",
+              "translation": "Padrastro"
+            },
+            {
+              "word": "Step mother",
+              "translation": "Madrastra"
+            },
+            {
+              "word": "Step sister",
+              "translation": "Hermanastra"
+            },
+            {
+              "word": "Step brother",
+              "translation": "Hermanastro"
+            },
+            {
+              "word": "Step son",
+              "translation": "Hijastro"
+            },
+            {
+              "word": "Step daughter",
+              "translation": "Hijastra"
             }
           ],
           "Daily Routines": [
@@ -4774,6 +4868,100 @@
             {
               "word": "son",
               "translation": "Hijo"
+            }
+          ],
+          "Family 2": [
+            {
+              "word": "Uncle",
+              "translation": "Tío"
+            },
+            {
+              "word": "Aunt",
+              "translation": "Tía"
+            },
+            {
+              "word": "Grandmother",
+              "translation": "Abuela"
+            },
+            {
+              "word": "Grandfather",
+              "translation": "Abuelo"
+            },
+            {
+              "word": "Grandparents",
+              "translation": "Abuelos"
+            },
+            {
+              "word": "Siblings",
+              "translation": "Hermanos/Hermanas"
+            },
+            {
+              "word": "Mother-in-law",
+              "translation": "Suegra"
+            },
+            {
+              "word": "Father-in-law",
+              "translation": "Suegro"
+            },
+            {
+              "word": "Sister-in-law",
+              "translation": "Cuñada"
+            },
+            {
+              "word": "Brother-in-law",
+              "translation": "Cuñado"
+            },
+            {
+              "word": "Son-in-law",
+              "translation": "Yerno"
+            },
+            {
+              "word": "Daughter-in-law",
+              "translation": "Nuera"
+            },
+            {
+              "word": "Nephew",
+              "translation": "Sobrino"
+            },
+            {
+              "word": "Niece",
+              "translation": "Sobrina"
+            },
+            {
+              "word": "Cousin",
+              "translation": "Primo/Prima"
+            },
+            {
+              "word": "Grandpa",
+              "translation": "Abuelito"
+            },
+            {
+              "word": "Grandma",
+              "translation": "Abuelita"
+            },
+            {
+              "word": "Step father",
+              "translation": "Padrastro"
+            },
+            {
+              "word": "Step mother",
+              "translation": "Madrastra"
+            },
+            {
+              "word": "Step sister",
+              "translation": "Hermanastra"
+            },
+            {
+              "word": "Step brother",
+              "translation": "Hermanastro"
+            },
+            {
+              "word": "Step son",
+              "translation": "Hijastro"
+            },
+            {
+              "word": "Step daughter",
+              "translation": "Hijastra"
             }
           ],
           "Daily routines": [
@@ -13522,6 +13710,100 @@
               "translation": "Hijo"
             }
           ],
+          "Family 2": [
+            {
+              "word": "Uncle",
+              "translation": "Tío"
+            },
+            {
+              "word": "Aunt",
+              "translation": "Tía"
+            },
+            {
+              "word": "Grandmother",
+              "translation": "Abuela"
+            },
+            {
+              "word": "Grandfather",
+              "translation": "Abuelo"
+            },
+            {
+              "word": "Grandparents",
+              "translation": "Abuelos"
+            },
+            {
+              "word": "Siblings",
+              "translation": "Hermanos"
+            },
+            {
+              "word": "Mother-in-law",
+              "translation": "Suegra"
+            },
+            {
+              "word": "Father-in-law",
+              "translation": "Suegro"
+            },
+            {
+              "word": "Sister-in-law",
+              "translation": "Cuñada"
+            },
+            {
+              "word": "Brother-in-law",
+              "translation": "Cuñado"
+            },
+            {
+              "word": "Son-in-law",
+              "translation": "Yerno"
+            },
+            {
+              "word": "Daughter-in-law",
+              "translation": "Nuera"
+            },
+            {
+              "word": "Nephew",
+              "translation": "Sobrino"
+            },
+            {
+              "word": "Niece",
+              "translation": "Sobrina"
+            },
+            {
+              "word": "Cousin",
+              "translation": "Primo"
+            },
+            {
+              "word": "Grandpa",
+              "translation": "Abuelito"
+            },
+            {
+              "word": "Grandma",
+              "translation": "Abuelita"
+            },
+            {
+              "word": "Step father",
+              "translation": "Padrastro"
+            },
+            {
+              "word": "Step mother",
+              "translation": "Madrastra"
+            },
+            {
+              "word": "Step sister",
+              "translation": "Hermanastra"
+            },
+            {
+              "word": "Step brother",
+              "translation": "Hermanastro"
+            },
+            {
+              "word": "Step son",
+              "translation": "Hijastro"
+            },
+            {
+              "word": "Step daughter",
+              "translation": "Hijastra"
+            }
+          ],
           "Daily routines": [
             {
               "word": "finish class",
@@ -16654,6 +16936,31 @@
             "pet",
             "sister",
             "son"
+          ],
+          "Family 2": [
+            "Uncle",
+            "Aunt",
+            "Grandmother",
+            "Grandfather",
+            "Grandparents",
+            "Siblings",
+            "Mother-in-law",
+            "Father-in-law",
+            "Sister-in-law",
+            "Brother-in-law",
+            "Son-in-law",
+            "Daughter-in-law",
+            "Nephew",
+            "Niece",
+            "Cousin",
+            "Grandpa",
+            "Grandma",
+            "Step father",
+            "Step mother",
+            "Step sister",
+            "Step brother",
+            "Step son",
+            "Step daughter"
           ],
           "Daily routines": [
             "finish class",
@@ -20526,6 +20833,100 @@
               "translation": "Hijo"
             }
           ],
+          "Family 2": [
+            {
+              "word": "Uncle",
+              "translation": "Tío"
+            },
+            {
+              "word": "Aunt",
+              "translation": "Tía"
+            },
+            {
+              "word": "Grandmother",
+              "translation": "Abuela"
+            },
+            {
+              "word": "Grandfather",
+              "translation": "Abuelo"
+            },
+            {
+              "word": "Grandparents",
+              "translation": "Abuelos"
+            },
+            {
+              "word": "Siblings",
+              "translation": "Hermanos"
+            },
+            {
+              "word": "Mother-in-law",
+              "translation": "Suegra"
+            },
+            {
+              "word": "Father-in-law",
+              "translation": "Suegro"
+            },
+            {
+              "word": "Sister-in-law",
+              "translation": "Cuñada"
+            },
+            {
+              "word": "Brother-in-law",
+              "translation": "Cuñado"
+            },
+            {
+              "word": "Son-in-law",
+              "translation": "Yerno"
+            },
+            {
+              "word": "Daughter-in-law",
+              "translation": "Nuera"
+            },
+            {
+              "word": "Nephew",
+              "translation": "Sobrino"
+            },
+            {
+              "word": "Niece",
+              "translation": "Sobrina"
+            },
+            {
+              "word": "Cousin",
+              "translation": "Primo"
+            },
+            {
+              "word": "Grandpa",
+              "translation": "Abuelito"
+            },
+            {
+              "word": "Grandma",
+              "translation": "Abuelita"
+            },
+            {
+              "word": "Step father",
+              "translation": "Padrastro"
+            },
+            {
+              "word": "Step mother",
+              "translation": "Madrastra"
+            },
+            {
+              "word": "Step sister",
+              "translation": "Hermanastra"
+            },
+            {
+              "word": "Step brother",
+              "translation": "Hermanastro"
+            },
+            {
+              "word": "Step son",
+              "translation": "Hijastro"
+            },
+            {
+              "word": "Step daughter",
+              "translation": "Hijastra"
+            }
+          ],
           "Daily routines": [
             {
               "word": "finish class",
@@ -24341,6 +24742,100 @@
             {
               "word": "son",
               "translation": "Hijo"
+            }
+          ],
+          "Family 2": [
+            {
+              "word": "Uncle",
+              "translation": "Tío"
+            },
+            {
+              "word": "Aunt",
+              "translation": "Tía"
+            },
+            {
+              "word": "Grandmother",
+              "translation": "Abuela"
+            },
+            {
+              "word": "Grandfather",
+              "translation": "Abuelo"
+            },
+            {
+              "word": "Grandparents",
+              "translation": "Abuelos"
+            },
+            {
+              "word": "Siblings",
+              "translation": "Hermanos"
+            },
+            {
+              "word": "Mother-in-law",
+              "translation": "Suegra"
+            },
+            {
+              "word": "Father-in-law",
+              "translation": "Suegro"
+            },
+            {
+              "word": "Sister-in-law",
+              "translation": "Cuñada"
+            },
+            {
+              "word": "Brother-in-law",
+              "translation": "Cuñado"
+            },
+            {
+              "word": "Son-in-law",
+              "translation": "Yerno"
+            },
+            {
+              "word": "Daughter-in-law",
+              "translation": "Nuera"
+            },
+            {
+              "word": "Nephew",
+              "translation": "Sobrino"
+            },
+            {
+              "word": "Niece",
+              "translation": "Sobrina"
+            },
+            {
+              "word": "Cousin",
+              "translation": "Primo"
+            },
+            {
+              "word": "Grandpa",
+              "translation": "Abuelito"
+            },
+            {
+              "word": "Grandma",
+              "translation": "Abuelita"
+            },
+            {
+              "word": "Step father",
+              "translation": "Padrastro"
+            },
+            {
+              "word": "Step mother",
+              "translation": "Madrastra"
+            },
+            {
+              "word": "Step sister",
+              "translation": "Hermanastra"
+            },
+            {
+              "word": "Step brother",
+              "translation": "Hermanastro"
+            },
+            {
+              "word": "Step son",
+              "translation": "Hijastro"
+            },
+            {
+              "word": "Step daughter",
+              "translation": "Hijastra"
             }
           ],
           "Daily Routines": [
