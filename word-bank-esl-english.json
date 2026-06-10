@@ -1,7 +1,7 @@
 {
   "app": "ESL English",
   "schema": "esl-word-bank-v3",
-  "updatedAt": "2026-06-10T18:46:29.778Z",
+  "updatedAt": "2026-06-10T18:50:16.995Z",
   "levels": [
     "Inglés I",
     "Inglés II",
@@ -18930,6 +18930,123 @@
               "word": "SON",
               "translation": "hijo varón de una madre o un padre",
               "englishDefinition": "a male child of a parent"
+            }
+          ],
+          "Family 2": [
+            {
+              "word": "Uncle",
+              "translation": "Hermano del padre o de la madre",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Aunt",
+              "translation": "Hermana del padre o de la madre",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Grandmother",
+              "translation": "Madre de tu padre o madre",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Grandfather",
+              "translation": "Padre de tu padre o madre",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Grandparents",
+              "translation": "Padres de tu padre o madre",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Siblings",
+              "translation": "Hermanos o hermanas",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Mother-in-law",
+              "translation": "Madre de tu esposo/a",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Father-in-law",
+              "translation": "Padre de tu esposo/a",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Sister-in-law",
+              "translation": "Hermana de tu esposo/a o esposa de tu hermano",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Brother-in-law",
+              "translation": "Hermano de tu esposo/a o esposo de tu hermana",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Son-in-law",
+              "translation": "Esposo de tu hija",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Daughter-in-law",
+              "translation": "Esposa de tu hijo",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Nephew",
+              "translation": "Hijo de tu hermano o hermana",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Niece",
+              "translation": "Hija de tu hermano o hermana",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Cousin",
+              "translation": "Hijo o hija de tu tío o tía",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Grandpa",
+              "translation": "Abuelo",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Grandma",
+              "translation": "Abuela",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Step father",
+              "translation": "Hombre que se casó con tu madre, no es tu padre biológico",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Step mother",
+              "translation": "Mujer que se casó con tu padre, no es tu madre biológica",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Step sister",
+              "translation": "Hija de tu padrastro o madrastra, no es tu hermana biológica",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Step brother",
+              "translation": "Hijo de tu padrastro o madrastra, no es tu hermano biológico",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Step son",
+              "translation": "Hijo de tu pareja, no es tu hijo biológico",
+              "englishDefinition": ""
+            },
+            {
+              "word": "Step daughter",
+              "translation": "Hija de tu pareja, no es tu hija biológica",
+              "englishDefinition": ""
             }
           ],
           "Daily routines": [
